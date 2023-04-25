@@ -1,0 +1,167 @@
+#  ___
+# |_ _| |_ __ _ _   _
+#  | || __/ _` | | | |  github: https://github.com/itaysharir
+#  | || || (_| | |_| |  reddit: u/visible-pop-2576
+# |___|\__\__,_|\__, |  dotfiles: https://github.com/itaysharir/Dotfiles
+#               |___/
+
+### Open apps ###
+ctrl - return : /Applications/Alacritty.app/Contents/MacOS/alacritty msg create-window     # open a terminal
+#cmd - m : emacsclient -c                                                # open a graphical emacs client
+cmd - b : /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome              # open chrome
+cmd - e : open -a finder                                                # open finder
+
+### Various dmenu scripts ###
+cmd + shift - return : /bin/bash -l -c "sh ~/dmenu\ scripts/apps/script.sh"      # App launcher
+cmd + shift - t : /bin/bash -l -c "sh ~/dmenu\ scripts/themes/.script.sh"        # Bar changer
+cmd + shift - l : /bin/bash -l -c "sh ~/dmenu\ scripts/logout/.script.sh"        # Logout menu
+cmd + shift - r : /bin/bash -l -c "sh ~/dmenu\ scripts/screenshot/.script.sh"    # Screenshot menu
+cmd + shift - b : /bin/bash -l -c "sh ~/dmenu\ scripts/web/.script.sh"           # Search engine script
+cmd + shift - e : /bin/bash -l -c "sh ~/dmenu\ scripts/editconfig/.script.sh"    # Edit conigs
+cmd + shift - d : /bin/bash -l -c "sh ~/dmenu\ scripts/todo/.script.sh"          # Todo
+cmd + shift - m : /bin/bash -l -c "sh ~/dmenu\ scripts/wallpaper/.script.sh"     # Wallpaper
+
+### Quick stuff ###
+ctrl - q : yabai -m window --close
+ctrl - f : yabai -m window --toggle zoom-fullscreen                                                   # Close a window
+ctrl - t : yabai -m window --toggle float; sketchybar --trigger window_focus                                # Toogle parent zoom
+ctrl + shift - t : yabai -m window --toggle float --grid 4:4:1:1:2:2; sketchybar --trigger window_focus     # float a window and put it in the center
+cmd + alt - b : yabai -m window --toggle border                                                            # toggle border for the focused window
+ctrl - u : yabai -m window --toggle topmost                                                                 # Toggle topmost
+ctrl - e : yabai -m window --toggle split                                                                   # Toggle split type
+alt + cmd - r : /opt/homebrew/bin/brew services restart yabai                                              # Quickly restart yabai
+
+### Tmux ###
+# create/destroy windows
+cmd + alt - return : tmux new-window -c '~/'            # open a new window
+cmd + alt - c : tmux kill-window                        # close the current window
+# move to spacific windows
+#cmd + shift - 0 : skhd -k "ctrl - b" && skhd -k "0"
+#cmd + shift - 1 : skhd -k "ctrl - b" && skhd -k "1"
+#cmd + shift - 2 : skhd -k "ctrl - b" && skhd -k "2"
+#cmd + shift - 3 : skhd -k "ctrl - b" && skhd -k "3"
+#cmd + shift - 4 : skhd -k "ctrl - b" && skhd -k "4"
+#cmd + shift - 5 : skhd -k "ctrl - b" && skhd -k "5"
+#cmd + shift - 6 : skhd -k "ctrl - b" && skhd -k "6"
+hyper - right : sh ~/.config/skhd/tmux-next-window.sh # go to next window
+hyper - left : sh ~/.config/skhd/tmux-prev-window.sh  # go to previous window
+# create/destroy panes
+cmd + alt - v : skhd -k "ctrl - b" && skhd -t "%"       # create a vertical split
+cmd + alt - h : skhd -k "ctrl - b" && skhd -t '"'       # create a horizontal split
+cmd + alt - x : tmux kill-pane                          # close the current pane
+## focus panes
+# cmd + ctrl + shift - up : skhd -k "ctrl - b" && skhd -k "up"       # focus the pane above
+# cmd + ctrl + shift - down : skhd -k "ctrl - b" && skhd -k "down"   # focus the pane below
+# cmd + ctrl + shift - left : skhd -k "ctrl - b" && skhd -k "left"   # focus the pane left
+# cmd + ctrl + shift - right : skhd -k "ctrl - b" && skhd -k "right" # focus the pane right
+
+### Switch focus between windows ###
+ctrl - right : yabai -m window --focus stack.next || yabai -m window --focus east      # focus the window on right
+ctrl - up : yabai -m window --focus north        # focus the window on up
+ctrl - down : yabai -m window --focus south      # focus the window on down
+ctrl - left : yabai -m window --focus stack.prev || yabai -m window --focus west       # focus the window on left
+
+### Swap windows ###
+ctrl + shift - up : yabai -m window --warp north     # swap the window on up
+ctrl + shift - down : yabai -m window --warp south   # swap the windiow on down
+ctrl + shift - right : yabai -m window --warp east   # swap thw windows on right
+ctrl + shift - left : yabai -m window --warp west    # swap the windows on left
+
+### Move windows around ###
+#ctrl - a : yabai -m window --move rel:-20:0             # Large steps
+#ctrl - s : yabai -m window --move rel:0:20
+#ctrl - w : yabai -m window --move rel:0:-20
+#ctrl - d : yabai -m window --move rel:20:
+
+ctrl + alt - a : yabai -m window --move rel:-140:0      # Small steps
+ctrl + alt - s : yabai -m window --move rel:0:140
+ctrl + alt - w : yabai -m window --move rel:0:-140
+ctrl + alt - d : yabai -m window --move rel:140:0
+
+### Fast focus spaces ###
+ctrl - 1 : yabai -m space --focus 1
+ctrl - 2 : yabai -m space --focus 2
+ctrl - 3 : yabai -m space --focus 3
+ctrl - 4 : yabai -m space --focus 4
+ctrl - 5 : yabai -m space --focus 5
+ctrl - 6 : yabai -m space --focus 6
+ctrl - 7 : yabai -m space --focus 7
+ctrl - 8 : yabai -m space --focus 8
+ctrl - 9 : yabai -m space --focus 9
+#cmd - right : yabai -m space --focus next   # Focus the space on the right
+#cmd - left : yabai -m space --focus prev    # Focus the space on the left
+
+### Send a window to a space and follow focus ###
+ctrl + shift - 1 : yabai -m window --space 1; yabai -m space --focus 1
+ctrl + shift - 2 : yabai -m window --space 2; yabai -m space --focus 2
+ctrl + shift - 3 : yabai -m window --space 3; yabai -m space --focus 3
+ctrl + shift - 4 : yabai -m window --space 4; yabai -m space --focus 4
+ctrl + shift - 5 : yabai -m window --space 5; yabai -m space --focus 5
+ctrl + shift - 6 : yabai -m window --space 6; yabai -m space --focus 6
+ctrl + shift - 7 : yabai -m window --space 7; yabai -m space --focus 7
+ctrl + shift - 8 : yabai -m window --space 8; yabai -m space --focus 8
+cmd + ctrl - left : yabai -m space --focus prev    # To the space on the left
+cmd + ctrl - right : yabai -m space --focus next   # To the spave on the right
+
+### Focus displays ###
+ctrl + alt - left  : yabai -m display --focus 1     # focus main display
+ctrl + alt - right  : yabai -m display --focus 2    # focus second display
+
+### Increase window size
+shift + alt - a : yabai -m window --resize left:-20:0
+shift + alt - s : yabai -m window --resize bottom:0:20
+shift + alt - w : yabai -m window --resize top:0:-20
+shift + alt - d : yabai -m window --resize right:20:0
+# Larger Steps
+hyper + shift - a : yabai -m window --resize left:-140:0
+hyper + shift - s : yabai -m window --resize bottom:0:140
+hyper + shift - w : yabai -m window --resize top:0:-140
+hyper + shift - d : yabai -m window --resize right:140:0
+
+### Decrease window size ###
+shift + cmd - a : yabai -m window --resize left:20:0
+shift + cmd - s : yabai -m window --resize bottom:0:-20
+shift + cmd - w : yabai -m window --resize top:0:20
+shift + cmd - d : yabai -m window --resize right:-20:0
+# Larger steps
+shift + ctrl - a : yabai -m window --resize left:140:0
+shift + ctrl - s : yabai -m window --resize bottom:0:-140
+shift + ctrl - w : yabai -m window --resize top:0:140
+shift + ctrl - d : yabai -m window --resize right:-140:0
+
+### Send a window to a space ###
+#alt - 1 : yabai -m window --space 1
+#alt - 2 : yabai -m window --space 2
+#alt - 3 : yabai -m window --space 3
+#alt - 4 : yabai -m window --space 4
+#alt - 5 : yabai -m window --space 5
+#alt - 6 : yabai -m window --space 6
+#alt - 7 : yabai -m window --space 7
+#alt - 8 : yabai -m window --space 8
+#alt - 9 : yabai -m window --space 9
+#alt - left : yabai -m window --space prev   # Send window to space on the left
+#alt - right : yabai -m window --space next  # Send window to space on the right
+
+### Fullscreen ###
+cmd +shift - space : yabai -m window --toggle zoom-fullscreen &&
+
+### Rotate and flip ###
+ctrl - r : yabai -m space --rotate 90             # Rotate the tree 90 degrees
+alt + shift - r : yabai -m space --rotate 180    # Rotate the tree 180 degrees
+ctrl - g : yabai -m space --mirror y-axis         # Flip the tree
+
+### Change layout of desktop ###
+ctrl - a : yabai -m config --space $(yabai -m query --spaces | jq '.[]|select(."has-focus"==true)|.index') layout bsp
+ctrl - s : yabai -m config --space $(yabai -m query --spaces | jq '.[]|select(."has-focus"==true)|.index') layout float
+ctrl - w : yabai -m window --stack next || yabai -m window --stack prev || yabai -m config --space $(yabai -m query --spaces | jq '.[]|select(."has-focus"==true)|.index') layout stack
+
+alt - tab : yabai -m window --focus $(yabai -m query --windows | jq -re "sort_by(.display, .space, .frame.x, .frame.y, .id) | map(select(.\"is-visible\" == true and .role != \"AXUnknown\" and .space == $(yabai -m query --spaces | jq '.[]|select(."has-focus"==true)|.index'))) | reverse | nth(index(map(select(.\"has-focus\" == true))) - 1).id")
+alt + shift - tab : yabai -m window --focus $(yabai -m query --windows | jq -re "sort_by(.display, .space, .frame.x, .frame.y, .id) | map(select(.\"is-visible\" == true and .role != \"AXUnknown\" and .space == $(yabai -m query --spaces | jq '.[]|select(."has-focus"==true)|.index'))) | nth(index(map(select(.\"has-focus\" == true))) - 1).id")
+
+ctrl - h : yabai -m window --toggle sticky
+
+ctrl - o : yabai -m window --opacity 1.0
+ctrl + shift - o : yabai -m window --opacity 0.0
+
+### disable ###
+#cmd - q : cd # cmd + q
