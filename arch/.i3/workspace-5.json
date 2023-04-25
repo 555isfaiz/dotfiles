@@ -1,0 +1,125 @@
+// vim:ts=4:sw=4:et
+{
+    // floating_con with 1 children
+    "border": "none",
+    "floating": "auto_off",
+    "layout": "splith",
+    "marks": [],
+    "percent": null,
+    "rect": {
+       "height": 600,
+       "width": 800,
+       "x": 1618,
+       "y": 762
+    },
+    "type": "floating_con",
+    "nodes": [
+        {
+            "border": "none",
+            "current_border_width": 0,
+            "floating": "user_on",
+            "geometry": {
+               "height": 600,
+               "width": 800,
+               "x": 0,
+               "y": 0
+            },
+            "marks": [],
+            "name": "mdown",
+            "percent": 1,
+            "swallows": [
+               {
+               "class": "^Alacritty$",
+               // "instance": "^Alacritty$",
+               // "machine": "^ma1nfram3$",
+               "title": "^mdown$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+
+{
+    // floating_con with 1 children
+    "border": "none",
+    "floating": "auto_off",
+    "layout": "splith",
+    "marks": [],
+    "percent": null,
+    "rect": {
+       "height": 602,
+       "width": 802,
+       "x": 1614,
+       "y": 111
+    },
+    "type": "floating_con",
+    "nodes": [
+        {
+            "border": "none",
+            "current_border_width": 0,
+            "floating": "user_on",
+            "geometry": {
+               "height": 600,
+               "width": 800,
+               "x": 0,
+               "y": 0
+            },
+            "marks": [],
+            "name": "cava",
+            "percent": 1,
+            "swallows": [
+               {
+               "class": "^Alacritty$",
+               // "instance": "^Alacritty$",
+               // "machine": "^ma1nfram3$",
+               "title": "^cava$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+
+{
+    // floating_con with 1 children
+    "border": "none",
+    "floating": "auto_off",
+    "layout": "splith",
+    "marks": [],
+    "percent": null,
+    "rect": {
+       "height": 991,
+       "width": 1433,
+       "x": 135,
+       "y": 241
+    },
+    "type": "floating_con",
+    "nodes": [
+        {
+            "border": "none",
+            "current_border_width": 0,
+            "floating": "user_on",
+            "geometry": {
+               "height": 629,
+               "width": 1073,
+               "x": 743,
+               "y": 405
+            },
+            "marks": [],
+            "name": "Cider",
+            "percent": 1,
+            "swallows": [
+               {
+               "class": "^Cider$"
+               // "instance": "^cider$",
+               // "machine": "^ma1nfram3$",
+               // "title": "^Cider$",
+               // "window_role": "^browser\\-window$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+

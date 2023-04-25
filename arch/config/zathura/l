@@ -1,0 +1,7 @@
+include catppuccin-latte
+set selection-clipboard clipboard
+set recolor true
+set recolor-reverse-video "true"
+set recolor-keephue true
+set scroll-step 100
+#set guioptions sv

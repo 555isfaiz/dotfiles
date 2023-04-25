@@ -1,0 +1,15 @@
+[submodule "arch/layout-machi"]
+	path = arch/layout-machi
+	url = https://github.com/xinhaoyuan/layout-machi.git
+[submodule "arch/awesome/lib/layout-machi"]
+	path = arch/awesome/lib/layout-machi
+	url = https://github.com/xinhaoyuan/layout-machi.git
+[submodule "arch/awesome/lib/rubato"]
+	path = arch/awesome/lib/rubato
+	url = https://github.com/andOrlando/rubato.git
+[submodule "arch/awesome/lib/bling"]
+	path = arch/awesome/lib/bling
+	url = https://github.com/BlingCorp/bling.git
+[submodule "common/alacritty/alacritty"]
+	path = common/alacritty/alacritty
+	url = https://github.com/catppuccin/alacritty.git

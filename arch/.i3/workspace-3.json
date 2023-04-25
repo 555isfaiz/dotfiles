@@ -1,0 +1,115 @@
+// vim:ts=4:sw=4:et
+{
+    // splitv split container with 2 children
+    "border": "none",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "marks": [],
+    "percent": 1,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "none",
+            "current_border_width": 0,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 600,
+               "width": 800,
+               "x": 0,
+               "y": 0
+            },
+            "marks": [],
+            "name": "htop",
+            "percent": 0.264747690120824,
+            "swallows": [
+               {
+               "class": "^Alacritty$",
+               // "instance": "^Alacritty$",
+               // "machine": "^ma1nfram3$",
+               "title": "^htop$"
+               }
+            ],
+            "type": "con"
+        },
+        {
+            // splith split container with 1 children
+            "border": "none",
+            "floating": "auto_off",
+            "layout": "splith",
+            "marks": [],
+            "percent": 0.735252309879176,
+            "type": "con",
+            "nodes": [
+                {
+                    // splith split container with 2 children
+                    "border": "none",
+                    "floating": "auto_off",
+                    "layout": "splith",
+                    "marks": [],
+                    "percent": 1,
+                    "type": "con",
+                    "nodes": [
+                        {
+                            "border": "none",
+                            "current_border_width": 0,
+                            "floating": "auto_off",
+                            "geometry": {
+                               "height": 600,
+                               "width": 800,
+                               "x": 0,
+                               "y": 0
+                            },
+                            "marks": [],
+                            "name": "left",
+                            "percent": 0.43203125,
+                            "swallows": [
+                               {
+                               "class": "^Alacritty$",
+                               // "instance": "^Alacritty$",
+                               // "machine": "^ma1nfram3$",
+                               "title": "^left$"
+                               }
+                            ],
+                            "type": "con"
+                        },
+                        {
+                            // tabbed split container with 1 children
+                            "border": "none",
+                            "floating": "auto_off",
+                            "layout": "tabbed",
+                            "marks": [],
+                            "percent": 0.56796875,
+                            "type": "con",
+                            "nodes": [
+                                {
+                                    "border": "none",
+                                    "current_border_width": 0,
+                                    "floating": "auto_off",
+                                    "geometry": {
+                                       "height": 600,
+                                       "width": 800,
+                                       "x": 0,
+                                       "y": 0
+                                    },
+                                    "marks": [],
+                                    "name": "right",
+                                    "percent": 1,
+                                    "swallows": [
+                                       {
+                                       "class": "^Alacritty$",
+                                       // "instance": "^Alacritty$",
+                                       // "machine": "^ma1nfram3$",
+                                       "title": "^right$"
+                                       }
+                                    ],
+                                    "type": "con"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+

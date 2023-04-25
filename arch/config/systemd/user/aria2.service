@@ -1,0 +1,12 @@
+[Unit]
+Description=Aria2
+
+[Service]
+Type=simple
+#Environment=SSH_AUTH_SOCK=%t/ssh-agent.socket
+# DISPLAY required for ssh-askpass to work
+#Environment=DISPLAY=:0
+ExecStart=/usr/bin/aria2c --enable-rpc --rpc-listen-all
+
+[Install]
+WantedBy=default.target

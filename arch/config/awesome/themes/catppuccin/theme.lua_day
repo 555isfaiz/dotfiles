@@ -1,0 +1,318 @@
+---------------------------
+-- Default awesome theme --
+---------------------------
+local gears = require("gears")
+local theme_assets = require("beautiful.theme_assets")
+local xresources = require("beautiful.xresources")
+local dpi = xresources.apply_dpi
+local gfs = require("gears.filesystem")
+
+local themes_path = gfs.get_configuration_dir() .. "themes/"
+local helpers = require("helpers")
+
+local theme = {}
+
+-- Moche Color Theme from "github.com/catppuccin/catppuccin" --
+
+-- Transparent Color --
+theme.transparent = "#00000000"
+
+-- Base --
+theme.xcolorcrust = "#dce0e8"
+theme.xcolormantle = "#e6e9ef"
+theme.xcolorbase = "#eff1f5"
+
+
+-- Surface --
+theme.xcolorS0 = "#ccd0da"
+theme.xcolorS1 = "#bcc0cc"
+theme.xcolorS2 = "#acb0be"
+
+-- Overlay --
+theme.xcolorO0 = "#9ca0b0"
+theme.xcolorO1 = "#8c8fa1"
+theme.xcolorO2 = "#7c7f93"
+
+-- Text --
+theme.xcolorT0 = "#6c6f85"
+theme.xcolorT1 = "#5c5f77"
+theme.xcolorT2 = "#4c4f69"
+
+-- Lavender --
+theme.xcolor1 = "#7287fd"
+-- Blue --
+theme.xcolor2 = "#1e66f5"
+-- Sapphire --
+theme.xcolor3 = "#209fb5"
+-- Sky --
+theme.xcolor4 = "#04a5e5"
+-- Teal --
+theme.xcolor5 = "#179299"
+-- Green --
+theme.xcolor6 = "#40a02b"
+-- Yellow --
+theme.xcolor7 = "#df8e1d"
+-- Peach --
+theme.xcolor8 = "#fe640b"
+-- Maroon --
+theme.xcolor9 = "#e64553"
+-- Red --
+theme.xcolor10 = "#d20f39"
+-- Mauve --
+theme.xcolor11 = "#8839ef"
+-- Pink --
+theme.xcolor12 = "#ea76cb"
+-- Flamingo --
+theme.xcolor13 = "#dd7878"
+-- Rosewater --
+theme.xcolor14 = "#dc8a78"
+
+theme.music      = themes_path .. "catppuccin/assets/music.png"
+theme.volume_on  = themes_path .. "catppuccin/assets/volume-on.png"
+theme.volume_off = themes_path .. "catppuccin/assets/volume-off.png"
+-- theme.pfp = themes_path.."catppuccin/assets/pfp.jpg"
+theme.pfp        = "~/.face/face.png"
+theme.font       = "FiraCode Nerd Font 10"
+
+theme.font_name = "FiraCode Nerd Font "
+
+theme.titlebar_bg_focus = theme.xcolorbase
+theme.titlebar_bg       = theme.xcolorbase
+theme.bg_normal         = theme.xcolorbase
+theme.bg_focus          = theme.xcolorS0
+theme.bg_urgent         = "#ff0000"
+theme.bg_minimize       = "#444444"
+theme.bg_systray        = theme.bg_normal
+
+theme.fg_normal   = theme.xcolorT2 --Text Color
+theme.fg_focus    = theme.xcolor5
+theme.fg_urgent   = "#ffffff"
+theme.fg_minimize = "#ffffff"
+
+theme.useless_gap   = dpi(6)
+theme.border_width  = dpi(2)
+theme.border_normal = theme.xcolorbase
+theme.border_focus  = theme.xcolor5
+theme.border_marked = "#91231c"
+
+theme.menu_font         = "FiraCode Nerd Font 12"
+theme.menu_bg_focus     = theme.xcolorbase
+theme.menu_fg_focus     = theme.xcolor2
+theme.menu_border_width = dpi(2)
+--theme.menu_border_radius = dpi()
+theme.menu_border_color = theme.xcolorS0
+--theme.menu_submenu_icon = themes_path.."catppuccin/submenu.png"
+theme.submenu           = "»  "
+theme.menu_height       = dpi(37)
+theme.menu_width        = dpi(194)
+
+
+theme.tasklist_bg_focus = theme.xcolorbase
+theme.tasklist_bg_normal = theme.xcolorbase
+theme.tasklist_fg_focus = theme.xcolor1
+theme.tasklist_disable_icon = true
+theme.tasklist_font = "FiraCode Nerd Font 12"
+
+theme.taglist_spacing = dpi(2)
+theme.taglist_bg_focus = theme.xcolor5
+theme.taglist_disable_icon = true
+theme.taglist_font = "FiraCode Nerd Font 16"
+theme.taglist_fg_focus = theme.xcolorbase --"#7e9dde"
+theme.taglist_fg_empty = theme.xcolorS2
+theme.taglist_fg_occupied = "#526c96"
+
+-- Generate taglist squares:
+local taglist_square_size = dpi(0)
+theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
+    taglist_square_size, theme.xcolor2
+)
+theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
+    taglist_square_size, theme.taglist_fg_occupied
+)
+
+-- Edge Snap
+theme.snap_bg = theme.xcolor5
+theme.snap_border_width = dpi(5)
+theme.snap_shape = helpers.ui.rrect(0)
+
+-- Hotkey Popup
+theme.hotkeys_shape = helpers.ui.rrect(12)
+theme.hotkeys_border_color = theme.xcolor5
+theme.hotkeys_modifiers_fg = theme.xcolorO2
+theme.hotkeys_font = "FiraCode Nerd Font 9"
+theme.hotkeys_description_font = "FiraCode Nerd Font 9"
+
+-- Layoutlist
+theme.layoutlist_shape_selected = helpers.ui.rrect(7)
+
+-- Tabs
+theme.mstab_bar_height = 1
+theme.mstab_dont_resize_slaves = true
+theme.mstab_bar_padding = dpi(10)
+theme.mstab_border_radius = dpi(6)
+theme.mstab_bar_ontop = false
+theme.mstab_tabbar_position = "top"
+theme.mstab_tabbar_style = "default"
+theme.mstab_bar_disable = false
+-- For tabbed only
+theme.tabbed_spawn_in_tab = false -- whether a new client should spawn into the focused tabbing container
+
+-- For tabbar in general
+theme.tabbar_ontop              = false
+theme.tabbar_radius             = 0 -- border radius of the tabbar
+theme.tabbar_style              = "default" -- style of the tabbar ("default", "boxes" or "modern")
+theme.tabbar_font               = "JetBrainsMono Nerd Font 11" -- font of the tabbar
+theme.tabbar_size               = 20 -- size of the tabbar
+theme.tabbar_position           = "top" -- position of the tabbar
+theme.tabbar_bg_normal          = theme.xcolorbase .. "DD" -- background color of the focused client on the tabbar
+theme.tabbar_fg_normal          = theme.xcolorT2 -- foreground color of the focused client on the tabbar
+theme.tabbar_bg_focus           = theme.xcolor5 -- background color of unfocused clients on the tabbar
+theme.tabbar_fg_focus           = theme.xcolorbase -- foreground color of unfocused clients on the tabbar
+theme.tabbar_bg_focus_inactive  = nil -- background color of the focused client on the tabbar when inactive
+theme.tabbar_fg_focus_inactive  = nil -- foreground color of the focused client on the tabbar when inactive
+theme.tabbar_bg_normal_inactive = nil -- background color of unfocused clients on the tabbar when inactive
+theme.tabbar_fg_normal_inactive = nil -- foreground color of unfocused clients on the tabbar when inactive
+theme.tabbar_disable            = false -- disable the tab bar entirely
+
+-- the following variables are currently only for the "modern" tabbar style
+theme.tabbar_color_close = "#f9929b" -- chnges the color of the close button
+theme.tabbar_color_min   = "#fbdf90" -- chnges the color of the minimize button
+theme.tabbar_color_float = "#ccaced" -- chnges the color of the float button
+--theme.tabbar_bg_focus = theme.xcolorS0
+--theme.tabbar_bg_normal = theme.xcolorS0
+--theme.tabbar_radius = dpi(6)
+
+-- Layout Machi
+theme.machi_switcher_border_color = theme.xcolorS0
+theme.machi_switcher_border_opacity = 0.4
+theme.machi_editor_border_color = theme.xcolorS1
+theme.machi_editor_border_opacity = 0.4
+theme.machi_editor_active_opacity = 0.4
+
+-- Bling
+theme.tag_preview_widget_border_radius = dpi(6)
+theme.tag_preview_client_border_radius = dpi(6)
+theme.tag_preview_client_opacity = 1
+theme.tag_preview_client_bg = theme.xcolorbase
+theme.tag_preview_client_border_color = theme.xcolorS0
+theme.tag_preview_client_border_width = dpi(2)
+theme.tag_preview_widget_border_color = theme.xcolor5
+theme.tag_preview_widget_border_width = dpi(2)
+theme.tag_preview_widget_margin = 4
+-- Variables set for theming notifications:
+-- notification_font
+theme.notification_spacing = dpi(4)
+theme.notification_bg = theme.xcolorbase
+-- notification_[bg|fg]
+-- notification_[width|height|margin]
+-- notification_[border_color|border_width|shape|opacity]
+
+-- Variables set for theming the menu:
+-- menu_[bg|fg]_[normal|focus]
+-- menu_[border_color|border_width]
+
+-- You can add as many variables as
+-- you wish and access them by using
+-- beautiful.variable in your rc.lua
+--theme.bg_widget = "#cc0000"
+
+-- Define the image to load
+theme.titlebar_close_button_normal       = themes_path .. "catppuccin/titlebar/unfocus.svg"
+theme.titlebar_close_button_focus        = themes_path .. "catppuccin/titlebar/close.svg"
+theme.titlebar_close_button_normal_hover = themes_path .. "catppuccin/titlebar/close_hover.svg"
+theme.titlebar_close_button_focus_hover  = themes_path .. "catppuccin/titlebar/close_hover.svg"
+
+theme.titlebar_minimize_button_normal       = themes_path .. "catppuccin/titlebar/unfocus.svg"
+theme.titlebar_minimize_button_focus        = themes_path .. "catppuccin/titlebar/minimize.svg"
+theme.titlebar_minimize_button_normal_hover = themes_path .. "catppuccin/titlebar/minimize_hover.svg"
+theme.titlebar_minimize_button_focus_hover  = themes_path .. "catppuccin/titlebar/minimize_hover.svg"
+
+theme.titlebar_ontop_button_normal_inactive = themes_path .. "catppuccin/titlebar/unfocus.svg"
+theme.titlebar_ontop_button_focus_inactive  = themes_path .. "catppuccin/titlebar/ontop.svg"
+
+theme.titlebar_ontop_button_normal_active = themes_path .. "catppuccin/titlebar/unfocus.svg"
+theme.titlebar_ontop_button_focus_active  = themes_path .. "catppuccin/titlebar/ontop.svg"
+
+theme.window_switcher_widget_bg = theme.xcolorbase .. "DD" -- The bg color of the widget
+theme.window_switcher_widget_border_width = 3 -- The border width of the widget
+theme.window_switcher_widget_border_radius = 0 -- The border radius of the widget
+theme.window_switcher_widget_border_color = theme.xcolor5 -- The border color of the widget
+theme.window_switcher_clients_spacing = 20 -- The space between each client item
+theme.window_switcher_client_icon_horizontal_spacing = 5 -- The space between client icon and text
+theme.window_switcher_client_width = 150 -- The width of one client widget
+theme.window_switcher_client_height = 250 -- The height of one client widget
+theme.window_switcher_client_margins = 10 -- The margin between the content and the border of the widget
+theme.window_switcher_thumbnail_margins = 10 -- The margin between one client thumbnail and the rest of the widget
+theme.thumbnail_scale = false -- If set to true, the thumbnails fit policy will be set to "fit" instead of "auto"
+theme.window_switcher_name_margins = 10 -- The margin of one clients title to the rest of the widget
+theme.window_switcher_name_valign = "center" -- How to vertically align one clients title
+theme.window_switcher_name_forced_width = 200 -- The width of one title
+theme.window_switcher_name_font = "FiraCode Nerd Font 12" -- The font of all titles
+theme.window_switcher_name_normal_color = theme.xcolorT0 -- The color of one title if the client is unfocused
+theme.window_switcher_name_focus_color = theme.xcolor5 -- The color of one title if the client is focused
+theme.window_switcher_icon_valign = "center" -- How to vertically align the one icon
+theme.window_switcher_icon_width = 40 -- The width of one icon
+
+-- theme.titlebar_sticky_button_normal_inactive = themes_path.."catppuccin/titlebar/sticky_normal_inactive.png"
+-- theme.titlebar_sticky_button_focus_inactive  = themes_path.."catppuccin/titlebar/sticky_focus_inactive.png"
+-- theme.titlebar_sticky_button_normal_active = themes_path.."catppuccin/titlebar/sticky_normal_active.png"
+-- theme.titlebar_sticky_button_focus_active  = themes_path.."catppuccin/titlebar/sticky_focus_active.png"
+
+-- theme.titlebar_floating_button_normal_inactive = themes_path.."catppuccin/titlebar/floating_normal_inactive.png"
+-- theme.titlebar_floating_button_focus_inactive  = themes_path.."catppuccin/titlebar/floating_focus_inactive.png"
+-- theme.titlebar_floating_button_normal_active = themes_path.."catppuccin/titlebar/floating_normal_active.png"
+-- theme.titlebar_floating_button_focus_active  = themes_path.."catppuccin/titlebar/floating_focus_active.png"
+
+theme.titlebar_maximized_button_normal_active       = themes_path .. "catppuccin/titlebar/unfocus.svg"
+theme.titlebar_maximized_button_focus_active        = themes_path .. "catppuccin/titlebar/maximize.svg"
+theme.titlebar_maximized_button_normal_active_hover = themes_path .. "catppuccin/titlebar/maximize_hover.svg"
+theme.titlebar_maximized_button_focus_active_hover  = themes_path .. "catppuccin/titlebar/maximize_hover.svg"
+
+theme.titlebar_maximized_button_normal_inactive       = themes_path .. "catppuccin/titlebar/unfocus.svg"
+theme.titlebar_maximized_button_focus_inactive        = themes_path .. "catppuccin/titlebar/maximize.svg"
+theme.titlebar_maximized_button_normal_inactive_hover = themes_path .. "catppuccin/titlebar/maximize_hover.svg"
+theme.titlebar_maximized_button_focus_inactive_hover  = themes_path .. "catppuccin/titlebar/maximize_hover.svg"
+
+local function file_exists(file)
+    local f = io.open(file, "rb")
+    if f then f:close() end
+    return f ~= nil
+end
+
+-- get all lines from a file, returns an empty
+-- list/table if the file does not exist
+local function lines_from(file)
+    if not file_exists(file) then return {} end
+    local lines = {}
+    for line in io.lines(file) do
+        lines[#lines + 1] = line
+    end
+    return lines
+end
+
+-- theme.wallpaper = themes_path.."catppuccin/buttons.png"
+theme.wallpaper = lines_from("/home/fu1lp0w3r/.wallpaper_current")[1]
+
+-- You can use your own layout icons like this:
+theme.layout_floating = themes_path .. "catppuccin/layouts/floating.png"
+theme.layout_max = themes_path .. "catppuccin/layouts/max.png"
+-- theme.layout_tile = themes_path.."catppuccin/layouts/tile.png"
+theme.layout_tilebottom = themes_path .. "catppuccin/layouts/tile.png"
+theme.layout_dwindle = themes_path .. "catppuccin/layouts/dwindle.png"
+theme.layout_centered = themes_path .. "catppuccin/layouts/centered.png"
+theme.layout_mstab = themes_path .. "catppuccin/layouts/mstab.png"
+theme.layout_equalarea = themes_path .. "catppuccin/layouts/equalarea.png"
+theme.layout_machi = themes_path .. "catppuccin/layouts/machi.png"
+
+-- Generate Awesome icon:
+theme.awesome_icon = theme_assets.awesome_icon(
+    theme.menu_height, theme.bg_focus, theme.fg_focus
+)
+
+-- Define the icon theme for application icons. If not set then the icons
+-- from /usr/share/icons and /usr/share/icons/hicolor will be used.
+theme.icon_theme = "Tela-circle-dark"
+
+return theme
+
+-- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
