@@ -8,7 +8,7 @@ local helpers = require "helpers"
 local icon = wibox.widget.textbox()
 icon.font = beautiful.font_name.."16"
 icon.align = 'center'
-icon.markup = "<span foreground='"..beautiful.xcolor9.."'>  </span>"
+icon.markup = "<span foreground='"..beautiful.xcolor9.."'> 󰻠 </span>"
 
 -- Uptime
 local cpu = wibox.widget.textbox()

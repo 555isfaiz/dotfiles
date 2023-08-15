@@ -55,9 +55,9 @@ naughty.connect_signal("request::display", function(n)
 	--- table of icons
 	local app_icons = {
 		["firefox"] = { icon = "" },
-		["discord"] = { icon = "ﭮ" },
-		["music"] = { icon = "ﱘ" },
-		["screenshot tool"] = { icon = "" },
+		["discord"] = { icon = "󰙯" },
+		["music"] = { icon = "" },
+		["screenshot tool"] = { icon = "" },
 	}
 
 	local app_icon = nil
@@ -66,7 +66,7 @@ naughty.connect_signal("request::display", function(n)
 	if app_icons[tolow(n.app_name)] then
 		app_icon = app_icons[tolow(n.app_name)].icon
 	else
-		app_icon = ""
+		app_icon = "󰂞"
 	end
 
 	local app_icon_n = wibox.widget({

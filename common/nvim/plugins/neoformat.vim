@@ -1,16 +1,16 @@
-autocmd BufWritePre *.js Neoformat
-autocmd BufWritePre *.css Neoformat
-autocmd BufWritePre *.html Neoformat
-autocmd BufWritePre *.hs Neoformat
-autocmd BufWritePre *.rs Neoformat
-autocmd BufWritePre *.md Neoformat
-autocmd BufWritePre *.yml Neoformat
-autocmd BufWritePre *.json Neoformat
-autocmd BufWritePre *.py Neoformat
-autocmd BufWritePre *.go Neoformat
-autocmd BufWritePre *.ts Neoformat
-autocmd BufWritePre *.tsx Neoformat
-autocmd BufWritePre *.jsx Neoformat
-autocmd BufWritePre *.java Neoformat
-autocmd BufWritePre *.c Neoformat
-autocmd BufWritePre *.cpp Neoformat
+autocmd BufWritePre *.js lua vim.lsp.buf.format()
+autocmd BufWritePre *.css lua vim.lsp.buf.format()
+autocmd BufWritePre *.html lua vim.lsp.buf.format()
+autocmd BufWritePre *.hs lua vim.lsp.buf.format()
+autocmd BufWritePre *.rs lua vim.lsp.buf.format()
+autocmd BufWritePre *.md lua vim.lsp.buf.format()
+autocmd BufWritePre *.yml lua vim.lsp.buf.format()
+autocmd BufWritePre *.json lua vim.lsp.buf.format()
+autocmd BufWritePre *.py lua vim.lsp.buf.format()
+autocmd BufWritePre *.go lua vim.lsp.buf.format()
+autocmd BufWritePre *.ts lua vim.lsp.buf.format()
+autocmd BufWritePre *.tsx lua vim.lsp.buf.format()
+autocmd BufWritePre *.jsx lua vim.lsp.buf.format()
+autocmd BufWritePre *.java lua vim.lsp.buf.format()
+autocmd BufWritePre *.c lua vim.lsp.buf.format()
+autocmd BufWritePre *.cpp lua vim.lsp.buf.format()

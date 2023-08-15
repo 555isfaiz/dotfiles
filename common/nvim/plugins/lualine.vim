@@ -6,7 +6,8 @@ require('lualine').setup {
 	options = {
 			component_separators = { left = '', right = '' },
             section_separators = { left = '', right = '' },
-			disabled_filetypes = { "NvimTree", "alpha", "dashboard", "Outline" }
+            theme = "tokyonight",
+			disabled_filetypes = { "neo-tree", "dapui_scopes", "dashboard", "Outline", "dapui_breakpoints", "dapui_stacks", "dapui_watches", "dap-repl", "dapui_console", "aerial"}
 		},
 	sections = {
 		lualine_b = {
@@ -14,7 +15,7 @@ require('lualine').setup {
 				'diagnostics',
 				sources = { 'nvim_diagnostic' },
 				sections = { 'error', 'warn' },
-				symbols = {error = " ", warn = " ", info = " ", hint = " " },
+				symbols = {error = " ", warn = " ", info = " ", hint = "󰌵 " },
 				always_visible = true
 			}
 		},

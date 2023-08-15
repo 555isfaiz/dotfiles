@@ -1,0 +1,211 @@
+@import "current.css";
+
+* {
+  font-family: JetBrainsMono Nerd Font;
+  font-size: 16px;
+}
+
+window#waybar {
+    background-color: transparent;
+    border-radius: 10px;
+    color: #ffffff;
+    transition-property: background-color;
+    transition-duration: .5s;
+    margin-top: 5px;
+    /* padding-right: 100px; */
+}
+
+window#waybar.hidden {
+	opacity: 0.2;
+}
+
+@keyframes blink {
+    to {
+        background-color: #BF616A;
+        color: #B5E8E0;
+    }
+}
+
+#clock,
+#window,
+#custom-media
+#submap,
+#battery,
+#cpu,
+#tray,
+#memory,
+#temperature,
+#disk,
+#backlight,
+#disk,
+#network,
+/*#pulseaudio {
+  padding: 0 10px;
+}*/
+
+#tray {
+  padding-left: 15px;
+  border-radius: 10px;
+  color: @lavender;
+  background-color: @base;
+  padding-right: 10px;
+  margin-left: 10px;
+}
+
+#custom-media {
+  border-radius: 10px;
+  color: @teal;
+  background-color: @base;
+  padding-right: 25px;
+  padding-left: 10px;
+}
+
+#window {
+  border-radius: 10px;
+  color: @blue;
+  background-color: @base;
+  padding-right: 10px;
+  min-width: 30px;
+}
+
+#submap {
+  border-radius: 10px;
+  color: @rosewater;
+  background-color: @base;
+}
+
+#clock.time {
+  border-radius: 10px;
+  background-color: @base;
+  margin-left: -20px;
+  color: @sky;
+  padding-right: 10px;
+}
+
+#clock.calendar {
+  border-radius: 10px;
+  padding-left: 15px;
+  padding-right: 25px;
+  background-color: @base;
+  color: @yellow;
+  margin-left: 10px;
+}
+
+#cpu {
+  border-radius: 10px;
+  background-color: @red;
+  color: @base;
+  margin-left: -20px;
+  padding-right: 25px; 
+  min-width: 60px;
+}
+
+#memory {
+  border-radius: 10px;
+  background-color: @green;
+  color: @base;
+  margin-left: -20px;
+  padding-right: 25px;
+  min-width: 60px;
+}
+
+/*#cpu {
+  padding-left: 10px;
+  color: #161320;
+  background: @red;
+  border-radius: 10px;
+}
+
+#memory {
+  padding-left: 10px;
+  color: #161320;
+  background: @green;
+  border-radius: 10px;
+}*/
+
+#pulseaudio {
+  border-radius: 10px;
+  background-color: @flamingo;
+  color: @base;
+  margin-left: -20px;
+  padding-right: 25px;
+  padding-left: 10px;
+}
+
+#temperature {
+  border-radius: 10px;
+  background-color: @peach;
+  color: @base;
+  margin-left: -20px;
+  padding-right: 25px;
+}
+
+#disk {
+  border-radius: 10px;
+  background-color: @sapphire;
+  color: @base;
+  margin-left: -20px;
+  padding-right: 10px;
+}
+
+#wifi {
+  color: @sapphire;
+}
+
+#battery {
+  color: @green;
+}
+
+#network {
+  color: @maroon;
+}
+
+#backlight {
+  color: @mauve;
+}
+
+#workspaces {
+  border-radius: 10px;
+  color: @flamingo;
+  background-color: @base;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#workspaces button {
+  color: @pink;
+  border-radius: 16px;
+  transition: all 0.5s cubic-bezier(.55,-0.68,.48,1.68);
+}
+
+#workspaces button:hover {
+  background-color: @mauve;
+}
+
+#workspaces button.active {
+  background-color: shade(@maroon, 0.9);
+  color: @base;
+}
+
+.modules-right {
+  background-color: transparent;
+  border-radius: 16px;
+  margin-right: 12px;
+  margin-top: 5px;
+}
+
+.modules-left {
+  background-color: transparent;
+  border-radius: 16px;
+  margin-left: 12px;
+  margin-top: 5px;
+}
+
+.modules-center {
+  background-color: transparent;
+  border-radius: 16px;
+  margin-top: 5px;
+}
+
+
+

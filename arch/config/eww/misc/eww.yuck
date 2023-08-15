@@ -1,0 +1,25 @@
+(defpoll song :interval "2s"  "playerctl -i firefox metadata title")
+(defpoll song_artist :interval "2s"  "playerctl -i firefox metadata artist")
+(defpoll current_status :interval "1s"  "~/.config/eww/bar/scripts/music_info --time")
+(defpoll song_status :interval "1s"  "if [ $(playerctl -i firefox status) = 'Playing' ]; then echo '󰏤'; else echo '󰐊'; fi")
+(defpoll cover_art :interval "1s"  "playerctl -i firefox metadata | grep artUrl | awk -F' ' '{print $3}'")
+
+;;  Music
+(defwidget music_pop []
+		(box :class "music_pop" :orientation "h" :space-evenly "false" :vexpand "false" :hexpand "false"
+			(box :class "music_cover_art" :vexpand "false" :hexpand "false" :style "background-image: url('${cover_art}');")
+			(box :orientation "v" :spacing 20 :space-evenly "false" :vexpand "false" :hexpand "false"
+				(label :halign "center" :class "music" :wrap "true" :limit-width 13 :text song)
+				(label :halign "center" :class "music_artist" :wrap "true" :limit-width 15 :text song_artist)
+				(box :orientation "h" :spacing 15 :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
+					(button :class "music_btn_prev" :onclick "playerctl -i firefox previous" "")
+					(button :class "music_btn_play" :onclick "playerctl -i firefox play-pause" song_status)
+					(button :class "music_btn_next" :onclick "playerctl -i firefox next" ""))
+				)))
+
+
+;;  music
+		(defwindow music_win :stacking "fg" :focusable "false" :screen 0
+			    :geometry (geometry :x "0" :y "1%" :width 400 :height 104 :anchor "top center")
+			     				(music_pop))
+

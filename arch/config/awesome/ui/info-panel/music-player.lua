@@ -117,7 +117,7 @@ toggle:buttons(gears.table.join(
 
 local next = wibox.widget.textbox()
 next.font = beautiful.font_name.."26"
-next.markup = "怜"
+next.markup = ""
 
 next:buttons(gears.table.join(
 	awful.button({}, 1, function() playerctl_daemon:next()  end)
@@ -125,7 +125,7 @@ next:buttons(gears.table.join(
 
 local back = wibox.widget.textbox()
 back.font = beautiful.font_name.."26"
-back.markup = "玲"
+back.markup = ""
 
 back:buttons(gears.table.join(
 	awful.button({}, 1, function() playerctl_daemon:previous()  end)
@@ -242,10 +242,10 @@ end)
 playerctl_daemon:connect_signal("playback_status", function(_, playing, __)
 	if playing then
 		music_text:set_markup_silently(helpers.ui.colorize_text("Now Playing", beautiful.xcolorO0 )) --"#666c79"
-		toggle.markup = helpers.ui.colorize_text("", beautiful.xcolor2 )
+		toggle.markup = helpers.ui.colorize_text("", beautiful.xcolor2 )
 	else
 		music_text:set_markup_silently(helpers.ui.colorize_text("Music", beautiful.xcolorO0 ))
-		toggle.markup = helpers.ui.colorize_text("契", beautiful.xcolor2 )
+		toggle.markup = helpers.ui.colorize_text("", beautiful.xcolor2 )
 	end
 end)
 

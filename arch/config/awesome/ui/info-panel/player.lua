@@ -32,17 +32,17 @@ toggle.font = beautiful.font_name.."26"
 toggle:buttons(gears.table.join(
 	awful.button({}, 1, function() 
 		awful.spawn("mpc toggle", false) 
-		if toggle.markup:match("") then
+		if toggle.markup:match("") then
 			toggle.markup = "契"
 		else
-			toggle.markup = ""
+			toggle.markup = ""
 		end
 	end)
 ))
 
 local next = wibox.widget.textbox()
 next.font = beautiful.font_name.."26"
-next.markup = "怜"
+next.markup = ""
 
 next:buttons(gears.table.join(
 	awful.button({}, 1, function() awful.spawn("mpc next", false) end)
@@ -50,7 +50,7 @@ next:buttons(gears.table.join(
 
 local back = wibox.widget.textbox()
 back.font = beautiful.font_name.."26"
-back.markup = "玲"
+back.markup = ""
 
 back:buttons(gears.table.join(
 	awful.button({}, 1, function() awful.spawn("mpc prev", false) end)
@@ -59,7 +59,7 @@ back:buttons(gears.table.join(
 -- Get data
 awesome.connect_signal("signal::player", function(t, a, l, s)
 	if not s:match("playing") then
-		toggle.markup = "契"
+		toggle.markup = ""
 	else
 		toggle.markup = ""
 	end

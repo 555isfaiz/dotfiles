@@ -113,7 +113,7 @@ local current_weather_widget_2 = wibox.widget({
 		{
 			{
 				id = "wind_desc",
-				markup = "煮 Wind",
+				markup = " Wind",
 				align = "right",
 				font = beautiful.font_name .. "Bold 13",
 				widget = wibox.widget.textbox,

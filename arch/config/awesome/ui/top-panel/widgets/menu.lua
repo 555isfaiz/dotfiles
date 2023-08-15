@@ -16,7 +16,7 @@ local menu = wibox.widget {
   markup = "<span foreground='"..beautiful.xcolor9.."'>    </span>",
 	widget = wibox.widget.textbox(),
 	},
-	right = 6,
+	--right = 2,
 	bottom = 2,
 	widget = wibox.container.margin,
 }

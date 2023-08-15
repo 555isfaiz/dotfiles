@@ -11,7 +11,7 @@ icon.align = 'center'
 icon.markup = "<span foreground='"..beautiful.xcolor11.."'>  </span>"
 
 -- Uptime
-local cput = awful.widget.watch('bash -c "cat /sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon1/temp1_input"', 5,
+local cput = awful.widget.watch('bash -c "cat /sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon2/temp1_input"', 5,
     function(widget, s) widget:set_text((math.floor(tonumber(s)/1000)).. "°C") end)
 cput.font = beautiful.font_name.."12"
 cput.align = 'center'

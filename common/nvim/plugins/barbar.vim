@@ -1,14 +1,15 @@
 " Move to previous/next
 " nnoremap <silent>    <A-,> <Cmd>BufferPrevious<CR>
 " nnoremap <silent>    <A-.> <Cmd>BufferNext<CR>
-nmap <silent>    q <Cmd>BufferPrevious<CR>
-nmap <silent>    w <Cmd>BufferNext<CR>
-map <silent>    <A-Left> <C-O>
-map <silent>    <A-Right> <C-I>
-map <silent>     ' <C-W>
+
 " Re-order to previous/next
 nnoremap <silent>    <A-<> <Cmd>BufferMovePrevious<CR>
 nnoremap <silent>    <A->> <Cmd>BufferMoveNext<CR>
+
+nmap <silent>    Q <Cmd>BufferPrevious<CR>
+nmap <silent>    W <Cmd>BufferNext<CR>
+nmap <silent>    <C-q> <Cmd>BufferClose<CR>
+
 " Goto buffer in position...
 nnoremap <silent>    <A-1> <Cmd>BufferGoto 1<CR>
 nnoremap <silent>    <A-2> <Cmd>BufferGoto 2<CR>
@@ -21,5 +22,5 @@ nnoremap <silent>    <A-8> <Cmd>BufferGoto 8<CR>
 nnoremap <silent>    <A-9> <Cmd>BufferGoto 9<CR>
 nnoremap <silent>    <A-0> <Cmd>BufferLast<CR>
 
-let bufferline = get(g:, 'bufferline', {})
+" let bufferline = get(g:, 'bufferline', {})
 

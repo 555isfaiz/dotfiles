@@ -49,7 +49,7 @@ prev_icon:add_button(
     end)
 )
 
-local music_icon = create_icon('ﱘ ', beautiful.xcolor13)
+local music_icon = create_icon(' ', beautiful.xcolor13)
 
 helpers.ui.add_hover_cursor(play_icon, "hand2")
 helpers.ui.add_hover_cursor(next_icon, "hand2")

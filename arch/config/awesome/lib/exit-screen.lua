@@ -15,7 +15,7 @@ local icon_font = beautiful.font_name.."bold 45"
 local poweroff_text_icon = ""
 local reboot_text_icon = ""
 local suspend_text_icon = ""
-local exit_text_icon = ""
+local exit_text_icon = "󰗽"
 local lock_text_icon = ""
 
 local button_bg = beautiful.xcolorbase

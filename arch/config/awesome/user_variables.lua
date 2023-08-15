@@ -2,11 +2,11 @@ return {
 	widget = {
 		weather = {
 			--- API Key
-			key = "",
+			key = "d362b5c9445795b4b7772dcdf54a6dcb",
 			--- Coordinates
 			coordinates = {
-				"", --- lat
-				"", --- lon
+				"52.3578369", --- lat
+				"4.8340268", --- lon
 			},
 		},
 
@@ -22,7 +22,7 @@ return {
 
 		--- Disk for Top-panel
 		disk = {
-			name = "",
+			name = "/dev/nvme0n1p5",
 		},
 		
 	},
