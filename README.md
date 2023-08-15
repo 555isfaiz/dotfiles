@@ -12,6 +12,18 @@
 ### Requirements
 TODO...
 
+## Arch Setup (Wayland)
+
+### Info
++ WM: Hyprland
++ Bar: Waybar + eww
++ Shell: Zsh
++ Terminal: alacritty
++ Editor: neovim
+
+### Requirements
+TODO...
+
 ## MacOS Setup
 
 ### Info
@@ -27,6 +39,8 @@ TODO...
 ## Screenshots
 
 ### Arch
+#### Wayland
+![](screenshots/arch_wayland.png)
 #### Light variant
 ![](screenshots/arch_day_1.png)
 ![](screenshots/arch_day_2.png)
