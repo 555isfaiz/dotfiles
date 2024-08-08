@@ -96,16 +96,22 @@ require("neodev").setup({
   -- add any options here, or leave empty to use the default settings
 })
 
-require('Comment').setup()
-
-local null_ls = require("null-ls")
-
-null_ls.setup({
-    sources = {
-        null_ls.builtins.formatting.ruff,
-        null_ls.builtins.diagnostics.vint
-    },
+require("conform").setup({
+  formatters_by_ft = {
+    vim = { "vint" },
+    -- -- Conform will run multiple formatters sequentially
+    -- python = { "isort", "black" },
+    -- -- You can customize some of the format options for the filetype (:help conform.format)
+    -- rust = { "rustfmt", lsp_format = "fallback" },
+    -- -- Conform will run the first available formatter
+    -- javascript = { "prettierd", "prettier", stop_after_first = true },
+  },
+  default_format_opts = {
+    lsp_format = "fallback",
+  },
 })
+
+require('Comment').setup()
 
 require('aerial').setup({
   backends = { "treesitter", "lsp", "markdown", "man" },
@@ -151,7 +157,7 @@ require('aerial').setup({
   end
 })
 -- You probably also want to set a keymap to toggle aerial
-vim.keymap.set('n', '<F2>', '<cmd>AerialToggle!<CR>')
+vim.keymap.set('n', '<F3>', '<cmd>AerialToggle!<CR>')
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -172,7 +178,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local opts = { buffer = ev.buf }
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
     vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
@@ -186,10 +192,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
     -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
     vim.keymap.set('n', '<space>f', function()
+      require('conform').format()
       vim.lsp.buf.format { async = true }
     end, opts)
   end,
 })
+require'lspconfig'.ruff.setup{}
+
 END
 
 nnoremap <silent> <A-o> :ClangdSwitchSourceHeader<CR>

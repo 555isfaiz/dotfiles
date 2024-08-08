@@ -6,8 +6,8 @@
 nnoremap <silent>    <A-<> <Cmd>BufferMovePrevious<CR>
 nnoremap <silent>    <A->> <Cmd>BufferMoveNext<CR>
 
-nmap <silent>    Q <Cmd>BufferPrevious<CR>
-nmap <silent>    W <Cmd>BufferNext<CR>
+nmap <silent>    q <Cmd>BufferPrevious<CR>
+nmap <silent>    w <Cmd>BufferNext<CR>
 nmap <silent>    <C-q> <Cmd>BufferClose<CR>
 
 " Goto buffer in position...

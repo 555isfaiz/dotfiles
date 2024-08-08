@@ -1,9 +1,9 @@
 set autoindent
+set smartindent
 set number
 set tabstop=4
 set shiftwidth=4
 set expandtab
-set smartindent
 set mouse=a
 set clipboard+=unnamedplus
 set pumheight=10
@@ -12,17 +12,21 @@ set splitbelow
 set splitright
 set signcolumn=yes
 set updatetime=100
+set laststatus=3
+
 
 nnoremap <silent> <Tab> :>1<CR>
 vnoremap <silent> <Tab> :'<,'>1><CR>gv
+
+map <silent> <C-m> :WindowsMaximize<CR>
 
 nnoremap <silent> <M-k> :m .-2<CR>==
 nnoremap <silent> <M-j> :m .+1<CR>==
 vnoremap <silent> <M-k> :m '<-2<CR>gv=gv
 vnoremap <silent> <M-j> :m '>+1<CR>gv=gv
 
-map <silent>    <A-h> <C-O>
-map <silent>    <A-l> <C-I>
+nnoremap <silent>    <A-h> <C-O>
+nnoremap <silent>    <A-l> <C-I>
 map <silent>     ' <C-W>
 map <silent>     8 <C-W>+
 map <silent>     2 <C-W>-

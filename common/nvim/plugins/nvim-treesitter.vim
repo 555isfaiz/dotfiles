@@ -42,11 +42,11 @@ require'nvim-treesitter.configs'.setup {
   incremental_selection = {
     enable = true,
     keymaps = {
-      init_selection = "gs", -- set to `false` to disable one of the mappings
-      node_incremental = "gu",
-      scope_incremental = "gU",
-      node_decremental = "gd",
-      scope_decremental = "gD",
+      init_selection = "<space>gs", -- set to `false` to disable one of the mappings
+      node_incremental = "<space>gu",
+      scope_incremental = "<space>gU",
+      node_decremental = "<space>gd",
+      -- scope_decremental = "gD",
     },
   },
   indent = {

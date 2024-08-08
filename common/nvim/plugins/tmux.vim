@@ -61,8 +61,8 @@ vim.keymap.set('n', '<A-L>', '<cmd>lua require("tmux").move_right()<cr>')
 vim.keymap.set('n', '<A-K>', '<cmd>lua require("tmux").move_top()<cr>')
 vim.keymap.set('n', '<A-J>', '<cmd>lua require("tmux").move_bottom()<cr>')
 
-vim.keymap.set('n', '<C-M-h>', '<cmd>lua require("tmux").resize_left()<cr>')
-vim.keymap.set('n', '<C-M-l>', '<cmd>lua require("tmux").resize_right()<cr>')
-vim.keymap.set('n', '<C-M-k>', '<cmd>lua require("tmux").resize_top()<cr>')
-vim.keymap.set('n', '<C-M-j>', '<cmd>lua require("tmux").resize_bottom()<cr>')
+vim.keymap.set('n', '<C-A-h>', '<cmd>lua require("tmux").resize_left()<cr>')
+vim.keymap.set('n', '<C-A-l>', '<cmd>lua require("tmux").resize_right()<cr>')
+vim.keymap.set('n', '<C-A-k>', '<cmd>lua require("tmux").resize_top()<cr>')
+vim.keymap.set('n', '<C-A-j>', '<cmd>lua require("tmux").resize_bottom()<cr>')
 END

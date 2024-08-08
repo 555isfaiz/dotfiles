@@ -12,4 +12,4 @@
 "
 " END
 
-nmap <silent>    <F3> <Cmd>Neotree toggle<CR>
+nmap <silent>    <F2> <Cmd>Neotree toggle<CR>

@@ -1,14 +1,31 @@
 lua << END
 require("dapui").setup()
 
-require('dap.ext.vscode').load_launchjs(nil, {cppdbg = {'c', 'cpp'}})
+if vim.fn.has('macunix') == 1 then
+    require('dap.ext.vscode').load_launchjs(nil, {lldb = {'c', 'cpp'}})
+else
+    require('dap.ext.vscode').load_launchjs(nil, {cppdbg = {'c', 'cpp'}})
+end
 require('dap-python').setup('~/.pyvenv/bin/python')
 
 local dap = require('dap')
+local home_dir = os.getenv('HOME')
 dap.adapters.cppdbg = {
   id = 'cppdbg',
   type = 'executable',
-  command = '/home/fu1lp0w3r/.local/share/nvim/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7',
+  command = home_dir .. '/.local/share/nvim/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7',
+}
+dap.adapters.lldb = {
+  type = 'server',
+  port = "${port}",
+  executable = {
+    -- CHANGE THIS to your path!
+    command = home_dir .. '/.local/share/nvim/mason/packages/codelldb/extension/adapter/codelldb',
+    args = {"--port", "${port}"},
+
+    -- On windows you may have to uncomment this:
+    -- detached = false,
+  }
 }
 
 vim.keymap.set('n', '<F5>', require'dap'.continue)
