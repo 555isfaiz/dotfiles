@@ -10,6 +10,11 @@ require('dap-python').setup('~/.pyvenv/bin/python')
 
 local dap = require('dap')
 local home_dir = os.getenv('HOME')
+
+vim.fn.sign_define('DapBreakpoint', {text='', texthl='ErrorMsg', linehl='DapBreakpoint', numhl='DapBreakpoint'})
+vim.fn.sign_define('DapBreakpointCondition', {text='', texthl='ErrorMsg', linehl='DapBreakpoint', numhl='DapBreakpoint'})
+vim.fn.sign_define('DapStopped', {text='→', texthl='ErrorMsg', linehl='DiffText', numhl='DiffText'})
+
 dap.adapters.cppdbg = {
   id = 'cppdbg',
   type = 'executable',
@@ -28,14 +33,25 @@ dap.adapters.lldb = {
   }
 }
 
-vim.keymap.set('n', '<F5>', require'dap'.continue)
--- vim.keymap.set('n', '<F17>', require'telescope'.extensions.dap.configurations) -- S-F5
-vim.keymap.set('n', '<F6>', require'dap'.terminate)
-vim.keymap.set('n', '<F7>', require'dap'.restart)
-vim.keymap.set('n', '<F10>', require'dap'.step_over)
-vim.keymap.set('n', '<F11>', require'dap'.step_into)
-vim.keymap.set('n', 'B', require'dap'.toggle_breakpoint)
-vim.keymap.set('n', '<F1>', require'dapui'.toggle)
+require("which-key").add({
+  {'<F5>', require'dap'.continue, desc = "DAP: start or continue"},
+  {'<F6>', require'dap'.terminate, desc = "DAP: terminate"},
+  {'<F7>', require'dap'.restart, desc = "DAP: restart"},
+  {'<F10>', require'dap'.step_over, desc = "DAP: step over"},
+  {'<F11>', require'dap'.step_into, desc = "DAP: step into"},
+  {'B', require'dap'.toggle_breakpoint, desc = "DAP: toggle breakpoint"},
+  {'<Space>b', function()
+    vim.ui.input({ prompt = 'Conditional Breakpoint: ' }, function(input)
+        require'dap'.toggle_breakpoint(input)
+    end)
+  end, desc = "DAP: toggle conditional breakpoint"},
+  {'<F1>', require'dapui'.toggle, desc = "DAP: toggle UI"},
+  {"<space>ev", function()
+    vim.ui.input({ prompt = 'Enter value for Evaluate: ', completion = 'command' }, function(input)
+        require("dapui").eval(input)
+    end)
+  end, desc = "DAP: evaluate experssion"}
+})
 
 local dap = require('dap')
 local api = vim.api
@@ -51,7 +67,7 @@ dap.listeners.after['event_initialized']['me'] = function()
     end
   end
   api.nvim_set_keymap(
-    'n', 'I', '<Cmd>lua require("dap.ui.widgets").hover()<CR>', { silent = true })
+    'n', 'I', '<Cmd>lua require("dap.ui.widgets").hover()<CR>', { desc = "DAP: show hover variable info", silent = true })
 end
 
 dap.listeners.after['event_terminated']['me'] = function()
@@ -66,4 +82,5 @@ dap.listeners.after['event_terminated']['me'] = function()
   end
   keymap_restore = {}
 end
+
 END

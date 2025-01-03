@@ -7,15 +7,10 @@ require('persistence').setup {
   branch = true, -- use git branch to save session
 }
 
--- load the session for the current directory
-vim.keymap.set("n", "<space>sl", function() require("persistence").load() end)
-
--- select a session to load
-vim.keymap.set("n", "<space>ss", function() require("persistence").select() end)
-
--- load the last session
-vim.keymap.set("n", "<space>so", function() require("persistence").load({ last = true }) end)
-
--- stop Persistence => session won't be saved on exit
-vim.keymap.set("n", "<space>sq", function() require("persistence").stop() end)
+require("which-key").add({
+    {"<space>sl", function() require("persistence").load() end, desc = "Persistence: load session for current directory"},
+    {"<space>ss", function() require("persistence").select() end, desc = "Persistence: select session"},
+    {"<space>so", function() require("persistence").load({ last = true }) end, desc = "Persistence: load last session"},
+    {"<space>sq", function() require("persistence").stop() end, desc = "Persistence: stop session (won't be saved on exit)"},
+})
 END

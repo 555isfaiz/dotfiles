@@ -72,8 +72,8 @@ local cmp = require("cmp")
       -- they way you will only jump inside the snippet region
       elseif luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
-      -- elseif has_words_before() then
-      --   cmp.complete()
+      elseif has_words_before() then
+        cmp.complete()
       else
         fallback()
       end
@@ -122,6 +122,12 @@ local cmp = require("cmp")
       { name = 'buffer' },
     })
   })
+  
+  cmp.setup.filetype('noice', {
+    sources = cmp.config.sources({
+      { name = 'buffer' },
+    })
+  })
 
   cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
       sources = {
@@ -166,7 +172,7 @@ local cmp = require("cmp")
   require('lspconfig')['jsonls'].setup {
     capabilities = capabilities
   }
-  require('lspconfig')['tsserver'].setup {
+  require('lspconfig')['ts_ls'].setup {
     capabilities = capabilities
   }
   require('lspconfig')['lua_ls'].setup {

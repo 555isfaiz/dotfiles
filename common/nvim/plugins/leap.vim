@@ -9,18 +9,26 @@ require('flit').setup {
     opts = {}
 }
 
-vim.keymap.set('n',        's', '<Plug>(leap)')
-vim.keymap.set('n',        'S', '<Plug>(leap-from-window)')
-vim.keymap.set({'x', 'o'}, 's', '<Plug>(leap-forward)')
-vim.keymap.set({'x', 'o'}, 'S', '<Plug>(leap-backward)')
-vim.keymap.set({'n', 'x', 'o'}, 'ga',  function ()
-  require('leap.treesitter').select()
-end)
+require("which-key").add({
+    {'s', '<Plug>(leap)', desc = "Leap: start leap", mode = {'n', 'x', 'o'}},
+    {'<Space>l',  function ()
+      require('leap.treesitter').select()
+    end, desc = "Leap: start treesitter leap", mode = {'n', 'x', 'o'}},
+    {'<Space>L', 'V<cmd>lua require("leap.treesitter").select()<cr>', desc = "Leap: start linewise treesitter leap", mode = {'n', 'x', 'o'}},
+})
 
--- Linewise.
-vim.keymap.set({'n', 'x', 'o'}, 'gA',
-  'V<cmd>lua require("leap.treesitter").select()<cr>'
-)
-
-
+vim.api.nvim_create_autocmd('ColorScheme', {
+      callback = function ()
+        -- if vim.g.colors_name == "noctis_bordo" then
+          -- Force using the defaults of Leap:
+          require('leap').init_highlight(true)
+          -- And/or make your own tweaks:
+          vim.api.nvim_set_hl(0, 'LeapBackdrop', { link = 'Comment' })
+          vim.api.nvim_set_hl(0, 'LeapLabelSecondary', { link = 'Normal' })
+          vim.api.nvim_set_hl(0, 'LeapLabelPrimary', { link = 'Substitute' })
+          vim.api.nvim_set_hl(0, 'LeapMatch', { link = 'ErrorMsg' })
+          -- etc.
+        -- end
+      end
+    })
 END

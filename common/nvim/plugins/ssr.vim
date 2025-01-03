@@ -10,9 +10,10 @@ require("ssr").setup {
         next_match = "n",
         prev_match = "N",
         replace_confirm = "<cr>",
-        replace_all = "<leader><cr>",
+        replace_all = "<space><cr>",
     },
 }
-
-vim.keymap.set({ "n", "x" }, "fr", function() require("ssr").open() end)
+require("which-key").add({
+    {"fr", function() require("ssr").open() end, desc = "SSR: start Structual Search and Replace"}
+})
 END

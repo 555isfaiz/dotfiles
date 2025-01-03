@@ -1,12 +1,20 @@
 lua << END
 require('gitsigns').setup {
   signs = {
-    add          = { text = '' },
-    change       = { text = '󰜥' },
-    delete       = { text = '' },
-    topdelete    = { text = '' },
-    changedelete = { text = '󰜥' },
-    untracked    = { text = '󰚉' },
+    add          = { text = '' },
+    change       = { text = '' },
+    delete       = { text = '_' },
+    topdelete    = { text = '‾' },
+    changedelete = { text = '~' },
+    untracked    = { text = '┆' },
+  },
+  signs_staged = {
+    add          = { text = '' },
+    change       = { text = '' },
+    delete       = { text = '_' },
+    topdelete    = { text = '‾' },
+    changedelete = { text = '~' },
+    untracked    = { text = '┆' },
   },
   signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
   numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
@@ -36,9 +44,6 @@ require('gitsigns').setup {
     row = 0,
     col = 1
   },
-  yadm = {
-    enable = false
-  },
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
 
@@ -49,35 +54,46 @@ require('gitsigns').setup {
     end
 
     -- Navigation
-    map('n', ']c', function()
-      if vim.wo.diff then return ']c' end
-      vim.schedule(function() gs.next_hunk() end)
-      return '<Ignore>'
-    end, {expr=true})
-
-    map('n', '[c', function()
-      if vim.wo.diff then return '[c' end
-      vim.schedule(function() gs.prev_hunk() end)
-      return '<Ignore>'
-    end, {expr=true})
+    -- map('n', ']c', function()
+    --   if vim.wo.diff then return ']c' end
+    --   vim.schedule(function() gs.next_hunk() end)
+    --   return '<Ignore>'
+    -- end, {expr=true})
+    --
+    -- map('n', '[c', function()
+    --   if vim.wo.diff then return '[c' end
+    --   vim.schedule(function() gs.prev_hunk() end)
+    --   return '<Ignore>'
+    -- end, {expr=true})
 
     -- Actions
-    map('n', '<space>hs', gs.stage_hunk)
-    map('n', '<space>hr', gs.reset_hunk)
-    map('v', '<space>hs', function() gs.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
-    map('v', '<space>hr', function() gs.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
-    map('n', '<space>hS', gs.stage_buffer)
-    map('n', '<space>hu', gs.undo_stage_hunk)
-    map('n', '<space>hR', gs.reset_buffer)
-    map('n', '<space>hp', gs.preview_hunk)
-    map('n', '<space>hb', function() gs.blame_line{full=true} end)
-    map('n', '<space>tb', gs.toggle_current_line_blame)
-    map('n', '<space>hd', gs.diffthis)
-    map('n', '<space>hD', function() gs.diffthis('~') end)
-    map('n', '<space>td', gs.toggle_deleted)
+    require("which-key").add({
+      {'<space>hs', gs.stage_hunk, desc = "Git hunk: stage hunk"},
+      {'<space>hr', gs.reset_hunk, desc = "Git hunk: reset hunk"},
+      {'<space>hs', function() gs.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end, desc = "Git hunk: stage hunk", mode = "v"},
+      {'<space>hr', function() gs.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end, desc = "Git hunk: reset hunk", mode = "v"},
+      {'<space>hS', gs.stage_buffer, desc = "Git hunk: stage buffer"},
+      {'<space>hu', gs.undo_stage_hunk, desc = "Git hunk: undo stage buffer"},
+      {'<space>hR', gs.reset_buffer, desc = "Git hunk: reset buffer"},
+      {'<space>hp', gs.preview_hunk, desc = "Git hunk: preview hunk"},
+      {'<space>hb', function() gs.blame_line{full=true} end, desc = "Git hunk: blame file"},
+      {'<space>tb', gs.toggle_current_line_blame, desc = "Git hunk: blame line"},
+      {'<space>hd', gs.diffthis, desc = "Git hunk: diff hunk"},
+      {'<space>hD', function() gs.diffthis('~') end, desc = "Git hunk: diff file"},
+      {'<space>td', gs.toggle_deleted, desc = "Git hunk: toggle deleted"},
+      {'[c', function()
+          if vim.wo.diff then return '[c' end
+              vim.schedule(function() gs.prev_hunk() end)
+          return '<Ignore>'
+      end, desc = "Git hunk: go to previous change", {expr=true}},
+      {']c', function()
+          if vim.wo.diff then return ']c' end
+              vim.schedule(function() gs.next_hunk() end)
+          return '<Ignore>'
+      end, desc = "Git hunk: go to next change", {expr=true}},
+      {'ih', ':<C-U>Gitsigns select_hunk<CR>', desc = "Git hunk: select hunk", mode = {'o', 'x'}},
+    })
 
-    -- Text object
-    map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
   end
 }
 END

@@ -55,14 +55,15 @@ require("tmux").setup({
         resize_step_y = 1,
     }
 })
+require("which-key").add({
+    {'<A-H>', '<cmd>lua require("tmux").move_left()<cr>', desc = "Tmux: move pane left"},
+    {'<A-L>', '<cmd>lua require("tmux").move_right()<cr>', desc = "Tmux: move pane right"},
+    {'<A-K>', '<cmd>lua require("tmux").move_top()<cr>', desc = "Tmux: move pane top"},
+    {'<A-J>', '<cmd>lua require("tmux").move_bottom()<cr>', desc = "Tmux: move pane bottom"},
 
-vim.keymap.set('n', '<A-H>', '<cmd>lua require("tmux").move_left()<cr>')
-vim.keymap.set('n', '<A-L>', '<cmd>lua require("tmux").move_right()<cr>')
-vim.keymap.set('n', '<A-K>', '<cmd>lua require("tmux").move_top()<cr>')
-vim.keymap.set('n', '<A-J>', '<cmd>lua require("tmux").move_bottom()<cr>')
-
-vim.keymap.set('n', '<C-A-h>', '<cmd>lua require("tmux").resize_left()<cr>')
-vim.keymap.set('n', '<C-A-l>', '<cmd>lua require("tmux").resize_right()<cr>')
-vim.keymap.set('n', '<C-A-k>', '<cmd>lua require("tmux").resize_top()<cr>')
-vim.keymap.set('n', '<C-A-j>', '<cmd>lua require("tmux").resize_bottom()<cr>')
+    {'<C-A-h>', '<cmd>lua require("tmux").resize_left()<cr>', desc = "Tmux: resize pane left"},
+    {'<C-A-l>', '<cmd>lua require("tmux").resize_right()<cr>', desc = "Tmux: resize pane right"},
+    {'<C-A-k>', '<cmd>lua require("tmux").resize_top()<cr>', desc = "Tmux: resize pane up"},
+    {'<C-A-j>', '<cmd>lua require("tmux").resize_bottom()<cr>', desc = "Tmux: resize pane down"},
+})
 END

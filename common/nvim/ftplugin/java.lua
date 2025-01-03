@@ -45,6 +45,23 @@ if not ok then
 end
 
 local project_name = fn.fnamemodify(fn.getcwd(), ':p:h:t')
+local project_setting = fn.getcwd() .. "/.jdtls"
+
+local settingsTable = {}
+local file = io.open(project_setting, "r") -- Open the file in read mode
+
+if file then
+    for line in file:lines() do
+        local key, value = line:match("^(%S+)%s*=%s*(%S+)$")
+        if key and value then
+            settingsTable[key] = value
+        end
+    end
+    file:close()
+end
+
+local format_url = settingsTable["format_setting"] or "https://gist.githubusercontent.com/ikws4/7880fdcb4e3bf4a38999a628d287b1ab/raw/9005c451ed1ff629679d6100e22d63acc805e170/jdtls-formatter-style.xml"
+
 local workspace_dir = home_dir .. "/.cache/jdtls/workspace/" .. project_name
 
 local get_jdp_javaagent = function()
@@ -67,11 +84,36 @@ local get_jdp_javaagent = function()
     return ''
 end
 
+local capabilities = {
+        workspace = {
+            configuration = true
+        },
+        textDocument = {
+            completion = {
+                completionItem = {
+                    snippetSupport = true
+                }
+            }
+        }
+    }
+
+local extendedClientCapabilities = require'jdtls'.extendedClientCapabilities
+    extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
+
+local bundles = {
+    -- vim.fn.glob(get_jdp_javaagent(), 1),
+    vim.fn.glob(vim.fn.stdpath('data')..'/mason/packages/java-test/extension/server/*.jar', true ),
+    vim.fn.glob(vim.fn.stdpath('data')..'/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar', true),
+}
+-- vim.list_extend(bundles, vim.split(vim.fn.glob(home_dir .. "/.config/nvim/ftplugin/vscode-java-test/server/*.jar", 1), "\n"))
+
 local config = {
-    capabilities = require("cmp_nvim_lsp").default_capabilities(),
+    -- capabilities = require("cmp_nvim_lsp").default_capabilities(),
+    capabilities = capabilities,
     on_attach = function()
         require("jdtls.setup").add_commands()
         require('jdtls.dap').setup_dap_main_class_configs()
+        -- require 'lspsaga'.init_lsp_saga()
     end,
     cmd = {
         'jdtls',
@@ -89,17 +131,35 @@ local config = {
                     enabled = false,
                 },
                 settings = {
-                    url =
-                    "https://gist.githubusercontent.com/ikws4/7880fdcb4e3bf4a38999a628d287b1ab/raw/9005c451ed1ff629679d6100e22d63acc805e170/jdtls-formatter-style.xml",
+                    url = format_url,
                 },
+            },
+            completion = {
+                importOrder = {
+                    "java",
+                    "javax",
+                    "jakarta",
+                    "org",
+                    "com"
+                }
+            },
+            autobuild = {
+                enabled = false, -- Disable automatic builds
+            },
+            eclipse = {
+                downloadSource = true,
             },
         },
     },
     init_options = {
-        bundles = {
-            vim.fn.glob(get_jdp_javaagent(), 1)
-        },
+        bundles = bundles,
+        extendedClientCapabilities = extendedClientCapabilities;
     },
 }
+
+require("which-key").add({
+    {'<space>tc', function() require'jdtls'.compile() require'jdtls'.test_class() end, desc = "Jdtls: debug current test class"},
+    {'<space>tm', function() require'jdtls'.compile() require'jdtls'.test_nearest_method() end, desc = "Jdtls: debug current test method"},
+})
 
 require("jdtls").start_or_attach(config)

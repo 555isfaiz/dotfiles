@@ -152,19 +152,26 @@ require('aerial').setup({
   -- optionally use on_attach to set keymaps when aerial has attached to a buffer
   on_attach = function(bufnr)
     -- Jump forwards/backwards with '{' and '}'
-    vim.keymap.set('n', '{', '<cmd>AerialPrev<CR>', {buffer = bufnr})
-    vim.keymap.set('n', '}', '<cmd>AerialNext<CR>', {buffer = bufnr})
+    require("which-key").add({
+      {'{', '<cmd>AerialPrev<CR>', desc = "Aerial: jump previous", {buffer = bufnr}},
+      {'}', '<cmd>AerialNext<CR>', desc = "Aerial: jump next", {buffer = bufnr}},
+    })
   end
 })
--- You probably also want to set a keymap to toggle aerial
-vim.keymap.set('n', '<F3>', '<cmd>AerialToggle!<CR>')
 
 -- Global mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
+require("which-key").add({
+  -- You probably also want to set a keymap to toggle aerial
+  -- {'<F3>', '<cmd>AerialToggle!<CR>', desc = "Aerial: toggle UI"},
+  -- See `:help vim.diagnostic.*` for documentation on any of the below functions
+  {'<space>e', vim.diagnostic.open_float, desc = "LSP: open floating diagnostic"},
+  {'<space>q', vim.diagnostic.setloclist, desc = "LSP: diagnostic set local list"},
+  {'[d', '<cmd>Lspsaga diagnostic_jump_prev<cr>', desc = "LSPSaga: jump to previous diagnostic"},
+  {']d', '<cmd>Lspsaga diagnostic_jump_next<cr>', desc = "LSPSaga: jump to next diagnostic"},
+  {'fm', '<cmd>Lspsaga outline<cr>', desc = "LSPSaga: show file outline"},
+  {'gr', '<cmd>Lspsaga finder<cr>', desc = "LSPSaga: find reference"},
+  {'fs', '<cmd>Lspsaga subtypes<cr>', desc = "LSPSaga: show subtypes"},
+})
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
@@ -177,27 +184,60 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- Buffer local mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local opts = { buffer = ev.buf }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-    -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
-    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
-    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
-    vim.keymap.set('n', '<space>wl', function()
-      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, opts)
-    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
-    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-    vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
-    -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-    vim.keymap.set('n', '<space>f', function()
-      require('conform').format()
-      vim.lsp.buf.format { async = true }
-    end, opts)
+    require("which-key").add({
+      {'gD', vim.lsp.buf.declaration, desc = "LSP: go to declaration", opts},
+      {'K', vim.lsp.buf.hover, desc = "LSP: show hover info", opts},
+      {'gi', vim.lsp.buf.implementation, desc = "LSP: go to implementation", opts},
+      {'<C-k>', vim.lsp.buf.signature_help, desc = "LSP: show signature help", opts},
+      {'<space>wa', vim.lsp.buf.add_workspace_folder, desc = "LSP: add workspace folder", opts},
+      {'<space>wr', vim.lsp.buf.remove_workspace_folder, desc = "LSP: remove workspace folder", opts},
+      {'<space>wl', function()
+          print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+      end, desc = "LSP: list workspace folders", opts},
+      {'<space>D', vim.lsp.buf.type_definition, desc = "LSP: show type definition", opts},
+      {'<space>rn', vim.lsp.buf.rename, desc = "LSP: rename", opts},
+      {'<space>ca', '<cmd>Lspsaga code_action<cr>', desc = "LSPSaga: show code actions", mode = {'n', 'v'}, opts},
+      {'<space>f', function()
+          require('conform').format()
+          vim.lsp.buf.format { async = true }
+      end, desc = "LSP: format file", opts},
+    })
   end,
 })
-require'lspconfig'.ruff.setup{}
+
+require('lspconfig').ruff.setup({
+  
+})
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_hover', { clear = true }),
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client == nil then
+      return
+    end
+    if client.name == 'ruff' then
+      -- Disable hover in favor of Pyright
+      client.server_capabilities.hoverProvider = false
+    end
+  end,
+  desc = 'LSP: Disable hover capability from Ruff',
+})
+
+require('lspconfig').pyright.setup {
+  settings = {
+    pyright = {
+      -- Using Ruff's import organizer
+      disableOrganizeImports = true,
+    },
+    python = {
+      analysis = {
+        -- Ignore all files for analysis to exclusively use Ruff for linting
+        ignore = { '*' },
+      },
+    },
+  },
+}
 
 END
 
