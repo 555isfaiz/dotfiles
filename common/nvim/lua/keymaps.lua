@@ -108,21 +108,15 @@ require("which-key").add({
     { '<space>td',  gs.toggle_deleted,                                                   desc = "Git hunk: toggle deleted" },
     {
         '[c',
-        function()
-            if vim.wo.diff then return '[c' end
-            vim.schedule(function() gs.prev_hunk() end)
-            return '<Ignore>'
-        end,
+        function() gs.prev_hunk() end,
+        cond = function() return vim.wo.diff end,
         desc = "Git hunk: go to previous change",
         { expr = true }
     },
     {
         ']c',
-        function()
-            if vim.wo.diff then return ']c' end
-            vim.schedule(function() gs.next_hunk() end)
-            return '<Ignore>'
-        end,
+        function() gs.next_hunk() end,
+        cond = function() return vim.wo.diff end,
         desc = "Git hunk: go to next change",
         { expr = true }
     },
