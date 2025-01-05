@@ -15,36 +15,55 @@ end
 
 require("which-key").add({
     ------------
+    --  Misc  --
+    ------------
+    { "<Tab>",      ":>1<CR>",                       desc = "Indent line" },
+    { "<Tab>",      ":'<,'>1><CR>gv",                desc = "Indent selection",               mode = "v" },
+    { "<C-m>",      ":WindowsMaximize<CR>",          desc = "Maximize window" },
+    { "S",          "v<space>u",                     desc = "Select a treesitter node" },
+    { "S",          "<space>u",                      desc = "Increment treesitter selection", mode = "v" },
+    { "<M-k>",      ":m .-2<CR>==",                  desc = "Move line up" },
+    { "<M-j>",      ":m .+1<CR>==",                  desc = "Move line down" },
+    { "<M-k>",      ":m '<-2<CR>gv=gv",              desc = "Move selected line up",          mode = "v" },
+    { "<M-j>",      ":m '>+1<CR>gv=gv",              desc = "Move selected line down",        mode = "v" },
+    { "<Esc><Esc>", "<C-\\><Cn>",                    desc = "Exit terminal mode",             mode = "t" },
+    { "<A-h>",      "<C-O>",                         desc = "Go back" },
+    { "<A-l>",      "<C-I>",                         desc = "Go forward" },
+    { "'",          "<C-W>",                         desc = "Window prefix" },
+    { "<C-l>",      "$",                             desc = "Go to line end",                 mode = { 'n', 'v' } },
+    { "<C-h>",      "^",                             desc = "Go to line start",               mode = { 'n', 'v' } },
+
+    ------------
     -- Barbar --
     ------------
-    { "<A-<>", "<Cmd>BufferMovePrevious<CR>",   desc = "Barbar: buffer move previous" },
-    { "<A->>", "<Cmd>BufferMoveNext<CR>",       desc = "Barbar: buffer move next" },
+    { "<A-<>",      "<Cmd>BufferMovePrevious<CR>",   desc = "Barbar: buffer move previous" },
+    { "<A->>",      "<Cmd>BufferMoveNext<CR>",       desc = "Barbar: buffer move next" },
 
-    { "Q",     "<Cmd>BufferPrevious<CR>",       desc = "Barbar: buffer previous" },
-    { "W",     "<Cmd>BufferNext<CR>",           desc = "Barbar: buffer next" },
+    { "Q",          "<Cmd>BufferPrevious<CR>",       desc = "Barbar: buffer previous" },
+    { "W",          "<Cmd>BufferNext<CR>",           desc = "Barbar: buffer next" },
 
-    { "<C-q>", "<Cmd>BufferClose<CR>",          desc = "Barbar: buffer close" },
+    { "<C-q>",      "<Cmd>BufferClose<CR>",          desc = "Barbar: buffer close" },
 
-    { "<A-1>", "<Cmd>BufferGoto 1<CR>",         desc = "Barbar: go to buffer 1" },
-    { "<A-2>", "<Cmd>BufferGoto 2<CR>",         desc = "Barbar: go to buffer 2" },
-    { "<A-3>", "<Cmd>BufferGoto 3<CR>",         desc = "Barbar: go to buffer 3" },
-    { "<A-4>", "<Cmd>BufferGoto 4<CR>",         desc = "Barbar: go to buffer 4" },
-    { "<A-5>", "<Cmd>BufferGoto 5<CR>",         desc = "Barbar: go to buffer 5" },
-    { "<A-6>", "<Cmd>BufferGoto 6<CR>",         desc = "Barbar: go to buffer 6" },
-    { "<A-7>", "<Cmd>BufferGoto 7<CR>",         desc = "Barbar: go to buffer 7" },
-    { "<A-8>", "<Cmd>BufferGoto 8<CR>",         desc = "Barbar: go to buffer 8" },
-    { "<A-9>", "<Cmd>BufferGoto 9<CR>",         desc = "Barbar: go to buffer 9" },
-    { "<A-0>", "<Cmd>BufferLast<CR>",           desc = "Barbar: go to last buffer" },
+    { "<A-1>",      "<Cmd>BufferGoto 1<CR>",         desc = "Barbar: go to buffer 1" },
+    { "<A-2>",      "<Cmd>BufferGoto 2<CR>",         desc = "Barbar: go to buffer 2" },
+    { "<A-3>",      "<Cmd>BufferGoto 3<CR>",         desc = "Barbar: go to buffer 3" },
+    { "<A-4>",      "<Cmd>BufferGoto 4<CR>",         desc = "Barbar: go to buffer 4" },
+    { "<A-5>",      "<Cmd>BufferGoto 5<CR>",         desc = "Barbar: go to buffer 5" },
+    { "<A-6>",      "<Cmd>BufferGoto 6<CR>",         desc = "Barbar: go to buffer 6" },
+    { "<A-7>",      "<Cmd>BufferGoto 7<CR>",         desc = "Barbar: go to buffer 7" },
+    { "<A-8>",      "<Cmd>BufferGoto 8<CR>",         desc = "Barbar: go to buffer 8" },
+    { "<A-9>",      "<Cmd>BufferGoto 9<CR>",         desc = "Barbar: go to buffer 9" },
+    { "<A-0>",      "<Cmd>BufferLast<CR>",           desc = "Barbar: go to last buffer" },
 
     ---------
     -- DAP --
     ---------
-    { '<F5>',  require 'dap'.continue,          desc = "DAP: start or continue" },
-    { '<F6>',  require 'dap'.terminate,         desc = "DAP: terminate" },
-    { '<F7>',  require 'dap'.restart,           desc = "DAP: restart" },
-    { '<F10>', require 'dap'.step_over,         desc = "DAP: step over" },
-    { '<F11>', require 'dap'.step_into,         desc = "DAP: step into" },
-    { 'B',     require 'dap'.toggle_breakpoint, desc = "DAP: toggle breakpoint" },
+    { '<F5>',       require 'dap'.continue,          desc = "DAP: start or continue" },
+    { '<F6>',       require 'dap'.terminate,         desc = "DAP: terminate" },
+    { '<F7>',       require 'dap'.restart,           desc = "DAP: restart" },
+    { '<F10>',      require 'dap'.step_over,         desc = "DAP: step over" },
+    { '<F11>',      require 'dap'.step_into,         desc = "DAP: step into" },
+    { 'B',          require 'dap'.toggle_breakpoint, desc = "DAP: toggle breakpoint" },
     {
         '<Space>b',
         function()
@@ -108,6 +127,14 @@ require("which-key").add({
         { expr = true }
     },
     { 'ih', ':<C-U>Gitsigns select_hunk<CR>', desc = "Git hunk: select hunk", mode = { 'o', 'x' } },
+
+    --------------
+    --   Hover  --
+    --------------
+    -- { "K",     require("hover").hover,                                   desc = "Hover: show" },
+    -- { "gK",    require("hover").hover_select,                            desc = "Hover: select" },
+    -- { "<C-p>", function() require("hover").hover_switch("previous") end, desc = "Hover: previous source" },
+    -- { "<C-n>", function() require("hover").hover_switch("next") end,     desc = "Hover: next source" },
 
     --------------
     --   Leap   --
@@ -247,5 +274,25 @@ require("which-key").add({
             require("which-key").show({ global = true })
         end,
         desc = "Which-key: Buffer Local Keymaps",
+    },
+
+    ---------------
+    --   Jdtls   --
+    ---------------
+    {
+        '<space>tc',
+        function()
+            require 'jdtls'.compile()
+            require 'jdtls'.test_class()
+        end,
+        desc = "Jdtls: debug current test class"
+    },
+    {
+        '<space>tm',
+        function()
+            require 'jdtls'.compile()
+            require 'jdtls'.test_nearest_method()
+        end,
+        desc = "Jdtls: debug current test method"
     },
 })

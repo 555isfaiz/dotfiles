@@ -1,6 +1,7 @@
 return {
     {
         'nvimdev/lspsaga.nvim',
+        event = 'VeryLazy',
         config = function()
             require('lspsaga').setup({
                 outline = {
@@ -15,6 +16,7 @@ return {
     },
     {
         'p00f/clangd_extensions.nvim',
+        event = "VeryLazy",
         config = function()
             require("clangd_extensions").setup {
                 server = {
@@ -181,8 +183,10 @@ return {
     },
     {
         'neovim/nvim-lspconfig',
+        event = 'VeryLazy',
         dependencies = {
-            'saghen/blink.cmp'
+            'saghen/blink.cmp',
+            'williamboman/mason-lspconfig.nvim',
         },
         opts = {
             servers = {

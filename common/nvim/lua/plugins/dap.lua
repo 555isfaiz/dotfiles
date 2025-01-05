@@ -1,24 +1,31 @@
 return {
     {
         'rcarriga/nvim-dap-ui',
+        lazy = true,
         config = function()
             require("dapui").setup()
         end
     },
     {
         'mfussenegger/nvim-dap-python',
+        ft = "py",
         config = function()
             require('dap-python').setup('~/.pyvenv/bin/python')
         end
     },
     {
         'LiadOz/nvim-dap-repl-highlights',
+        event = "VeryLazy",
         config = function()
             require('nvim-dap-repl-highlights').setup()
         end
     },
     {
         'mfussenegger/nvim-dap',
+        event = "VeryLazy",
+        dependencies = {
+            'jay-babu/mason-nvim-dap.nvim',
+        },
         config = function()
             if vim.fn.has('macunix') == 1 then
                 require('dap.ext.vscode').load_launchjs(nil, { lldb = { 'c', 'cpp' } })

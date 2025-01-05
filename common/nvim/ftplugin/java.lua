@@ -102,10 +102,11 @@ local extendedClientCapabilities = require'jdtls'.extendedClientCapabilities
 
 local bundles = {
     -- vim.fn.glob(get_jdp_javaagent(), 1),
-    vim.fn.glob(vim.fn.stdpath('data')..'/mason/packages/java-test/extension/server/*.jar', true ),
+    -- vim.fn.glob(vim.fn.stdpath('data')..'/mason/packages/java-test/extension/server/*.jar', true ),
     vim.fn.glob(vim.fn.stdpath('data')..'/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar', true),
 }
--- vim.list_extend(bundles, vim.split(vim.fn.glob(home_dir .. "/.config/nvim/ftplugin/vscode-java-test/server/*.jar", 1), "\n"))
+
+vim.list_extend(bundles, vim.split(vim.fn.glob(vim.fn.stdpath('data')..'/mason/packages/java-test/extension/server/*.jar', true), "\n"))
 
 local config = {
     -- capabilities = require("cmp_nvim_lsp").default_capabilities(),
@@ -156,10 +157,5 @@ local config = {
         extendedClientCapabilities = extendedClientCapabilities;
     },
 }
-
-require("which-key").add({
-    {'<space>tc', function() require'jdtls'.compile() require'jdtls'.test_class() end, desc = "Jdtls: debug current test class"},
-    {'<space>tm', function() require'jdtls'.compile() require'jdtls'.test_nearest_method() end, desc = "Jdtls: debug current test method"},
-})
 
 require("jdtls").start_or_attach(config)

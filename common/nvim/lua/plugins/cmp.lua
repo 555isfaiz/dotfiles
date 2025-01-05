@@ -9,7 +9,7 @@ return {
     --  'hrsh7th/vim-vsnip'
 
     -- For luasnip users.
-    'saadparwaiz1/cmp_luasnip',
+    { 'saadparwaiz1/cmp_luasnip', event = "VeryLazy" },
     {
         'windwp/nvim-autopairs',
         config = function()

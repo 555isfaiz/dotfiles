@@ -4,16 +4,28 @@ return {
     'rebelot/kanagawa.nvim',
     'marko-cerovac/material.nvim',
     'Shatur/neovim-ayu',
+    'kvrohit/mellow.nvim', -- Color Scheme
+    'jamestthompson3/nvim-remote-containers',
+    'folke/tokyonight.nvim',
+    'MunifTanjim/nui.nvim',
+    'nvim-neo-tree/neo-tree.nvim',
+    'rcarriga/nvim-notify',  -- Notification Boxes
+    'ap/vim-css-color',      -- CSS Color Preview
+    'nvim-lua/plenary.nvim', -- Telescope Dependency
+    'slyces/hierarchy.nvim',
+    'ray-x/lsp_signature.nvim',
+    'othree/html5.vim',
+    { 'romgrk/barbar.nvim', event = 'VeryLazy' }, -- Tabs
+    { "catppuccin/nvim",    name = "catppuccin", priority = 1000 },
     {
         'goolord/alpha-nvim',
         config = function()
             require('alpha').setup(require 'alpha.themes.dashboard'.config)
         end
     },
-    { "catppuccin/nvim",              name = "catppuccin",             priority = 1000 },
-    'kvrohit/mellow.nvim', -- Color Scheme
     {
         'lukas-reineke/indent-blankline.nvim',
+        event = 'VeryLazy',
         config = function()
             require("ibl").setup {
                 -- for example, context is off by default, use this to turn it on
@@ -22,13 +34,6 @@ return {
             }
         end
     },
-    'tpope/vim-repeat',
-    'jamestthompson3/nvim-remote-containers',
-    'folke/tokyonight.nvim',
-    'romgrk/barbar.nvim', -- Tabs
-    'MunifTanjim/nui.nvim',
-    'nvim-neo-tree/neo-tree.nvim',
-    'rcarriga/nvim-notify',                                               -- Notification Boxes
     {
         'xiyaowong/nvim-transparent',
         config = function()
@@ -44,31 +49,13 @@ return {
             })
         end
     },
-    --  'wakatime/vim-wakatime' -- Time Logging
-    'ap/vim-css-color',       -- CSS Color Preview
-    'ryanoasis/vim-devicons', -- Developer Icons
-    'nvim-lua/plenary.nvim',  -- Telescope Dependency
-    --  'sbdchd/neoformat' -- Auto formatter
-    {
-        'folke/neodev.nvim',
-        config = function()
-            require("neodev").setup({})
-        end
-    },
     {
         'numToStr/Comment.nvim',
+        event = 'VeryLazy',
         config = function()
             require('Comment').setup()
         end
     },
-    'slyces/hierarchy.nvim',
-    'lewis6991/hover.nvim',
-    'ray-x/lsp_signature.nvim',
-    -- 'airblade/vim-gitgutter',
-
-    -- Extra Syntax Highlighting
-    'othree/html5.vim',
-    'pangloss/vim-javascript',
     {
         "anuvyklack/windows.nvim",
         dependencies = {
@@ -92,7 +79,7 @@ return {
     },
     {
         'MeanderingProgrammer/render-markdown.nvim',
-        lazy = true,
+        event = 'VeryLazy',
         -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
         -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
         dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
@@ -105,5 +92,16 @@ return {
         config = function()
             require("trouble").setup {}
         end
+    },
+    {
+        "folke/lazydev.nvim",
+        ft = "lua", -- only load on lua files
+        opts = {
+            library = {
+                -- See the configuration section for more details
+                -- Load luvit types when the `vim.uv` word is found
+                { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+            },
+        },
     },
 }

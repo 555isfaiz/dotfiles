@@ -1,7 +1,7 @@
 return {
     {
         'sindrets/diffview.nvim',
-        lazy = true,
+        event = "VeryLazy",
         config = function()
             vim.api.nvim_create_autocmd("FileType", {
                 pattern = {

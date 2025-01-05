@@ -1,5 +1,5 @@
 local function is_dap_buffer()
-  return require("cmp_dap").is_dap_buffer()
+    return require("cmp_dap").is_dap_buffer()
 end
 
 return {
@@ -28,6 +28,7 @@ return {
 
         -- use a release tag to download pre-built binaries
         version = '*',
+        event = 'VeryLazy',
         -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
         -- build = 'cargo build --release',
         -- If you use nix, you can build from source using latest nightly rust with:
@@ -99,7 +100,7 @@ return {
             -- Default list of enabled providers defined so that you can extend it
             -- elsewhere in your config, without redefining it, due to `opts_extend`
             sources = {
-                default = function(ctx)
+                default = function()
                     local success, node = pcall(vim.treesitter.get_node)
                     if is_dap_buffer() then
                         return { "dap", "snippets", "buffer" }
@@ -110,7 +111,7 @@ return {
                     elseif success and node and vim.tbl_contains({ 'comment', 'line_comment', 'block_comment' }, node:type()) then
                         return { 'buffer' }
                     else
-                        return { 'lsp', 'path', 'snippets', 'buffer' }
+                        return { "lazydev", 'lsp', 'path', 'snippets', 'buffer' }
                     end
                 end,
                 providers = {
@@ -118,6 +119,12 @@ return {
                     dap = { name = "dap", module = "blink.compat.source" },
                     cmp_git = { name = "cmp_git", module = "blink.compat.source" },
                     cmdline = { name = "cmdline", module = "blink.compat.source" },
+                    lazydev = {
+                        name = "LazyDev",
+                        module = "lazydev.integrations.blink",
+                        -- make lazydev completions top priority (see `:h blink.cmp`)
+                        score_offset = 100,
+                    },
                 },
             },
         },
