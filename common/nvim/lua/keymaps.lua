@@ -77,8 +77,8 @@ require("which-key").add({
     {
         "<space>ev",
         function()
-            vim.ui.input({ prompt = 'Enter value for Evaluate: ', completion = 'command' }, function(input)
-                require("dapui").eval(input)
+            vim.ui.input({ prompt = 'Enter value for Evaluate: ' }, function(input)
+                vim.schedule(function() vim.schedule(function() require("dapui").eval(input, { enter = true }) end) end)
             end)
         end,
         desc = "DAP: evaluate experssion"

@@ -1,4 +1,21 @@
 local function is_dap_buffer()
+    -- overwrite the original function here to enable dap source in other places
+    require("cmp_dap").is_dap_buffer = function(bufnr)
+        local filetype = vim.api.nvim_buf_get_option(bufnr or 0, "filetype")
+        if vim.startswith(filetype, "dapui_") then
+            return true
+        end
+        if filetype == "dap-repl" then
+            return true
+        end
+
+        -- need this to have dap completion in the input box
+        if filetype == "snacks_input" then
+            return true
+        end
+
+        return false
+    end
     return require("cmp_dap").is_dap_buffer()
 end
 
@@ -106,8 +123,6 @@ return {
                         return { "dap", "snippets", "buffer" }
                     elseif vim.bo.filetype == "gitcommit" then
                         return { 'cmp_git', 'buffer' }
-                    elseif vim.bo.filetype == "snacks_input" then
-                        return { "dap", "snippets", "buffer" }
                     elseif success and node and vim.tbl_contains({ 'comment', 'line_comment', 'block_comment' }, node:type()) then
                         return { 'buffer' }
                     else

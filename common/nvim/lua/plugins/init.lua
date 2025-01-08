@@ -9,7 +9,14 @@ return {
     'folke/tokyonight.nvim',
     'MunifTanjim/nui.nvim',
     'nvim-neo-tree/neo-tree.nvim',
-    'rcarriga/nvim-notify',  -- Notification Boxes
+    {
+        'rcarriga/nvim-notify',
+        config = function()
+            require("notify").setup({
+                background_colour = "#000000",
+            })
+        end
+    },                       -- Notification Boxes
     'ap/vim-css-color',      -- CSS Color Preview
     'nvim-lua/plenary.nvim', -- Telescope Dependency
     'slyces/hierarchy.nvim',
