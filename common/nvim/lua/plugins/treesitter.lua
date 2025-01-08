@@ -49,9 +49,9 @@ return {
                     enable = true,
                     keymaps = {
                         init_selection = "gs", -- set to `false` to disable one of the mappings
-                        node_incremental = "<space>u",
+                        node_incremental = "v",
                         scope_incremental = "<space>U",
-                        node_decremental = "<space>d",
+                        node_decremental = "V",
                         -- scope_decremental = "<space>D",
                     },
                 },

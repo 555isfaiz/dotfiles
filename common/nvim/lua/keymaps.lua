@@ -18,20 +18,20 @@ require("which-key").add({
     --  Misc  --
     ------------
     { "<Tab>",      ":>1<CR>",                       desc = "Indent line" },
-    { "<Tab>",      ":'<,'>1><CR>gv",                desc = "Indent selection",               mode = "v" },
+    { "<Tab>",      ":'<,'>1><CR>gv",                desc = "Indent selection",            mode = "v" },
     { "<C-m>",      ":WindowsMaximize<CR>",          desc = "Maximize window" },
-    { "S",          "v<space>u",                     desc = "Select a treesitter node" },
-    { "S",          "<space>u",                      desc = "Increment treesitter selection", mode = "v" },
+    -- { "S",          "v<space>u",                     desc = "Select a treesitter node" },
+    -- { "S",          "<space>u",                      desc = "Increment treesitter selection", mode = "v" },
     { "<M-k>",      ":m .-2<CR>==",                  desc = "Move line up" },
     { "<M-j>",      ":m .+1<CR>==",                  desc = "Move line down" },
-    { "<M-k>",      ":m '<-2<CR>gv=gv",              desc = "Move selected line up",          mode = "v" },
-    { "<M-j>",      ":m '>+1<CR>gv=gv",              desc = "Move selected line down",        mode = "v" },
-    { "<Esc><Esc>", "<C-\\><Cn>",                    desc = "Exit terminal mode",             mode = "t" },
+    { "<M-k>",      ":m '<-2<CR>gv=gv",              desc = "Move selected line up",       mode = "v" },
+    { "<M-j>",      ":m '>+1<CR>gv=gv",              desc = "Move selected line down",     mode = "v" },
+    { "<Esc><Esc>", "<C-\\><Cn>",                    desc = "Exit terminal mode",          mode = "t" },
     { "<A-h>",      "<C-O>",                         desc = "Go back" },
     { "<A-l>",      "<C-I>",                         desc = "Go forward" },
     { "'",          "<C-W>",                         desc = "Window prefix" },
-    { "<C-l>",      "$",                             desc = "Go to line end",                 mode = { 'n', 'v' } },
-    { "<C-h>",      "^",                             desc = "Go to line start",               mode = { 'n', 'v' } },
+    { "<C-l>",      "$",                             desc = "Go to line end",              mode = { 'n', 'v' } },
+    { "<C-h>",      "^",                             desc = "Go to line start",            mode = { 'n', 'v' } },
 
     ------------
     -- Barbar --
@@ -108,17 +108,25 @@ require("which-key").add({
     { '<space>td',  gs.toggle_deleted,                                                   desc = "Git hunk: toggle deleted" },
     {
         '[c',
-        function() gs.prev_hunk() end,
-        cond = function() return vim.wo.diff end,
+        function()
+            if vim.wo.diff then
+                vim.cmd.normal({ '[c', bang = true })
+            else
+                gs.nav_hunk('prev')
+            end
+        end,
         desc = "Git hunk: go to previous change",
-        { expr = true }
     },
     {
         ']c',
-        function() gs.next_hunk() end,
-        cond = function() return vim.wo.diff end,
+        function()
+            if vim.wo.diff then
+                vim.cmd.normal({ ']c', bang = true })
+            else
+                gs.nav_hunk('next')
+            end
+        end,
         desc = "Git hunk: go to next change",
-        { expr = true }
     },
     { 'ih', ':<C-U>Gitsigns select_hunk<CR>', desc = "Git hunk: select hunk", mode = { 'o', 'x' } },
 

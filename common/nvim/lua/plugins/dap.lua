@@ -3,7 +3,46 @@ return {
         'rcarriga/nvim-dap-ui',
         lazy = true,
         config = function()
-            require("dapui").setup()
+            require("dapui").setup({
+                layouts = {
+                    {
+                        elements = {
+                            {
+                                id = "scopes",
+                                size = 0.25
+                            },
+                            {
+                                id = "breakpoints",
+                                size = 0.25
+                            },
+                            {
+                                id = "stacks",
+                                size = 0.25
+                            },
+                            {
+                                id = "watches",
+                                size = 0.25
+                            }
+                        },
+                        position = "left",
+                        size = math.ceil(vim.api.nvim_win_get_width(0) * 0.2)
+                    },
+                    {
+                        elements = {
+                            {
+                                id = "repl",
+                                size = 0.5
+                            },
+                            {
+                                id = "console",
+                                size = 0.5
+                            }
+                        },
+                        position = "bottom",
+                        size = math.ceil(vim.api.nvim_win_get_height(0) * 0.2)
+                    }
+                },
+            })
         end
     },
     {
