@@ -97,10 +97,29 @@ return {
 
                 -- Disable auto brackets
                 -- NOTE: some LSPs may add auto brackets themselves anyway
-                accept = { auto_brackets = { enabled = true }, },
+                accept = {
+                    create_undo_point = true,
+                    auto_brackets = {
+                        enabled = true,
+                        kind_resolution = {
+                            enabled = true,
+                            -- blocked_filetypes = { 'typescriptreact', 'javascriptreact', 'vue' },
+                        },
+                        -- Asynchronously use semantic token to determine if brackets should be added
+                        semantic_token_resolution = {
+                            enabled = true,
+                            -- blocked_filetypes = { 'java' },
+                            -- How long to wait for semantic tokens to return before assuming no brackets should be added
+                            timeout_ms = 400,
+                        },
+                    },
 
+                },
                 -- Insert completion item on selection, don't select by default
-                list = { selection = 'auto_insert' },
+                list = {
+                    selection = { preselect = false, auto_insert = true },
+                    cycle = { from_top = true, from_bottom = true }
+                },
                 menu = {
                     draw = {
                         treesitter = { 'lsp' },
@@ -110,6 +129,16 @@ return {
                     auto_show = true,
                     auto_show_delay_ms = 500,
                 }
+            },
+
+            fuzzy = {
+                -- When enabled, allows for a number of typos relative to the length of the query
+                -- Disabling this matches the behavior of fzf
+                use_typo_resistance = true,
+                -- Frecency tracks the most recently/frequently used items and boosts the score of the item
+                use_frecency = true,
+                -- Proximity bonus boosts the score of items matching nearby words
+                use_proximity = true,
             },
 
             signature = { enabled = true },

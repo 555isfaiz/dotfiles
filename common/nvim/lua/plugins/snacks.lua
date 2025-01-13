@@ -56,7 +56,7 @@ return {
             { "<space>gl", function() Snacks.lazygit.log() end,                   desc = "Snacks: Lazygit Log (cwd)" },
             { "<space>un", function() Snacks.notifier.hide() end,                 desc = "Snacks: Dismiss All Notifications" },
             { "<F4>",      function() Snacks.terminal() end,                      desc = "Snacks: Toggle Terminal" },
-            { "<c-_>",     function() Snacks.terminal() end,                      desc = "Snacks: which_key_ignore" },
+            -- { "<c-_>",     function() Snacks.terminal() end,                      desc = "Snacks: which_key_ignore" },
             { "<space>wn", function() Snacks.words.jump(vim.v.count1, true) end,  desc = "Snacks: Next Reference",              mode = { "n" } },
             { "<space>wN", function() Snacks.words.jump(-vim.v.count1, true) end, desc = "Snacks: Prev Reference",              mode = { "n" } },
             {

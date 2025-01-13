@@ -26,7 +26,7 @@ require("which-key").add({
     { "<M-j>",      ":m .+1<CR>==",                  desc = "Move line down" },
     { "<M-k>",      ":m '<-2<CR>gv=gv",              desc = "Move selected line up",       mode = "v" },
     { "<M-j>",      ":m '>+1<CR>gv=gv",              desc = "Move selected line down",     mode = "v" },
-    { "<Esc><Esc>", "<C-\\><Cn>",                    desc = "Exit terminal mode",          mode = "t" },
+    { "<Esc><Esc>", "<C-\\><C-n>",                   desc = "Exit terminal mode",          mode = "t" },
     { "<A-h>",      "<C-O>",                         desc = "Go back" },
     { "<A-l>",      "<C-I>",                         desc = "Go forward" },
     { "'",          "<C-W>",                         desc = "Window prefix" },

@@ -60,7 +60,8 @@ if file then
     file:close()
 end
 
-local format_url = settingsTable["format_setting"] or "https://gist.githubusercontent.com/ikws4/7880fdcb4e3bf4a38999a628d287b1ab/raw/9005c451ed1ff629679d6100e22d63acc805e170/jdtls-formatter-style.xml"
+local format_url = settingsTable["format_setting"] or
+    "https://gist.githubusercontent.com/ikws4/7880fdcb4e3bf4a38999a628d287b1ab/raw/9005c451ed1ff629679d6100e22d63acc805e170/jdtls-formatter-style.xml"
 
 local workspace_dir = home_dir .. "/.cache/jdtls/workspace/" .. project_name
 
@@ -85,36 +86,40 @@ local get_jdp_javaagent = function()
 end
 
 local capabilities = {
-        workspace = {
-            configuration = true
-        },
-        textDocument = {
-            completion = {
-                completionItem = {
-                    snippetSupport = true
-                }
+    workspace = {
+        configuration = true
+    },
+    textDocument = {
+        completion = {
+            completionItem = {
+                snippetSupport = true
             }
         }
     }
+}
 
-local extendedClientCapabilities = require'jdtls'.extendedClientCapabilities
-    extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
+local extendedClientCapabilities = require 'jdtls'.extendedClientCapabilities
+extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 
 local bundles = {
     -- vim.fn.glob(get_jdp_javaagent(), 1),
     -- vim.fn.glob(vim.fn.stdpath('data')..'/mason/packages/java-test/extension/server/*.jar', true ),
-    vim.fn.glob(vim.fn.stdpath('data')..'/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar', true),
+    vim.fn.glob(
+        vim.fn.stdpath('data') ..
+        '/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar',
+        true),
 }
 
-vim.list_extend(bundles, vim.split(vim.fn.glob(vim.fn.stdpath('data')..'/mason/packages/java-test/extension/server/*.jar', true), "\n"))
+vim.list_extend(bundles,
+    vim.split(vim.fn.glob(vim.fn.stdpath('data') .. '/mason/packages/java-test/extension/server/*.jar', true), "\n"))
 
 local config = {
     -- capabilities = require("cmp_nvim_lsp").default_capabilities(),
     capabilities = capabilities,
     on_attach = function()
+        require("jdtls").setup_dap({ hotcodereplace = "auto" })
         require("jdtls.setup").add_commands()
         require('jdtls.dap').setup_dap_main_class_configs()
-        -- require 'lspsaga'.init_lsp_saga()
     end,
     cmd = {
         'jdtls',
@@ -127,6 +132,12 @@ local config = {
     root_dir = require('jdtls.setup').find_root({ '.git', 'mvnw', 'gradlew' }),
     settings = {
         java = {
+            jdt = {
+                ls = {
+                    vmargs =
+                    "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx4G -Xms100m"
+                }
+            },
             format = {
                 comments = {
                     enabled = false,
@@ -142,20 +153,39 @@ local config = {
                     "jakarta",
                     "org",
                     "com"
-                }
+                },
             },
+            useBlocks = true,
+            signatureHelp = { enabled = true },
             autobuild = {
                 enabled = false, -- Disable automatic builds
             },
             eclipse = {
-                downloadSource = true,
+                downloadSources = true,
+            },
+            maven = {
+                downloadSources = true,
             },
         },
     },
     init_options = {
         bundles = bundles,
-        extendedClientCapabilities = extendedClientCapabilities;
+        extendedClientCapabilities = extendedClientCapabilities,
     },
 }
+
+require("jdtls.ui").pick_one = function(items, prompt, label_fn)
+    local co = coroutine.running()
+    local callback = function(item)
+        coroutine.resume(co, item)
+    end
+    callback = vim.schedule_wrap(callback)
+    vim.ui.select(items, {
+        prompt = prompt,
+        format_item = label_fn,
+    }, callback)
+
+    return coroutine.yield()
+end
 
 require("jdtls").start_or_attach(config)

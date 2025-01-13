@@ -11,12 +11,12 @@ return {
                         ["cmp.entry.get_documentation"] = true,
                     },
                 },
-                routes = {
-                    {
-                        view = "mini",
-                        filter = { event = "msg_show", blocking = true },
-                    },
-                },
+                -- routes = {
+                --     {
+                --         opts = { skip = true },
+                --         filter = { event = "msg_show", blocking = true },
+                --     },
+                -- },
                 -- you can enable a preset for easier configuration
                 presets = {
                     bottom_search = true,         -- use a classic bottom cmdline for search
