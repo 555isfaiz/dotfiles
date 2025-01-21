@@ -22,8 +22,8 @@ return {
     'slyces/hierarchy.nvim',
     'ray-x/lsp_signature.nvim',
     'othree/html5.vim',
-    { 'romgrk/barbar.nvim', event = 'VeryLazy' }, -- Tabs
-    { "catppuccin/nvim",    name = "catppuccin", priority = 1000 },
+    -- { 'romgrk/barbar.nvim', event = 'VeryLazy' }, -- Tabs
+    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
     {
         'goolord/alpha-nvim',
         config = function()

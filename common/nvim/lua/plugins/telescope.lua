@@ -1,6 +1,7 @@
 return {
     'nvim-telescope/telescope-dap.nvim',
     'nvim-telescope/telescope-ui-select.nvim',
+    'gbrlsnchs/telescope-lsp-handlers.nvim',
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     {
         'nvim-telescope/telescope.nvim',
@@ -17,6 +18,11 @@ return {
                         '--column',
                         '--smart-case',
                         -- '--hidden',
+                    },
+                    layout_strategy = 'vertical',
+                    layout_config = {
+                        vertical = { width = 0.7 }
+                        -- other layout configuration here
                     },
                 },
                 extensions = {
@@ -56,6 +62,7 @@ return {
             require('telescope').load_extension('fzf')
             require('telescope').load_extension('dap')
             require("telescope").load_extension("ui-select")
+            require("telescope").load_extension('lsp_handlers')
         end
     }
 }

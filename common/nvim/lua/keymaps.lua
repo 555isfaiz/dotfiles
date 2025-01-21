@@ -17,53 +17,53 @@ require("which-key").add({
     ------------
     --  Misc  --
     ------------
-    { "<Tab>",      ":>1<CR>",                       desc = "Indent line" },
-    { "<Tab>",      ":'<,'>1><CR>gv",                desc = "Indent selection",            mode = "v" },
-    { "<C-m>",      ":WindowsMaximize<CR>",          desc = "Maximize window" },
+    { "<Tab>",      ":>1<CR>",                         desc = "Indent line" },
+    { "<Tab>",      ":'<,'>1><CR>gv",                  desc = "Indent selection",                mode = "v" },
+    { "<C-m>",      ":WindowsMaximize<CR>",            desc = "Maximize window" },
     -- { "S",          "v<space>u",                     desc = "Select a treesitter node" },
     -- { "S",          "<space>u",                      desc = "Increment treesitter selection", mode = "v" },
-    { "<M-k>",      ":m .-2<CR>==",                  desc = "Move line up" },
-    { "<M-j>",      ":m .+1<CR>==",                  desc = "Move line down" },
-    { "<M-k>",      ":m '<-2<CR>gv=gv",              desc = "Move selected line up",       mode = "v" },
-    { "<M-j>",      ":m '>+1<CR>gv=gv",              desc = "Move selected line down",     mode = "v" },
-    { "<Esc><Esc>", "<C-\\><C-n>",                   desc = "Exit terminal mode",          mode = "t" },
-    { "<A-h>",      "<C-O>",                         desc = "Go back" },
-    { "<A-l>",      "<C-I>",                         desc = "Go forward" },
-    { "'",          "<C-W>",                         desc = "Window prefix" },
-    { "<C-l>",      "$",                             desc = "Go to line end",              mode = { 'n', 'v' } },
-    { "<C-h>",      "^",                             desc = "Go to line start",            mode = { 'n', 'v' } },
+    { "<M-k>",      ":m .-2<CR>==",                    desc = "Move line up" },
+    { "<M-j>",      ":m .+1<CR>==",                    desc = "Move line down" },
+    { "<M-k>",      ":m '<-2<CR>gv=gv",                desc = "Move selected line up",           mode = "v" },
+    { "<M-j>",      ":m '>+1<CR>gv=gv",                desc = "Move selected line down",         mode = "v" },
+    { "<Esc><Esc>", "<C-\\><C-n>",                     desc = "Exit terminal mode",              mode = "t" },
+    { "<A-h>",      "<C-O>",                           desc = "Go back" },
+    { "<A-l>",      "<C-I>",                           desc = "Go forward" },
+    { "'",          "<C-W>",                           desc = "Window prefix" },
+    { "<C-l>",      "$",                               desc = "Go to line end",                  mode = { 'n', 'v' } },
+    { "<C-h>",      "^",                               desc = "Go to line start",                mode = { 'n', 'v' } },
 
-    ------------
-    -- Barbar --
-    ------------
-    { "<A-<>",      "<Cmd>BufferMovePrevious<CR>",   desc = "Barbar: buffer move previous" },
-    { "<A->>",      "<Cmd>BufferMoveNext<CR>",       desc = "Barbar: buffer move next" },
+    ----------------
+    -- BufferLine --
+    ----------------
+    { "<A-<>",      "<Cmd>BufferLineMovePrev<CR>",     desc = "BufferLine: buffer move previous" },
+    { "<A->>",      "<Cmd>BufferLineMoveNext<CR>",     desc = "BufferLine: buffer move next" },
 
-    { "Q",          "<Cmd>BufferPrevious<CR>",       desc = "Barbar: buffer previous" },
-    { "W",          "<Cmd>BufferNext<CR>",           desc = "Barbar: buffer next" },
+    { "Q",          "<Cmd>BufferLineCyclePrev<CR>",    desc = "BufferLine: buffer previous" },
+    { "W",          "<Cmd>BufferLineCycleNext<CR>",    desc = "BufferLine: buffer next" },
 
-    { "<C-q>",      "<Cmd>BufferClose<CR>",          desc = "Barbar: buffer close" },
+    { "<C-q>",      "<Cmd>bdelete<CR>",                desc = "Misc: buffer close" },
 
-    { "<A-1>",      "<Cmd>BufferGoto 1<CR>",         desc = "Barbar: go to buffer 1" },
-    { "<A-2>",      "<Cmd>BufferGoto 2<CR>",         desc = "Barbar: go to buffer 2" },
-    { "<A-3>",      "<Cmd>BufferGoto 3<CR>",         desc = "Barbar: go to buffer 3" },
-    { "<A-4>",      "<Cmd>BufferGoto 4<CR>",         desc = "Barbar: go to buffer 4" },
-    { "<A-5>",      "<Cmd>BufferGoto 5<CR>",         desc = "Barbar: go to buffer 5" },
-    { "<A-6>",      "<Cmd>BufferGoto 6<CR>",         desc = "Barbar: go to buffer 6" },
-    { "<A-7>",      "<Cmd>BufferGoto 7<CR>",         desc = "Barbar: go to buffer 7" },
-    { "<A-8>",      "<Cmd>BufferGoto 8<CR>",         desc = "Barbar: go to buffer 8" },
-    { "<A-9>",      "<Cmd>BufferGoto 9<CR>",         desc = "Barbar: go to buffer 9" },
-    { "<A-0>",      "<Cmd>BufferLast<CR>",           desc = "Barbar: go to last buffer" },
+    { "<A-1>",      "<Cmd>BufferLineGoToBuffer 1<CR>", desc = "BufferLine: go to buffer 1" },
+    { "<A-2>",      "<Cmd>BufferLineGoToBuffer 2<CR>", desc = "BufferLine: go to buffer 2" },
+    { "<A-3>",      "<Cmd>BufferLineGoToBuffer 3<CR>", desc = "BufferLine: go to buffer 3" },
+    { "<A-4>",      "<Cmd>BufferLineGoToBuffer 4<CR>", desc = "BufferLine: go to buffer 4" },
+    { "<A-5>",      "<Cmd>BufferLineGoToBuffer 5<CR>", desc = "BufferLine: go to buffer 5" },
+    { "<A-6>",      "<Cmd>BufferLineGoToBuffer 6<CR>", desc = "BufferLine: go to buffer 6" },
+    { "<A-7>",      "<Cmd>BufferLineGoToBuffer 7<CR>", desc = "BufferLine: go to buffer 7" },
+    { "<A-8>",      "<Cmd>BufferLineGoToBuffer 8<CR>", desc = "BufferLine: go to buffer 8" },
+    { "<A-9>",      "<Cmd>BufferLineGoToBuffer 9<CR>", desc = "BufferLine: go to buffer 9" },
+    -- { "<A-0>",      "<Cmd>BufferLineLast<CR>",           desc = "BufferLine: go to last buffer" },
 
     ---------
     -- DAP --
     ---------
-    { '<F5>',       require 'dap'.continue,          desc = "DAP: start or continue" },
-    { '<F6>',       require 'dap'.terminate,         desc = "DAP: terminate" },
-    { '<F7>',       require 'dap'.restart,           desc = "DAP: restart" },
-    { '<F10>',      require 'dap'.step_over,         desc = "DAP: step over" },
-    { '<F11>',      require 'dap'.step_into,         desc = "DAP: step into" },
-    { 'B',          require 'dap'.toggle_breakpoint, desc = "DAP: toggle breakpoint" },
+    { '<F5>',       require 'dap'.continue,            desc = "DAP: start or continue" },
+    { '<F6>',       require 'dap'.terminate,           desc = "DAP: terminate" },
+    { '<F7>',       require 'dap'.restart,             desc = "DAP: restart" },
+    { '<F10>',      require 'dap'.step_over,           desc = "DAP: step over" },
+    { '<F11>',      require 'dap'.step_into,           desc = "DAP: step into" },
+    { 'B',          require 'dap'.toggle_breakpoint,   desc = "DAP: toggle breakpoint" },
     {
         '<Space>b',
         function()
@@ -180,9 +180,10 @@ require("which-key").add({
         desc = "LSP: list workspace folders",
 
     },
-    { '<space>D',  vim.lsp.buf.type_definition,    desc = "LSP: show type definition", },
-    { '<space>rn', vim.lsp.buf.rename,             desc = "LSP: rename", },
-    { '<space>ca', '<cmd>Lspsaga code_action<cr>', desc = "LSPSaga: show code actions", mode = { 'n', 'v' }, },
+    { '<space>D',  vim.lsp.buf.type_definition, desc = "LSP: show type definition", },
+    { '<space>rn', vim.lsp.buf.rename,          desc = "LSP: rename", },
+    -- { '<space>ca', '<cmd>Lspsaga code_action<cr>', desc = "LSPSaga: show code actions", mode = { 'n', 'v' }, },
+    { '<space>ca', vim.lsp.buf.code_action,     desc = "LSPSaga: show code actions", mode = { 'n', 'v' }, },
     {
         '<space>f',
         function()

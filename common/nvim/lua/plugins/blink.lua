@@ -139,6 +139,26 @@ return {
                 use_frecency = true,
                 -- Proximity bonus boosts the score of items matching nearby words
                 use_proximity = true,
+                sorts = {
+                    -- function(entry1, entry2)
+                    --     local method = types.lsp.CompletionItemKind.Method
+                    --     local cmp_item1 = entry1:get_completion_item() ---@type lsp.CompletionItem
+                    --     local cmp_item2 = entry2:get_completion_item() ---@type lsp.CompletionItem
+                    --     -- if both items are methods, sort those with detail starting with Object. laststatus
+                    --     if cmp_item1.kind == method and cmp_item2.kind == method then
+                    --         local _, detail1 = cmp_item1.detail:find("^Object%.")
+                    --         local _, detail2 = cmp_item2.detail:find("^Object%.")
+                    --         if detail1 and detail2 then
+                    --             return nil
+                    --         elseif detail1 then
+                    --             return false
+                    --         elseif detail2 then
+                    --             return true
+                    --         end
+                    --     end
+                    -- end,
+                    'score', 'kind', 'label', 'sort_text'
+                },
             },
 
             signature = { enabled = true },
