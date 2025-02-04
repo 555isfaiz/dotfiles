@@ -19,6 +19,11 @@ return {
                 enabled = false,
                 timeout = 3000,
             },
+            picker = {
+                matcher = {
+                    frecency = true,
+                }
+            },
             quickfile = { enabled = true },
             scroll = {
                 enabled = true,

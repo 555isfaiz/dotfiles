@@ -11,7 +11,7 @@ return {
             vim.o.equalalways = false
             require('windows').setup({
                 autowidth = {     --		       |windows.autowidth|
-                    enable = true,
+                    enable = false,
                     winwidth = 5, --		        |windows.winwidth|
                     filetype = {  --	      |windows.autowidth.filetype|
                         help = 2,

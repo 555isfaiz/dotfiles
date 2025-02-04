@@ -29,7 +29,9 @@ require("which-key").add({
     { "<Esc><Esc>", "<C-\\><C-n>",                     desc = "Exit terminal mode",              mode = "t" },
     { "<A-h>",      "<C-O>",                           desc = "Go back" },
     { "<A-l>",      "<C-I>",                           desc = "Go forward" },
-    { "'",          "<C-W>",                           desc = "Window prefix" },
+    { "<space>wh",  "<C-W>s",                          desc = "Horizontal split" },
+    { "<space>wv",  "<C-W>v",                          desc = "Vertical split" },
+    { "<space>wq",  "<C-W>q",                          desc = "Close split" },
     { "<C-l>",      "$",                               desc = "Go to line end",                  mode = { 'n', 'v' } },
     { "<C-h>",      "^",                               desc = "Go to line start",                mode = { 'n', 'v' } },
 
@@ -42,7 +44,7 @@ require("which-key").add({
     { "Q",          "<Cmd>BufferLineCyclePrev<CR>",    desc = "BufferLine: buffer previous" },
     { "W",          "<Cmd>BufferLineCycleNext<CR>",    desc = "BufferLine: buffer next" },
 
-    { "<C-q>",      "<Cmd>bdelete<CR>",                desc = "Misc: buffer close" },
+    { "<C-q>",      "<Cmd>bp|bd #<CR>",                desc = "Misc: buffer close" },
 
     { "<A-1>",      "<Cmd>BufferLineGoToBuffer 1<CR>", desc = "BufferLine: go to buffer 1" },
     { "<A-2>",      "<Cmd>BufferLineGoToBuffer 2<CR>", desc = "BufferLine: go to buffer 2" },
@@ -160,7 +162,7 @@ require("which-key").add({
     { '<space>q',  vim.diagnostic.setloclist,                           desc = "LSP: diagnostic set local list" },
     { '[d',        '<cmd>Lspsaga diagnostic_jump_prev<cr>',             desc = "LSPSaga: jump to previous diagnostic" },
     { ']d',        '<cmd>Lspsaga diagnostic_jump_next<cr>',             desc = "LSPSaga: jump to next diagnostic" },
-    { 'fm',        '<cmd>Lspsaga outline<cr>',                          desc = "LSPSaga: show file outline" },
+    -- { 'fm',        '<cmd>Lspsaga outline<cr>',                          desc = "LSPSaga: show file outline" },
     { 'gr',        '<cmd>Lspsaga finder<cr>',                           desc = "LSPSaga: find reference" },
     { 'fs',        '<cmd>Lspsaga subtypes<cr>',                         desc = "LSPSaga: show subtypes" },
     -- You probably also want to set a keymap to toggle aerial
@@ -191,13 +193,14 @@ require("which-key").add({
             vim.lsp.buf.format { async = true }
         end,
         desc = "LSP: format file",
+        mode = { 'n', 'v' }
     },
 
     --------------
     -- Neotree  --
     --------------
-    { "<space>nt", "<Cmd>Neotree toggle<CR>",                                   desc = "Neotree: toggle on the side" },
-    { "<F2>",      "<Cmd>Neotree filesystem reveal float<CR>",                  desc = "Neotree: toggle floating window" },
+    -- { "<space>nt", "<Cmd>Neotree toggle<CR>",                                   desc = "Neotree: toggle on the side" },
+    -- { "<F2>",      "<Cmd>Neotree filesystem reveal float<CR>",                  desc = "Neotree: toggle floating window" },
 
     ---------------
     --Persistence--
@@ -215,58 +218,121 @@ require("which-key").add({
     ---------------
     -- Telescope --
     ---------------
-    { 'ff',        '<cmd>Telescope find_files<cr>',                             desc = "Telescope: find file" },
-    { 'fg',        '<cmd>Telescope current_buffer_fuzzy_find<cr>',              desc = "Telescope: find in current buffer" },
+    -- { 'ff',        '<cmd>Telescope find_files<cr>',                             desc = "Telescope: find file" },
+    -- { 'fg',        '<cmd>Telescope current_buffer_fuzzy_find<cr>',              desc = "Telescope: find in current buffer" },
+    -- {
+    --     'fg',
+    --     function()
+    --         local text = vim.getVisualSelection()
+    --         require('telescope.builtin').current_buffer_fuzzy_find({ default_text = text })
+    --     end,
+    --     desc = "Telescope: find in current buffer",
+    --     mode = 'v',
+    --     { noremap = true, silent = true }
+    -- },
+    -- {
+    --     'fG',
+    --     function()
+    --         local text = vim.getVisualSelection()
+    --         require('telescope.builtin').live_grep({ default_text = text })
+    --     end,
+    --     desc = "Telescope: global find",
+    --     mode = 'v',
+    --     { noremap = true, silent = true }
+    -- },
+    -- { 'fG',        '<cmd>Telescope live_grep<cr>',                           desc = "Telescope: global find" },
+    -- { 'fb',        '<cmd>Telescope buffers<cr>',                             desc = "Telescope: find buffer" },
+    -- { 'fh',        '<cmd>Telescope help_tags<cr>',                           desc = "Telescope: find help tags" },
+    -- { 'fv',        '<cmd>Telescope command_history<cr>',                     desc = "Telescope: find command history" },
+    -- { 'fc',        '<cmd>Telescope commands<cr>',                            desc = "Telescope: find commands" },
+    -- { 'fi',        '<cmd>Telescope lsp_implementations<cr>',                 desc = "Telescope: find LSP implementations" },
+    -- { 'fu',        '<cmd>Telescope treesitter default_text=function\\ <cr>', desc = "Telescope: find function in treesitter" },
+    -- { 'ft',        '<cmd>Telescope treesitter<cr>',                          desc = "Telescope: find element in treesitter" },
+    -- { 'gd',        '<cmd>Telescope lsp_definitions<cr>',                     desc = "Telescope: find LSP definitions" },
+    -- { '<space>D',  '<cmd>Telescope lsp_type_definitions<cr>',                desc = "Telescope: find LSP type definitions" },
+    -- { '<space>ts', ':Telescope ',                                            desc = "Telescope: start finding" },
+
+    -------------------
+    -- Snacks.picker --
+    -------------------
     {
-        'fg',
+        "<F2>",
         function()
-            local text = vim.getVisualSelection()
-            require('telescope.builtin').current_buffer_fuzzy_find({ default_text = text })
+            Snacks.picker.explorer({
+                auto_close = true,
+                layout = {
+                    preview = false,
+                    layout = {
+                        backdrop = false,
+                        row = 1,
+                        width = 0.5,
+                        min_width = 80,
+                        height = 0.8,
+                        border = "none",
+                        box = "vertical",
+                        { win = "input",   height = 1,          border = "rounded", title = "{title} {live} {flags}", title_pos = "center" },
+                        { win = "list",    border = "hpad" },
+                        { win = "preview", title = "{preview}", border = "rounded" },
+                    },
+                }
+            })
         end,
-        desc = "Telescope: find in current buffer",
-        mode = 'v',
-        { noremap = true, silent = true }
+        desc = "Snacks.Picker: toggle floating explorer"
     },
+    { "<space>nt", function() Snacks.picker.explorer() end, desc = "Snacks.Picker: toggle explorer on the side" },
+    { 'ff',        function() Snacks.picker.smart() end,    desc = "Snacks.Picker: find file" },
+    { 'fg',        function() Snacks.picker.lines() end,    desc = "Snacks.Picker: find in current buffer", },
+    -- {
+    --     'fg',
+    --     function()
+    --         local text = vim.getVisualSelection()
+    --         require('telescope.builtin').current_buffer_fuzzy_find({ default_text = text })
+    --     end,
+    --     desc = "Snacks.Picker: find in current buffer",
+    --     mode = 'v',
+    --     { noremap = true, silent = true }
+    -- },
     {
         'fG',
         function()
             local text = vim.getVisualSelection()
-            require('telescope.builtin').live_grep({ default_text = text })
+            Snacks.picker.grep({ cmd = text })
         end,
-        desc = "Telescope: global find",
+        desc = "Snacks.Picker: global find",
         mode = 'v',
         { noremap = true, silent = true }
     },
-    { 'fG',        '<cmd>Telescope live_grep<cr>',                           desc = "Telescope: global find" },
-    { 'fb',        '<cmd>Telescope buffers<cr>',                             desc = "Telescope: find buffer" },
-    { 'fh',        '<cmd>Telescope help_tags<cr>',                           desc = "Telescope: find help tags" },
-    { 'fv',        '<cmd>Telescope command_history<cr>',                     desc = "Telescope: find command history" },
-    { 'fc',        '<cmd>Telescope commands<cr>',                            desc = "Telescope: find commands" },
-    { 'fi',        '<cmd>Telescope lsp_implementations<cr>',                 desc = "Telescope: find LSP implementations" },
-    { 'fu',        '<cmd>Telescope treesitter default_text=function\\ <cr>', desc = "Telescope: find function in treesitter" },
-    { 'ft',        '<cmd>Telescope treesitter<cr>',                          desc = "Telescope: find element in treesitter" },
-    { 'gd',        '<cmd>Telescope lsp_definitions<cr>',                     desc = "Telescope: find LSP definitions" },
-    { '<space>D',  '<cmd>Telescope lsp_type_definitions<cr>',                desc = "Telescope: find LSP type definitions" },
-    { '<space>ts', ':Telescope ',                                            desc = "Telescope: start finding" },
+    { 'fG',        function() Snacks.picker.grep() end,                 desc = "Snacks.Picker: global find", },
+    { 'fb',        function() Snacks.picker.buffers() end,              desc = "Snacks.Picker: find buffer" },
+    { 'fh',        function() Snacks.picker.help() end,                 desc = "Snacks.Picker: find help tags" },
+    { 'fv',        function() Snacks.picker.command_history() end,      desc = "Snacks.Picker: find command history" },
+    { 'fc',        function() Snacks.picker.commands() end,             desc = "Snacks.Picker: find commands" },
+    { 'fi',        function() Snacks.picker.lsp_implementations() end,  desc = "Snacks.Picker: find LSP implementations" },
+    -- { 'fu',        '<cmd>Telescope treesitter default_text=function\\ <cr>',    desc = "Telescope: find function in treesitter" },
+    -- { 'ft',        function() Snacks.picker() end,                              desc = "Snacks.Picker: find element in treesitter" },
+    { 'gd',        function() Snacks.picker.lsp_definitions() end,      desc = "Snacks.Picker: find LSP definitions" },
+    { '<space>D',  function() Snacks.picker.lsp_type_definitions() end, desc = "Snacks.Picker: find LSP type definitions" },
+    { 'fm',        function() Snacks.picker.lsp_symbols() end,          desc = "Snacks.Picker: show LSP symbols" },
+    { '<space>sp', function() Snacks.picker() end,                      desc = "Snacks.Picker: start finding" },
 
     ---------------
     --    Tmux   --
     ---------------
-    { '<A-H>',     '<cmd>lua require("tmux").move_left()<cr>',               desc = "Tmux: move pane left" },
-    { '<A-L>',     '<cmd>lua require("tmux").move_right()<cr>',              desc = "Tmux: move pane right" },
-    { '<A-K>',     '<cmd>lua require("tmux").move_top()<cr>',                desc = "Tmux: move pane top" },
-    { '<A-J>',     '<cmd>lua require("tmux").move_bottom()<cr>',             desc = "Tmux: move pane bottom" },
+    { '<A-H>',     '<cmd>lua require("tmux").move_left()<cr>',          desc = "Tmux: move pane left" },
+    { '<A-L>',     '<cmd>lua require("tmux").move_right()<cr>',         desc = "Tmux: move pane right" },
+    { '<A-K>',     '<cmd>lua require("tmux").move_top()<cr>',           desc = "Tmux: move pane top" },
+    { '<A-J>',     '<cmd>lua require("tmux").move_bottom()<cr>',        desc = "Tmux: move pane bottom" },
 
-    { '<C-A-h>',   '<cmd>lua require("tmux").resize_left()<cr>',             desc = "Tmux: resize pane left" },
-    { '<C-A-l>',   '<cmd>lua require("tmux").resize_right()<cr>',            desc = "Tmux: resize pane right" },
-    { '<C-A-k>',   '<cmd>lua require("tmux").resize_top()<cr>',              desc = "Tmux: resize pane up" },
-    { '<C-A-j>',   '<cmd>lua require("tmux").resize_bottom()<cr>',           desc = "Tmux: resize pane down" },
+    { '<C-A-h>',   '<cmd>lua require("tmux").resize_left()<cr>',        desc = "Tmux: resize pane left" },
+    { '<C-A-l>',   '<cmd>lua require("tmux").resize_right()<cr>',       desc = "Tmux: resize pane right" },
+    { '<C-A-k>',   '<cmd>lua require("tmux").resize_top()<cr>',         desc = "Tmux: resize pane up" },
+    { '<C-A-j>',   '<cmd>lua require("tmux").resize_bottom()<cr>',      desc = "Tmux: resize pane down" },
 
     ---------------
     --  Trouble  --
     ---------------
-    { "<space>wd", "<cmd>Trouble diagnostics toggle<cr>",                    desc = "Trouble: workspace diagnostics", },
-    { "<F3>",      "<cmd>Trouble symbols toggle focus=false<cr>",            desc = "Trouble: show outline", },
+    { "<space>wd", "<cmd>Trouble diagnostics toggle<cr>",               desc = "Trouble: workspace diagnostics", },
+    { "<F3>",      "<cmd>Trouble symbols toggle focus=false<cr>",       desc = "Trouble: show outline", },
 
     ---------------
     -- Which-key --

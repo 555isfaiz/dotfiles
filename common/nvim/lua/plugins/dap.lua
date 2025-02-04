@@ -25,7 +25,7 @@ return {
                             }
                         },
                         position = "left",
-                        size = math.ceil(vim.api.nvim_win_get_width(0) * 0.2)
+                        size = 70
                     },
                     {
                         elements = {
@@ -39,7 +39,7 @@ return {
                             }
                         },
                         position = "bottom",
-                        size = math.ceil(vim.api.nvim_win_get_height(0) * 0.2)
+                        size = 17
                     }
                 },
             })
