@@ -13,10 +13,11 @@ vim.o.splitbelow = true
 vim.o.splitright = true
 vim.o.updatetime=100
 vim.o.laststatus=3
-vim.o.spell = true
+vim.o.spell = false
+vim.o.cursorline = true
 vim.o.spelllang="en_us"
 vim.o.signcolumn = 'yes:3'
 
 vim.g.mapleader = " "
 
-vim.cmd("colorscheme duskfox")
+vim.cmd("colorscheme catppuccin-mocha")

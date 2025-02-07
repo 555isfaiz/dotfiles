@@ -20,8 +20,28 @@ return {
                 timeout = 3000,
             },
             picker = {
+                enabled = true,
                 matcher = {
                     frecency = true,
+                },
+                win = {
+                    -- input window
+                    input = {
+                        keys = {
+                            ["<S-Tab>"] = { "list_up", mode = { "i", "n" } },
+                            ["<Tab>"] = { "list_down", mode = { "i", "n" } },
+                            ["<S-s>"] = { "select_and_prev", mode = { "n" } },
+                            ["s"] = { "select_and_next", mode = { "n" } },
+                        }
+                    },
+                    list = {
+                        keys = {
+                            ["<S-Tab>"] = { "list_up", mode = { "n", "x" } },
+                            ["<Tab>"] = { "list_down", mode = { "n", "x" } },
+                            ["<S-s>"] = { "select_and_prev", mode = { "n", "x" } },
+                            ["s"] = { "select_and_next", mode = { "n", "x" } },
+                        }
+                    }
                 }
             },
             quickfile = { enabled = true },

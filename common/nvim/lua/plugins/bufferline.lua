@@ -12,6 +12,9 @@ return {
                         -- icon = '▎', -- this should be omitted if indicator style is not 'icon'
                         style = 'underline',
                     },
+                    separator_style = "slant",
+                    numbers = "both",
+                    move_wraps_at_ends = true,
                     diagnostics = "nvim_lsp",
                     max_name_length = 25,
                     hover = {

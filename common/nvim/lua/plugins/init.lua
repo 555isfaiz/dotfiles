@@ -8,7 +8,7 @@ return {
     'jamestthompson3/nvim-remote-containers',
     'folke/tokyonight.nvim',
     'MunifTanjim/nui.nvim',
-    'nvim-neo-tree/neo-tree.nvim',
+    -- 'nvim-neo-tree/neo-tree.nvim',
     {
         'rcarriga/nvim-notify',
         config = function()
@@ -28,17 +28,6 @@ return {
         'goolord/alpha-nvim',
         config = function()
             require('alpha').setup(require 'alpha.themes.dashboard'.config)
-        end
-    },
-    {
-        'lukas-reineke/indent-blankline.nvim',
-        event = 'VeryLazy',
-        config = function()
-            require("ibl").setup {
-                -- for example, context is off by default, use this to turn it on
-                -- show_current_context = true,
-                -- show_current_context_start = true,
-            }
         end
     },
     {

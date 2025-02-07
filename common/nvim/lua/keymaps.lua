@@ -255,6 +255,7 @@ require("which-key").add({
     -------------------
     -- Snacks.picker --
     -------------------
+    { "<space>wd", function() Snacks.picker.diagnostics() end,                  desc = "Snacks.Picker: workspace diagnostics", },
     {
         "<F2>",
         function()
