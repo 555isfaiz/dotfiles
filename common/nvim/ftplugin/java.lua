@@ -65,26 +65,6 @@ local format_url = settingsTable["format_setting"] or
 
 local workspace_dir = home_dir .. "/.cache/jdtls/workspace/" .. project_name
 
-local get_jdp_javaagent = function()
-    local jdp_dir = home_dir .. '/.local/share/nvim/mason/packages/java-debug-adapter/extension/server/'
-    local jdp_versions = io.popen('ls -1 "' .. jdp_dir .. '" | sort -r')
-    if jdp_versions ~= nil then
-        local lb_i, lb_versions = 0, {}
-        for lb_version in jdp_versions:lines() do
-            lb_i = lb_i + 1
-            lb_versions[lb_i] = lb_version
-        end
-        jdp_versions:close()
-        if next(lb_versions) ~= nil then
-            local jdp_jar = fn.expand(string.format('%s/%s', jdp_dir, lb_versions[1]))
-            if is_file_exist(jdp_jar) then
-                return jdp_jar
-            end
-        end
-    end
-    return ''
-end
-
 local capabilities = {
     workspace = {
         configuration = true
