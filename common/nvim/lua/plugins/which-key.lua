@@ -15,6 +15,11 @@ return {
                     { "f",      mode = { "n", "v" } },
                 },
             }
+            require('which-key').add({
+                icon = { icon = "󰅍 ", color = "blue" },
+                plugin = "registers",
+                { '<space>rg', mode = { "n", "x" }, desc = "registers" },
+            })
         end
     }, -- Key Suggestions
 }

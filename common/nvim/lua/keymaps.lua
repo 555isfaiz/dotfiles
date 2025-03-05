@@ -34,6 +34,9 @@ require("which-key").add({
     { "<space>wq",  "<C-W>q",                          desc = "Close split" },
     { "<C-l>",      "$",                               desc = "Go to line end",                  mode = { 'n', 'v' } },
     { "<C-h>",      "^",                               desc = "Go to line start",                mode = { 'n', 'v' } },
+    { "<space>rg",  "\"",                              desc = "Register prefix",                 mode = { 'n', 'v' }, { noremap = true, silent = true } },
+    { "\"",         "<space>sa\"",                     desc = "Add \" surrounding",              mode = { 'x' },      { remap = true, silent = true } },
+    { "'",          "<space>sa'",                      desc = "Add ' surrounding",               mode = { 'x' },      { remap = true, silent = true } },
 
     ----------------
     -- BufferLine --
@@ -170,7 +173,6 @@ require("which-key").add({
     -- See `:help vim.diagnostic.*` for documentation on any of the below functions
     { 'gD',        vim.lsp.buf.declaration,                             desc = "LSP: go to declaration", },
     { 'K',         vim.lsp.buf.hover,                                   desc = "LSP: show hover info", },
-    { 'gi',        vim.lsp.buf.implementation,                          desc = "LSP: go to implementation", },
     { '<C-k>',     vim.lsp.buf.signature_help,                          desc = "LSP: show signature help", },
     { '<space>wa', vim.lsp.buf.add_workspace_folder,                    desc = "LSP: add workspace folder", },
     { '<space>wr', vim.lsp.buf.remove_workspace_folder,                 desc = "LSP: remove workspace folder", },
@@ -309,6 +311,7 @@ require("which-key").add({
     { 'fv',        function() Snacks.picker.command_history() end,      desc = "Snacks.Picker: find command history" },
     { 'fc',        function() Snacks.picker.commands() end,             desc = "Snacks.Picker: find commands" },
     { 'fi',        function() Snacks.picker.lsp_implementations() end,  desc = "Snacks.Picker: find LSP implementations" },
+    { 'gi',        function() Snacks.picker.lsp_implementations() end,  desc = "LSP: go to implementation", },
     -- { 'fu',        '<cmd>Telescope treesitter default_text=function\\ <cr>',    desc = "Telescope: find function in treesitter" },
     -- { 'ft',        function() Snacks.picker() end,                              desc = "Snacks.Picker: find element in treesitter" },
     { 'gd',        function() Snacks.picker.lsp_definitions() end,      desc = "Snacks.Picker: find LSP definitions" },
