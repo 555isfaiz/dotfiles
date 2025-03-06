@@ -7,7 +7,7 @@ return {
                     globalstatus = true,
                     component_separators = { left = '', right = '' },
                     section_separators = { left = '', right = '' },
-                    theme = "duskfox",
+                    theme = "tokyonight-night",
                     disabled_filetypes = { "neo-tree", "dapui_scopes", "dashboard", "Outline", "dapui_breakpoints", "dapui_stacks", "dapui_watches", "dap-repl", "dapui_console", "aerial" }
                 },
                 sections = {
