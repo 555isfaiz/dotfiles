@@ -93,6 +93,19 @@ local bundles = {
 vim.list_extend(bundles,
     vim.split(vim.fn.glob(vim.fn.stdpath('data') .. '/mason/packages/java-test/extension/server/*.jar', true), "\n"))
 
+-- Paste it after bundles but before assigning bundles to jdtls
+-- Following filters out unwanted bundles
+local ignored_bundles = { "com.microsoft.java.test.runner-jar-with-dependencies.jar", "jacocoagent.jar", "org.jacoco.core_0.8.12.jar" }
+local find = string.find
+local function should_ignore_bundle(bundle)
+    for _, ignored in ipairs(ignored_bundles) do
+        if find(bundle, ignored, 1, true) then
+            return true
+        end
+    end
+end
+bundles = vim.tbl_filter(function(bundle) return bundle ~= "" and not should_ignore_bundle(bundle) end, bundles)
+
 local config = {
     -- capabilities = require("cmp_nvim_lsp").default_capabilities(),
     capabilities = capabilities,
@@ -115,7 +128,7 @@ local config = {
             jdt = {
                 ls = {
                     vmargs =
-                    "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx4G -Xms100m"
+                    "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx16G -Xms4G"
                 }
             },
             format = {
@@ -168,4 +181,6 @@ require("jdtls.ui").pick_one = function(items, prompt, label_fn)
     return coroutine.yield()
 end
 
-require("jdtls").start_or_attach(config)
+-- if project_name ~= 'enecogen-cms' then
+    require("jdtls").start_or_attach(config)
+-- end

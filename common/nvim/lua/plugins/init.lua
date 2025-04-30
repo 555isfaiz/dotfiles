@@ -8,6 +8,7 @@ return {
     'jamestthompson3/nvim-remote-containers',
     'folke/tokyonight.nvim',
     'MunifTanjim/nui.nvim',
+    'projekt0n/github-nvim-theme',
     -- 'nvim-neo-tree/neo-tree.nvim',
     {
         'rcarriga/nvim-notify',

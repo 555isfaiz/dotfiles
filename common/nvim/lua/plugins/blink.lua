@@ -175,7 +175,8 @@ return {
                     elseif success and node and vim.tbl_contains({ 'comment', 'line_comment', 'block_comment' }, node:type()) then
                         return { 'buffer' }
                     else
-                        return { "lazydev", 'lsp', 'path', 'snippets', 'buffer' }
+                        return { 'lazydev', 'lsp', 'path', 'snippets', 'buffer', 'avante_commands', 'avante_mentions',
+                            'avante_files', }
                     end
                 end,
                 providers = {
@@ -189,6 +190,24 @@ return {
                         -- make lazydev completions top priority (see `:h blink.cmp`)
                         score_offset = 100,
                     },
+                    avante_commands = {
+                        name = "avante_commands",
+                        module = "blink.compat.source",
+                        score_offset = 90, -- show at a higher priority than lsp
+                        opts = {},
+                    },
+                    avante_files = {
+                        name = "avante_files",
+                        module = "blink.compat.source",
+                        score_offset = 100, -- show at a higher priority than lsp
+                        opts = {},
+                    },
+                    avante_mentions = {
+                        name = "avante_mentions",
+                        module = "blink.compat.source",
+                        score_offset = 1000, -- show at a higher priority than lsp
+                        opts = {},
+                    }
                 },
             },
         },

@@ -75,6 +75,31 @@ return {
             local dap = require('dap')
             local home_dir = os.getenv('HOME')
 
+            -- vim.diagnostic.config({
+            --     signs = {
+            --         text = {
+            --             ['DapBreakpoint'] = "",
+            --             ['DapBreakpointCondition'] = "",
+            --             ['DapStopped'] = "→",
+            --         },
+            --         texthl = {
+            --             ['DapBreakpoint'] = "ErrorMsg",
+            --             ['DapBreakpointCondition'] = "ErrorMsg",
+            --             ['DapStopped'] = "ErrorMsg",
+            --         },
+            --         linehl = {
+            --             ['DapBreakpoint'] = "DapBreakpoint",
+            --             ['DapBreakpointCondition'] = "DapBreakpoint",
+            --             ['DapStopped'] = "DiffText",
+            --         },
+            --         numhl = {
+            --             ['DapBreakpoint'] = "DapBreakpoint",
+            --             ['DapBreakpointCondition'] = "DapBreakpoint",
+            --             ['DapStopped'] = "DiffText",
+            --         },
+            --     },
+            -- })
+
             vim.fn.sign_define('DapBreakpoint',
                 { text = '', texthl = 'ErrorMsg', linehl = 'DapBreakpoint', numhl = 'DapBreakpoint' })
             vim.fn.sign_define('DapBreakpointCondition',

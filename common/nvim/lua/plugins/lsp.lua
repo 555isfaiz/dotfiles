@@ -6,6 +6,9 @@ return {
             require('lspsaga').setup({
                 outline = {
                     layout = 'float'
+                },
+                lightbulb = {
+                    enable = false
                 }
             })
         end,
@@ -118,6 +121,7 @@ return {
             require("conform").setup({
                 formatters_by_ft = {
                     vim = { "vint" },
+                    sql = { "sql_formatter" },
                     -- -- Conform will run multiple formatters sequentially
                     -- python = { "isort", "black" },
                     -- -- You can customize some of the format options for the filetype (:help conform.format)
@@ -205,6 +209,14 @@ return {
             local signs = { Error = " ", Warn = " ", Hint = "󰌵 ", Info = " " }
             for type, icon in pairs(signs) do
                 local hl = "DiagnosticSign" .. type
+                -- local current_config = vim.diagnostic.config()
+                -- if current_config == nil then
+                --     current_config = {}
+                -- end
+                -- current_config['signs']['text']["DiagnosticSign" .. type] = icon
+                -- current_config['signs']['texthl']["DiagnosticSign" .. type] = hl
+                -- current_config['signs']['numhl']["DiagnosticSign" .. type] = hl
+                -- vim.diagnostic.config(current_config)
                 vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
             end
 

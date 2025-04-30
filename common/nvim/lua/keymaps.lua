@@ -32,11 +32,16 @@ require("which-key").add({
     { "<space>wh",  "<C-W>s",                          desc = "Horizontal split" },
     { "<space>wv",  "<C-W>v",                          desc = "Vertical split" },
     { "<space>wq",  "<C-W>q",                          desc = "Close split" },
-    { "L",      "$",                               desc = "Go to line end",                  mode = { 'n', 'v' } },
-    { "H",      "^",                               desc = "Go to line start",                mode = { 'n', 'v' } },
+    { "L",          "$",                               desc = "Go to line end",                  mode = { 'n', 'v' } },
+    { "H",          "^",                               desc = "Go to line start",                mode = { 'n', 'v' } },
     { "<space>rg",  "\"",                              desc = "Register prefix",                 mode = { 'n', 'v' }, { noremap = true, silent = true } },
     { "\"",         "<space>sa\"",                     desc = "Add \" surrounding",              mode = { 'x' },      { remap = true, silent = true } },
     { "'",          "<space>sa'",                      desc = "Add ' surrounding",               mode = { 'x' },      { remap = true, silent = true } },
+
+    ----------------
+    --     AI     --
+    ----------------
+    { "<space>aC",  ":AvanteClear<CR>",                desc = "Avante: clear chat",              mode = { 'n' },      { silent = true } },
 
     ----------------
     -- BufferLine --
@@ -44,8 +49,8 @@ require("which-key").add({
     { "<A-<>",      "<Cmd>BufferLineMovePrev<CR>",     desc = "BufferLine: buffer move previous" },
     { "<A->>",      "<Cmd>BufferLineMoveNext<CR>",     desc = "BufferLine: buffer move next" },
 
-    { "<C-h>",          "<Cmd>BufferLineCyclePrev<CR>",    desc = "BufferLine: buffer previous" },
-    { "<C-l>",          "<Cmd>BufferLineCycleNext<CR>",    desc = "BufferLine: buffer next" },
+    { "<C-h>",      "<Cmd>BufferLineCyclePrev<CR>",    desc = "BufferLine: buffer previous" },
+    { "<C-l>",      "<Cmd>BufferLineCycleNext<CR>",    desc = "BufferLine: buffer next" },
 
     { "<C-q>",      "<Cmd>bp|bd #<CR>",                desc = "Misc: buffer close" },
 
