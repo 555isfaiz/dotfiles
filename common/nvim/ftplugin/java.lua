@@ -91,20 +91,21 @@ local bundles = {
 }
 
 vim.list_extend(bundles,
-    vim.split(vim.fn.glob(vim.fn.stdpath('data') .. '/mason/packages/java-test/extension/server/*.jar', true), "\n"))
+    vim.split(vim.fn.glob(vim.fn.stdpath('data') .. '/mason/packages/vscode-java-test/server/*.jar', true), "\n"))
+    -- vim.split(vim.fn.glob(vim.fn.stdpath('data') .. '/mason/packages/java-test/extension/server/*.jar', true), "\n"))
 
 -- Paste it after bundles but before assigning bundles to jdtls
 -- Following filters out unwanted bundles
-local ignored_bundles = { "com.microsoft.java.test.runner-jar-with-dependencies.jar", "jacocoagent.jar", "org.jacoco.core_0.8.12.jar" }
-local find = string.find
-local function should_ignore_bundle(bundle)
-    for _, ignored in ipairs(ignored_bundles) do
-        if find(bundle, ignored, 1, true) then
-            return true
-        end
-    end
-end
-bundles = vim.tbl_filter(function(bundle) return bundle ~= "" and not should_ignore_bundle(bundle) end, bundles)
+-- local ignored_bundles = { "com.microsoft.java.test.runner-jar-with-dependencies.jar", "jacocoagent.jar", "junit-platform-commons_1.11.0.jar", "junit-platform-engine_1.11.0.jar", "junit-platform-launcher_1.11.0.jar", "org.apiguardian.api_1.1.2.jar", "org.opentest4j_1.3.0.jar", "" }
+-- local find = string.find
+-- local function should_ignore_bundle(bundle)
+--     for _, ignored in ipairs(ignored_bundles) do
+--         if find(bundle, ignored, 1, true) then
+--             return true
+--         end
+--     end
+-- end
+-- bundles = vim.tbl_filter(function(bundle) return bundle ~= "" and not should_ignore_bundle(bundle) end, bundles)
 
 local config = {
     -- capabilities = require("cmp_nvim_lsp").default_capabilities(),

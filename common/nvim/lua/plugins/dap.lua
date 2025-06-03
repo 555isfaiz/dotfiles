@@ -47,9 +47,9 @@ return {
     },
     {
         'mfussenegger/nvim-dap-python',
-        ft = "py",
+        ft = "python",
         config = function()
-            require('dap-python').setup('~/.pyvenv/bin/python')
+            require('dap-python').setup(vim.fn.getcwd() .. '/.venv/bin/python')
         end
     },
     {

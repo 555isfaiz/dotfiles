@@ -6,11 +6,11 @@ return {
         opts = {
             -- add any opts here
             -- for example
-            provider = "ollama",
+            -- provider = "ollama",
             ollama = {
                 model = "deepseek-r1:14b",
             },
-            -- provider = "openai",
+            provider = "openai",
             openai = {
                 endpoint = "https://api.openai.com/v1",
                 model = "gpt-4.1",             -- your desired model (or use gpt-4o, etc.)
