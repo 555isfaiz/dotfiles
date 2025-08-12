@@ -9,6 +9,21 @@ return {
     'folke/tokyonight.nvim',
     'MunifTanjim/nui.nvim',
     'projekt0n/github-nvim-theme',
+    {
+        "kndndrj/nvim-dbee",
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+        },
+        build = function()
+            -- Install tries to automatically detect the install method.
+            -- if it fails, try calling it with one of these parameters:
+            --    "curl", "wget", "bitsadmin", "go"
+            require("dbee").install()
+        end,
+        config = function()
+            require("dbee").setup( --[[optional config]])
+        end,
+    },
     -- 'nvim-neo-tree/neo-tree.nvim',
     {
         'rcarriga/nvim-notify',
@@ -73,6 +88,11 @@ return {
         -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
         -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
         dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+        config = function()
+            require('render-markdown').setup({
+                completions = { blink = { enabled = true } },
+            })
+        end
         ---@module 'render-markdown'
         ---@type render.md.UserConfig
     },

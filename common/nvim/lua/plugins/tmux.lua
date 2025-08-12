@@ -48,6 +48,9 @@ return {
                     -- prevents unzoom tmux when navigating beyond vim border
                     persist_zoom = false,
                 },
+                swap = {
+                    enable_default_keybindings = false
+                },
                 resize = {
                     -- enables default keybindings (A-hjkl) for normal mode
                     enable_default_keybindings = false,

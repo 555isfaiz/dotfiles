@@ -12,7 +12,8 @@ return {
                         -- icon = '▎', -- this should be omitted if indicator style is not 'icon'
                         style = 'underline',
                     },
-                    separator_style = "slant",
+                    themable = true,
+                    separator_style = "thick",
                     numbers = "both",
                     move_wraps_at_ends = true,
                     diagnostics = "nvim_lsp",

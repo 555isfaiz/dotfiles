@@ -20,4 +20,4 @@ vim.o.signcolumn = 'yes:3'
 
 vim.g.mapleader = " "
 
-vim.cmd("colorscheme github_dark_dimmed")
+vim.cmd("colorscheme catppuccin")

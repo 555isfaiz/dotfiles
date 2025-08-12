@@ -128,6 +128,7 @@ return {
                     -- rust = { "rustfmt", lsp_format = "fallback" },
                     -- -- Conform will run the first available formatter
                     -- javascript = { "prettierd", "prettier", stop_after_first = true },
+                    json = { "jq" },
                 },
                 default_format_opts = {
                     lsp_format = "fallback",

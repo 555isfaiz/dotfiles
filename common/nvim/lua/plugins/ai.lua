@@ -7,17 +7,20 @@ return {
             -- add any opts here
             -- for example
             -- provider = "ollama",
-            ollama = {
-                model = "deepseek-r1:14b",
-            },
             provider = "openai",
-            openai = {
-                endpoint = "https://api.openai.com/v1",
-                model = "gpt-4.1",             -- your desired model (or use gpt-4o, etc.)
-                timeout = 30000,              -- Timeout in milliseconds, increase this for reasoning models
-                temperature = 0,
-                max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
-                --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+            providers = {
+                ollama = {
+                    model = "deepseek-r1:14b",
+                },
+                openai = {
+                    endpoint = "https://api.openai.com/v1",
+                    model = "gpt-5",             -- your desired model (or use gpt-4o, etc.)
+                    extra_request_body = {
+                        temperature = 0,
+                        max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
+                        --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+                    }
+                },
             },
             selector = {
                 --- @alias avante.SelectorProvider "native" | "fzf_lua" | "mini_pick" | "snacks" | "telescope" | fun(selector: avante.ui.Selector): nil

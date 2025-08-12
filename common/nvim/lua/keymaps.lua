@@ -197,7 +197,7 @@ require("which-key").add({
         '<space>f',
         function()
             require('conform').format()
-            vim.lsp.buf.format { async = true }
+            -- vim.lsp.buf.format { async = true }
         end,
         desc = "LSP: format file",
         mode = { 'n', 'v' }
