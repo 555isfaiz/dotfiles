@@ -120,8 +120,7 @@ return {
         config = function()
             require("conform").setup({
                 formatters_by_ft = {
-                    vim = { "vint" },
-                    sql = { "sql_formatter" },
+                    sql = { "sqlfmt" },
                     -- -- Conform will run multiple formatters sequentially
                     -- python = { "isort", "black" },
                     -- -- You can customize some of the format options for the filetype (:help conform.format)
