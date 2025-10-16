@@ -1,6 +1,6 @@
 return {
     {
-        'williamboman/mason.nvim',
+        'mason-org/mason.nvim',
         config = function()
             require("mason").setup()
         end
@@ -34,37 +34,40 @@ return {
         end
     },
     {
-        'williamboman/mason-lspconfig.nvim',
-        event = 'VeryLazy',
-        config = function()
-            require("mason-lspconfig").setup {
-                automatic_enable = false,
-                -- The first entry (without a key) will be the default handler
-                -- and will be called for each installed server that doesn't have
-                -- a dedicated handler.
-                function(server_name) -- default handler (optional)
-                    require("lspconfig")[server_name].setup {
-                        capabilities = require("cmp_nvim_lsp").default_capabilities()
-                    }
-                end,
-                -- Next, you can provide a dedicated handler for specific servers.
-                -- For example, a handler override for the `rust_analyzer`:
-                -- ["pyright"] = function ()
-                --    require("lspconfig")["pyright"].setup {
-                --      capabilities = require("cmp_nvim_lsp").default_capabilities();
-                --      settings = {
-                --          python = {
-                --            analysis = {
-                --               typeCheckingMode = 'off'
-                --              }
-                --            }
-                --        }
-                --      }
-                -- end,
-                ["jdtls"] = function()
-                    -- The key is to do nothing here...
-                end
-            }
-        end
+        'mason-org/mason-lspconfig.nvim',
+        dependencies = {
+            { "mason-org/mason.nvim", opts = {} },
+            "neovim/nvim-lspconfig",
+        },
+        -- config = function()
+        --     require("mason-lspconfig").setup {
+        --         automatic_enable = false,
+        --         -- The first entry (without a key) will be the default handler
+        --         -- and will be called for each installed server that doesn't have
+        --         -- a dedicated handler.
+        --         function(server_name) -- default handler (optional)
+        --             require("lspconfig")[server_name].setup {
+        --                 capabilities = require("cmp_nvim_lsp").default_capabilities()
+        --             }
+        --         end,
+        --         -- Next, you can provide a dedicated handler for specific servers.
+        --         -- For example, a handler override for the `rust_analyzer`:
+        --         -- ["pyright"] = function ()
+        --         --    require("lspconfig")["pyright"].setup {
+        --         --      capabilities = require("cmp_nvim_lsp").default_capabilities();
+        --         --      settings = {
+        --         --          python = {
+        --         --            analysis = {
+        --         --               typeCheckingMode = 'off'
+        --         --              }
+        --         --            }
+        --         --        }
+        --         --      }
+        --         -- end,
+        --         ["jdtls"] = function()
+        --             -- The key is to do nothing here...
+        --         end
+        --     }
+        -- end
     },
 }

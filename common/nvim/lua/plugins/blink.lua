@@ -41,7 +41,7 @@ return {
     {
         'saghen/blink.cmp',
         -- optional: provides snippets for the snippet source
-        dependencies = { 'rafamadriz/friendly-snippets', 'rcarriga/cmp-dap' },
+        dependencies = { 'rafamadriz/friendly-snippets', 'rcarriga/cmp-dap', "Kaiser-Yang/blink-cmp-avante" },
 
         -- use a release tag to download pre-built binaries
         version = '*',
@@ -83,10 +83,22 @@ return {
                 -- Sets the fallback highlight groups to nvim-cmp's highlight groups
                 -- Useful for when your theme doesn't support blink.cmp
                 -- Will be removed in a future release
-                use_nvim_cmp_as_default = true,
+                -- use_nvim_cmp_as_default = true,
                 -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
                 -- Adjusts spacing to ensure icons are aligned
                 nerd_font_variant = 'mono'
+            },
+
+            cmdline = {
+                completion = {
+                    menu = {
+                        auto_show = function(ctx)
+                            return vim.fn.getcmdtype() == ":"
+                            -- enable for inputs as well, with:
+                            -- or vim.fn.getcmdtype() == '@'
+                        end,
+                    },
+                },
             },
 
             completion = {
@@ -121,8 +133,10 @@ return {
                     cycle = { from_top = true, from_bottom = true }
                 },
                 menu = {
+                    auto_show = true,
                     draw = {
                         treesitter = { 'lsp' },
+                        columns = { { "kind_icon", "label", "label_description", gap = 1 }, { "kind", "source_name" } },
                     },
                 },
                 documentation = {
@@ -136,7 +150,9 @@ return {
                 -- Disabling this matches the behavior of fzf
                 -- use_typo_resistance = true,
                 -- Frecency tracks the most recently/frequently used items and boosts the score of the item
-                use_frecency = true,
+                frecency = {
+                    enabled = true,
+                },
                 -- Proximity bonus boosts the score of items matching nearby words
                 use_proximity = true,
                 sorts = {
@@ -169,14 +185,13 @@ return {
                 default = function()
                     local success, node = pcall(vim.treesitter.get_node)
                     if is_dap_buffer() then
-                        return { "dap", "snippets", "buffer" }
+                        return { 'avante', "dap", "snippets", "buffer" }
                     elseif vim.bo.filetype == "gitcommit" then
-                        return { 'cmp_git', 'buffer' }
+                        return { 'avante', 'cmp_git', 'buffer' }
                     elseif success and node and vim.tbl_contains({ 'comment', 'line_comment', 'block_comment' }, node:type()) then
                         return { 'buffer' }
                     else
-                        return { 'lazydev', 'lsp', 'path', 'snippets', 'buffer', 'avante_commands', 'avante_mentions',
-                            'avante_files', }
+                        return { 'avante', 'lazydev', 'lsp', 'path', 'snippets', 'buffer' }
                     end
                 end,
                 providers = {
@@ -190,23 +205,12 @@ return {
                         -- make lazydev completions top priority (see `:h blink.cmp`)
                         score_offset = 100,
                     },
-                    avante_commands = {
-                        name = "avante_commands",
-                        module = "blink.compat.source",
-                        score_offset = 90, -- show at a higher priority than lsp
-                        opts = {},
-                    },
-                    avante_files = {
-                        name = "avante_files",
-                        module = "blink.compat.source",
-                        score_offset = 100, -- show at a higher priority than lsp
-                        opts = {},
-                    },
-                    avante_mentions = {
-                        name = "avante_mentions",
-                        module = "blink.compat.source",
-                        score_offset = 1000, -- show at a higher priority than lsp
-                        opts = {},
+                    avante = {
+                        module = 'blink-cmp-avante',
+                        name = 'Avante',
+                        opts = {
+                            -- options for blink-cmp-avante
+                        }
                     }
                 },
             },

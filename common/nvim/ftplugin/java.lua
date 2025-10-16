@@ -84,15 +84,17 @@ extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 local bundles = {
     -- vim.fn.glob(get_jdp_javaagent(), 1),
     -- vim.fn.glob(vim.fn.stdpath('data')..'/mason/packages/java-test/extension/server/*.jar', true ),
-    vim.fn.glob(
-        vim.fn.stdpath('data') ..
-        '/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar',
-        true),
+    -- vim.fn.glob(
+    --     vim.fn.stdpath('data') ..
+    --     '/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar',
+    --     true),
 }
 
 vim.list_extend(bundles,
-    vim.split(vim.fn.glob(vim.fn.stdpath('data') .. '/mason/packages/vscode-java-test/server/*.jar', true), "\n"))
-    -- vim.split(vim.fn.glob(vim.fn.stdpath('data') .. '/mason/packages/java-test/extension/server/*.jar', true), "\n"))
+    vim.split(vim.fn.glob(vim.fn.stdpath('data') .. '/mason/packages/java-debug-adapter/extension/server/*.jar', true), "\n"))
+
+vim.list_extend(bundles,
+    vim.split(vim.fn.glob(vim.fn.stdpath('data') .. '/mason/packages/java-test/extension/server/*.jar', true), "\n"))
 
 -- Paste it after bundles but before assigning bundles to jdtls
 -- Following filters out unwanted bundles
@@ -160,11 +162,23 @@ local config = {
             maven = {
                 downloadSources = true,
             },
+            implementationsCodeLens = {
+                enabled = true,
+            },
+            referencesCodeLens = {
+                enabled = true,
+            },
+            references = {
+                includeDecompiledSources = true,
+            },
         },
     },
+    flags = {
+        allow_incremental_sync = true,
+      },
     init_options = {
         bundles = bundles,
-        extendedClientCapabilities = extendedClientCapabilities,
+        extendedClientCapabilities = require("jdtls").extendedClientCapabilities,
     },
 }
 

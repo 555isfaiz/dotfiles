@@ -114,4 +114,25 @@ return {
             },
         },
     },
+    {
+        'AlexvZyl/nordic.nvim',
+        lazy = false,
+        priority = 1000,
+        config = function()
+            require('nordic').setup({
+                on_highlight = function(highlights, palette)
+                    highlights.LspReferenceText = {
+                        link = "PmenuSel"
+                    }
+                    highlights.LspReferenceRead = {
+                        link = "PmenuSel"
+                    }
+                    highlights.LspReferenceWrite = {
+                        link = "PmenuSel"
+                    }
+                end,
+            })
+            require('nordic').load()
+        end
+    }
 }
