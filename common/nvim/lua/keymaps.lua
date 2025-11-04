@@ -68,8 +68,22 @@ require("which-key").add({
     ---------
     -- DAP --
     ---------
-    { '<F5>',       require 'dap'.continue,            desc = "DAP: start or continue" },
-    { '<F6>',       require 'dap'.terminate,           desc = "DAP: terminate" },
+    {
+        '<F5>',
+        function()
+            require 'dap'.continue()
+            require 'nvim-dap-virtual-text'.refresh()
+        end,
+        desc = "DAP: start or continue"
+    },
+    {
+        '<F6>',
+        function()
+            require 'dap'.terminate()
+            require 'nvim-dap-virtual-text'.refresh()
+        end,
+        desc = "DAP: terminate"
+    },
     { '<F7>',       require 'dap'.restart,             desc = "DAP: restart" },
     { '<F10>',      require 'dap'.step_over,           desc = "DAP: step over" },
     { '<F11>',      require 'dap'.step_into,           desc = "DAP: step into" },

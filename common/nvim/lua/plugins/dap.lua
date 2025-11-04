@@ -46,14 +46,14 @@ return {
             require("nvim-dap-virtual-text").setup()
         end
     },
-    -- {
-    --     'mfussenegger/nvim-dap-python',
-    --     dependencies = { 'mfussenegger/nvim-dap', },
-    --     ft = "python",
-    --     config = function()
-    --         require('dap-python').setup(vim.fn.getcwd() .. '/.venv/bin/python')
-    --     end
-    -- },
+    {
+        'mfussenegger/nvim-dap-python',
+        dependencies = { 'mfussenegger/nvim-dap', },
+        ft = "python",
+        config = function()
+            require('dap-python').setup(vim.fn.getcwd() .. '/.venv/bin/python')
+        end
+    },
     {
         'LiadOz/nvim-dap-repl-highlights',
         event = "VeryLazy",
