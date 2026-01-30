@@ -1,6 +1,6 @@
 return {
     {
-        'ggandor/flit.nvim',
+        url = "https://codeberg.org/andyg/leap.nvim",
         config = function()
             require('flit').setup {
                 keys = { f = 't', F = 'T', t = 'r', T = 'R' },

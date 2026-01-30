@@ -265,17 +265,18 @@ return {
                 desc = 'LSP: Disable hover capability from Ruff',
             })
 
-            local lspconfig = require('lspconfig')
+            local lspconfig = vim.lsp.config
             for server, config in pairs(opts.servers) do
                 -- passing config.capabilities to blink.cmp merges with the capabilities in your
                 -- `opts[server].capabilities, if you've defined it
                 config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
-                lspconfig[server].setup(config)
+                lspconfig[server] = config
+                vim.lsp.enable(server)
             end
 
-            lspconfig.ruff.setup({})
+            vim.lsp.enable('ruff')
 
-            lspconfig.pyright.setup {
+            lspconfig['pyright'] = {
                 settings = {
                     pyright = {
                         -- Using Ruff's import organizer
@@ -289,6 +290,8 @@ return {
                     },
                 },
             }
+
+            vim.lsp.enable('pyright')
         end
     },
 }

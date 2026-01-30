@@ -5,7 +5,7 @@ local home_dir = os.getenv('HOME')
 local function get_server(name)
     local servers = mason_lspconfig.get_installed_servers()
     if vim.tbl_contains(servers, name) then
-        return true, require("lspconfig")[name]
+        return true, vim.lsp.config[name]
     end
     return false, nil
 end
