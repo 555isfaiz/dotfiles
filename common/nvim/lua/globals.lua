@@ -20,4 +20,4 @@ vim.o.signcolumn = 'yes:3'
 
 vim.g.mapleader = " "
 
-vim.cmd("colorscheme nordfox")
+vim.cmd("colorscheme nordic")

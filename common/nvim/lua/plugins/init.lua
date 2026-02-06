@@ -97,10 +97,32 @@ return {
         ---@type render.md.UserConfig
     },
     {
+        "gbprod/yanky.nvim",
+        opts = {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+        },
+    },
+    {
         "folke/trouble.nvim",
         cmd = "Trouble",
         config = function()
-            require("trouble").setup {}
+            require("trouble").setup {
+                auto_jump = true,
+                win = {
+                    type = "split",
+                    size = 0.3
+                },
+                modes = {
+                    lsp_references = {
+                        -- some modes are configurable, see the source code for more details
+                        params = {
+                            include_declaration = false,
+                        },
+                    },
+                }
+            }
         end
     },
     {

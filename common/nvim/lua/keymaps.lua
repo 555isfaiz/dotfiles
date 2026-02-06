@@ -346,10 +346,10 @@ require("which-key").add({
     { '<A-K>',     '<cmd>lua require("tmux").move_top()<cr>',           desc = "Tmux: move pane top" },
     { '<A-J>',     '<cmd>lua require("tmux").move_bottom()<cr>',        desc = "Tmux: move pane bottom" },
 
-    { '<C-A-h>',   '<cmd>lua require("tmux").resize_left()<cr>',        desc = "Tmux: resize pane left" },
-    { '<C-A-l>',   '<cmd>lua require("tmux").resize_right()<cr>',       desc = "Tmux: resize pane right" },
-    { '<C-A-k>',   '<cmd>lua require("tmux").resize_top()<cr>',         desc = "Tmux: resize pane up" },
-    { '<C-A-j>',   '<cmd>lua require("tmux").resize_bottom()<cr>',      desc = "Tmux: resize pane down" },
+    { '<C-A-h>',   '<cmd>lua require("tmux").resize_left(10)<cr>',        desc = "Tmux: resize pane left" },
+    { '<C-A-l>',   '<cmd>lua require("tmux").resize_right(10)<cr>',       desc = "Tmux: resize pane right" },
+    { '<C-A-k>',   '<cmd>lua require("tmux").resize_top(10)<cr>',         desc = "Tmux: resize pane up" },
+    { '<C-A-j>',   '<cmd>lua require("tmux").resize_bottom(10)<cr>',      desc = "Tmux: resize pane down" },
 
     ---------------
     --  Trouble  --
@@ -361,7 +361,7 @@ require("which-key").add({
     -- Which-key --
     ---------------
     {
-        "<space>?",
+        "?",
         function()
             require("which-key").show({ global = true })
         end,
@@ -387,4 +387,9 @@ require("which-key").add({
         end,
         desc = "Jdtls: debug current test method"
     },
+    ---------------
+    --   Yanky   --
+    ---------------
+    { 'p', '<Plug>(YankyPutAfter)', desc = "Yanky: put after", mode = { 'n', 'x' } },
+    { 'P', '<Plug>(YankyPutBefore)', desc = "Yanky: put before", mode = { 'n', 'x' } },
 })
