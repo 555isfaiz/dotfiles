@@ -6,11 +6,11 @@ return {
         opts = {
             -- add any opts here
             -- for example
-            -- provider = "ollama",
-            provider = "openai",
+            provider = "ollama",
+            -- provider = "openai",
             providers = {
                 ollama = {
-                    model = "deepseek-r1:14b",
+                    model = "qwen2.5-coder:14b",
                 },
                 openai = {
                     endpoint = "https://api.openai.com/v1",

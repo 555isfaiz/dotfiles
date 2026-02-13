@@ -26,8 +26,8 @@ return {
                 -- your on_attach function
             end
             metals_config.settings = {
-                javaHome = "~/.sdkman/candidates/java/11.0.29-tem/",
-                useGlobalExecutable = true,
+                -- javaHome = "~/.sdkman/candidates/java/11.0.29-tem/",
+                -- useGlobalExecutable = true,
             }
 
             return metals_config
@@ -42,6 +42,11 @@ return {
                 group = nvim_metals_group,
             })
         end
+    },
+    {
+        'mrcjkb/rustaceanvim',
+        version = '^7', -- Recommended
+        lazy = false, -- This plugin is already lazy
     },
     {
         'p00f/clangd_extensions.nvim',
