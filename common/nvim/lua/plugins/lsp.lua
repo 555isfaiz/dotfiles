@@ -234,7 +234,7 @@ return {
                 jsonls = {},
                 ts_ls = {},
                 hls = {},
-                rust_analyzer = {},
+                -- rust_analyzer = {},
                 clangd = {}
             }
         },

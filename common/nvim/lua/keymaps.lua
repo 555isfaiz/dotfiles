@@ -13,6 +13,24 @@ function vim.getVisualSelection()
     end
 end
 
+
+function compileCode()
+  local clients = vim.lsp.get_clients({ bufnr = 0 })
+
+  if #clients == 0 then
+    return
+  end
+
+  for _, client in ipairs(clients) do
+    if client.name == "rust-analyzer" then
+        vim.system({ "cargo", "build" }, { text = true })
+    elseif client.name == "clangd" then
+        vim.system({ "make" }, { text = true })
+    -- elseif client.name == "gopls" then
+    end
+  end
+end
+
 require("which-key").add({
     ------------
     --  Misc  --
@@ -71,6 +89,7 @@ require("which-key").add({
     {
         '<F5>',
         function()
+            compileCode()
             require 'dap'.continue()
             require 'nvim-dap-virtual-text'.refresh()
         end,
