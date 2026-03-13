@@ -46,7 +46,7 @@ return {
     {
         'mrcjkb/rustaceanvim',
         version = '^7', -- Recommended
-        lazy = false, -- This plugin is already lazy
+        lazy = false,   -- This plugin is already lazy
     },
     {
         'p00f/clangd_extensions.nvim',
@@ -240,19 +240,22 @@ return {
         },
         config = function(_, opts)
             vim.lsp.diagnostic.enable = true
-            local signs = { Error = " ", Warn = " ", Hint = "󰌵 ", Info = " " }
-            for type, icon in pairs(signs) do
-                local hl = "DiagnosticSign" .. type
-                -- local current_config = vim.diagnostic.config()
-                -- if current_config == nil then
-                --     current_config = {}
-                -- end
-                -- current_config['signs']['text']["DiagnosticSign" .. type] = icon
-                -- current_config['signs']['texthl']["DiagnosticSign" .. type] = hl
-                -- current_config['signs']['numhl']["DiagnosticSign" .. type] = hl
-                -- vim.diagnostic.config(current_config)
-                vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-            end
+            vim.diagnostic.config({
+                signs = {
+                    text = {
+                        [vim.diagnostic.severity.ERROR] = " ",
+                        [vim.diagnostic.severity.WARN]  = " ",
+                        [vim.diagnostic.severity.INFO]  = " ",
+                        [vim.diagnostic.severity.HINT]  = "󰌵 "
+                    },
+                    numhl = {
+                        [vim.diagnostic.severity.ERROR] = "DiagnosticError",
+                        [vim.diagnostic.severity.WARN]  = "DiagnosticWarn",
+                        [vim.diagnostic.severity.INFO]  = "DiagnosticInfo",
+                        [vim.diagnostic.severity.HINT]  = "DiagnosticHint"
+                    }
+                },
+            })
 
             vim.api.nvim_create_autocmd('LspAttach', {
                 group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -304,6 +307,7 @@ return {
             }
 
             vim.lsp.enable('pyright')
+            vim.lsp.enable('terraformls')
         end
     },
 }

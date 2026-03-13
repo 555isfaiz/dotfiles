@@ -8,9 +8,10 @@ return {
             -- for example
             provider = "ollama",
             -- provider = "openai",
+            auto_suggestions_provider = "ollama",
             providers = {
                 ollama = {
-                    model = "qwen2.5-coder:14b",
+                    model = "qwen3.5:9b",
                 },
                 openai = {
                     endpoint = "https://api.openai.com/v1",
@@ -21,6 +22,10 @@ return {
                         --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
                     }
                 },
+            },
+            web_search_engine = {
+                provider = "google", -- tavily, serpapi, google, kagi, brave, or searxng
+                proxy = nil, -- proxy support, e.g., http://127.0.0.1:7890
             },
             behaviour = {
                 auto_suggestions = false, -- Experimental stage

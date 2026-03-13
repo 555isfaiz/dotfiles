@@ -13,22 +13,21 @@ function vim.getVisualSelection()
     end
 end
 
-
 function compileCode()
-  local clients = vim.lsp.get_clients({ bufnr = 0 })
+    local clients = vim.lsp.get_clients({ bufnr = 0 })
 
-  if #clients == 0 then
-    return
-  end
-
-  for _, client in ipairs(clients) do
-    if client.name == "rust-analyzer" then
-        vim.system({ "cargo", "build" }, { text = true })
-    elseif client.name == "clangd" then
-        vim.system({ "make" }, { text = true })
-    -- elseif client.name == "gopls" then
+    if #clients == 0 then
+        return
     end
-  end
+
+    for _, client in ipairs(clients) do
+        if client.name == "rust-analyzer" then
+            vim.system({ "cargo", "build" }, { text = true })
+        elseif client.name == "clangd" then
+            vim.system({ "make" }, { text = true })
+            -- elseif client.name == "gopls" then
+        end
+    end
 end
 
 require("which-key").add({
@@ -103,10 +102,10 @@ require("which-key").add({
         end,
         desc = "DAP: terminate"
     },
-    { '<F7>',       require 'dap'.restart,             desc = "DAP: restart" },
-    { '<F10>',      require 'dap'.step_over,           desc = "DAP: step over" },
-    { '<F11>',      require 'dap'.step_into,           desc = "DAP: step into" },
-    { 'B',          require 'dap'.toggle_breakpoint,   desc = "DAP: toggle breakpoint" },
+    { '<F7>',  require 'dap'.restart,           desc = "DAP: restart" },
+    { '<F10>', require 'dap'.step_over,         desc = "DAP: step over" },
+    { '<F11>', require 'dap'.step_into,         desc = "DAP: step into" },
+    { 'B',     require 'dap'.toggle_breakpoint, desc = "DAP: toggle breakpoint" },
     {
         '<Space>b',
         function()
@@ -365,10 +364,10 @@ require("which-key").add({
     { '<A-K>',     '<cmd>lua require("tmux").move_top()<cr>',           desc = "Tmux: move pane top" },
     { '<A-J>',     '<cmd>lua require("tmux").move_bottom()<cr>',        desc = "Tmux: move pane bottom" },
 
-    { '<C-A-h>',   '<cmd>lua require("tmux").resize_left(10)<cr>',        desc = "Tmux: resize pane left" },
-    { '<C-A-l>',   '<cmd>lua require("tmux").resize_right(10)<cr>',       desc = "Tmux: resize pane right" },
-    { '<C-A-k>',   '<cmd>lua require("tmux").resize_top(10)<cr>',         desc = "Tmux: resize pane up" },
-    { '<C-A-j>',   '<cmd>lua require("tmux").resize_bottom(10)<cr>',      desc = "Tmux: resize pane down" },
+    { '<C-A-h>',   '<cmd>lua require("tmux").resize_left(10)<cr>',      desc = "Tmux: resize pane left" },
+    { '<C-A-l>',   '<cmd>lua require("tmux").resize_right(10)<cr>',     desc = "Tmux: resize pane right" },
+    { '<C-A-k>',   '<cmd>lua require("tmux").resize_top(10)<cr>',       desc = "Tmux: resize pane up" },
+    { '<C-A-j>',   '<cmd>lua require("tmux").resize_bottom(10)<cr>',    desc = "Tmux: resize pane down" },
 
     ---------------
     --  Trouble  --
@@ -409,6 +408,6 @@ require("which-key").add({
     ---------------
     --   Yanky   --
     ---------------
-    { 'p', '<Plug>(YankyPutAfter)', desc = "Yanky: put after", mode = { 'n', 'x' } },
+    { 'p', '<Plug>(YankyPutAfter)',  desc = "Yanky: put after",  mode = { 'n', 'x' } },
     { 'P', '<Plug>(YankyPutBefore)', desc = "Yanky: put before", mode = { 'n', 'x' } },
 })
