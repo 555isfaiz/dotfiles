@@ -370,10 +370,108 @@ require("which-key").add({
     { '<C-A-j>',   '<cmd>lua require("tmux").resize_bottom(10)<cr>',    desc = "Tmux: resize pane down" },
 
     ---------------
+    --Treesitter --
+    ---------------
+    {
+        "af",
+        function()
+            require "nvim-treesitter-textobjects.select".select_textobject("@function.outer",
+                "textobjects")
+        end,
+        mode = { "x", "o" },
+        desc = ""
+    },
+    {
+        "if",
+        function()
+            require "nvim-treesitter-textobjects.select".select_textobject("@function.inner",
+                "textobjects")
+        end,
+        mode = { "x", "o" },
+        desc = ""
+    },
+    {
+        "ac",
+        function()
+            require "nvim-treesitter-textobjects.select".select_textobject("@class.outer",
+                "textobjects")
+        end,
+        mode = { "x", "o" },
+        desc = ""
+    },
+    {
+        "ic",
+        function()
+            require "nvim-treesitter-textobjects.select".select_textobject("@class.inner",
+                "textobjects")
+        end,
+        mode = { "x", "o" },
+        desc = ""
+    },
+    { "as", function() require "nvim-treesitter-textobjects.select".select_textobject("@local.scope", "locals") end,   mode = { "x", "o" },      desc = "" },
+    {
+        "]m",
+        function()
+            require("nvim-treesitter-textobjects.move").goto_next_start("@function.outer",
+                "textobjects")
+        end,
+        mode = { "n", "x", "o" },
+        desc = ""
+    },
+    { "]]", function() require("nvim-treesitter-textobjects.move").goto_next_start("@class.outer", "textobjects") end, mode = { "n", "x", "o" }, desc = "" },
+    {
+        "]o",
+        function()
+            require("nvim-treesitter-textobjects.move").goto_next_start({ "@loop.inner", "@loop.outer" },
+                "textobjects")
+        end,
+        mode = { "n", "x", "o" },
+        desc = ""
+    },
+    { "]s", function() require("nvim-treesitter-textobjects.move").goto_next_start("@local.scope", "locals") end,             mode = { "n", "x", "o" }, desc = "" },
+    { "]z", function() require("nvim-treesitter-textobjects.move").goto_next_start("@fold", "folds") end,                     mode = { "n", "x", "o" }, desc = "" },
+
+    { "]M", function() require("nvim-treesitter-textobjects.move").goto_next_end("@function.outer", "textobjects") end,       mode = { "n", "x", "o" }, desc = "" },
+    { "][", function() require("nvim-treesitter-textobjects.move").goto_next_end("@class.outer", "textobjects") end,          mode = { "n", "x", "o" }, desc = "" },
+
+    { "[m", function() require("nvim-treesitter-textobjects.move").goto_previous_start("@function.outer", "textobjects") end, mode = { "n", "x", "o" }, desc = "" },
+    {
+        "[[",
+        function()
+            require("nvim-treesitter-textobjects.move").goto_previous_start("@class.outer",
+                "textobjects")
+        end,
+        mode = { "n", "x", "o" },
+        desc = ""
+    },
+
+    {
+        "[M",
+        function()
+            require("nvim-treesitter-textobjects.move").goto_previous_end("@function.outer",
+                "textobjects")
+        end,
+        mode = { "n", "x", "o" },
+        desc = ""
+    },
+    { "[]", function() require("nvim-treesitter-textobjects.move").goto_previous_end("@class.outer", "textobjects") end, mode = { "n", "x", "o" }, desc = "" },
+
+    { "]f", function() require("nvim-treesitter-textobjects.move").goto_next("@conditional.outer", "textobjects") end,   mode = { "n", "x", "o" }, desc = "" },
+    {
+        "[f",
+        function()
+            require("nvim-treesitter-textobjects.move").goto_previous("@conditional.outer",
+                "textobjects")
+        end,
+        mode = { "n", "x", "o" },
+        desc = ""
+    },
+
+    ---------------
     --  Trouble  --
     ---------------
-    { "<space>wd", "<cmd>Trouble diagnostics toggle<cr>",               desc = "Trouble: workspace diagnostics", },
-    { "<F3>",      "<cmd>Trouble symbols toggle focus=false<cr>",       desc = "Trouble: show outline", },
+    { "<space>wd", "<cmd>Trouble diagnostics toggle<cr>",         desc = "Trouble: workspace diagnostics", },
+    { "<F3>",      "<cmd>Trouble symbols toggle focus=false<cr>", desc = "Trouble: show outline", },
 
     ---------------
     -- Which-key --

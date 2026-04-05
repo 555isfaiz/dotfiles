@@ -1,109 +1,70 @@
 return {
-    { 'nvim-treesitter/nvim-treesitter-textobjects', event = 'VeryLazy' },
+    {
+        'nvim-treesitter/nvim-treesitter-textobjects',
+        event = 'VeryLazy',
+        branch = 'main',
+        init = function()
+            -- Disable entire built-in ftplugin mappings to avoid conflicts.
+            -- See https://github.com/neovim/neovim/tree/master/runtime/ftplugin for built-in ftplugins.
+            vim.g.no_plugin_maps = true
+
+            -- Or, disable per filetype (add as you like)
+            -- vim.g.no_python_maps = true
+            -- vim.g.no_ruby_maps = true
+            -- vim.g.no_rust_maps = true
+            -- vim.g.no_go_maps = true
+        end,
+        config = function()
+            -- put your config here
+            require("nvim-treesitter-textobjects").setup {
+                select = {
+                    -- Automatically jump forward to textobj, similar to targets.vim
+                    lookahead = true,
+                    -- You can choose the select mode (default is charwise 'v')
+                    --
+                    -- Can also be a function which gets passed a table with the keys
+                    -- * query_string: eg '@function.inner'
+                    -- * method: eg 'v' or 'o'
+                    -- and should return the mode ('v', 'V', or '<c-v>') or a table
+                    -- mapping query_strings to modes.
+                    selection_modes = {
+                        ['@parameter.outer'] = 'v', -- charwise
+                        ['@function.outer'] = 'V', -- linewise
+                        -- ['@class.outer'] = '<c-v>', -- blockwise
+                    },
+                    -- If you set this to `true` (default is `false`) then any textobject is
+                    -- extended to include preceding or succeeding whitespace. Succeeding
+                    -- whitespace has priority in order to act similarly to eg the built-in
+                    -- `ap`.
+                    --
+                    -- Can also be a function which gets passed a table with the keys
+                    -- * query_string: eg '@function.inner'
+                    -- * selection_mode: eg 'v'
+                    -- and should return true of false
+                    include_surrounding_whitespace = false,
+                },
+            }
+        end,
+    },
     {
         'nvim-treesitter/nvim-treesitter',
         -- dependencies = { "OXY2DEV/markview.nvim" },
         lazy = true,
+        branch = 'main',
         build = ':TSUpdate',
         config = function()
-            require 'nvim-treesitter.configs'.setup {
-                -- A list of parser names, or "all" (the five listed parsers should always be installed)
-                ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
-
-                -- Install parsers synchronously (only applied to `ensure_installed`)
-                sync_install = false,
-
-                -- Automatically install missing parsers when entering buffer
-                -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-                auto_install = true,
-
-                -- List of parsers to ignore installing (for "all")
-                ignore_install = {},
-
-                ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
-                -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
-
-                highlight = {
-                    enable = true,
-
-                    -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
-                    -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
-                    -- the name of the parser)
-                    -- list of language that will be disabled
-                    -- disable = { "c", "rust" },
-                    -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
-                    -- disable = function(lang, buf)
-                    -- local max_filesize = 101 * 1024 -- 100 KB
-                    --local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-                    --if ok and stats and stats.size > max_filesize then
-                    --    return true
-                    --end
-                    --end,
-
-                    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-                    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-                    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-                    -- Instead of true it can also be a list of languages
-                    additional_vim_regex_highlighting = false,
-                },
-                incremental_selection = {
-                    enable = true,
-                    keymaps = {
-                        init_selection = "gs", -- set to `false` to disable one of the mappings
-                        node_incremental = "v",
-                        scope_incremental = "<space>U",
-                        node_decremental = "V",
-                        -- scope_decremental = "<space>D",
-                    },
-                },
-                indent = {
-                    enable = true
-                },
-                textobjects = {
-                    select = {
-                        enable = true,
-                        lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-                        keymaps = {
-                            -- You can use the capture groups defined in textobjects.scm
-                            ['aa'] = '@parameter.outer',
-                            ['ia'] = '@parameter.inner',
-                            ['af'] = '@function.outer',
-                            ['if'] = '@function.inner',
-                            ['ac'] = '@class.outer',
-                            ['ic'] = '@class.inner',
-                        },
-                    },
-                    move = {
-                        enable = true,
-                        set_jumps = true, -- whether to set jumps in the jumplist
-                        goto_next_start = {
-                            [']m'] = '@function.outer',
-                            [']]'] = '@class.outer',
-                        },
-                        goto_next_end = {
-                            [']M'] = '@function.outer',
-                            [']['] = '@class.outer',
-                        },
-                        goto_previous_start = {
-                            ['[m'] = '@function.outer',
-                            ['[['] = '@class.outer',
-                        },
-                        goto_previous_end = {
-                            ['[M'] = '@function.outer',
-                            ['[]'] = '@class.outer',
-                        },
-                    },
-                    swap = {
-                        enable = true,
-                        swap_next = {
-                            ['<A-a>'] = '@function.inner',
-                        },
-                        swap_previous = {
-                            ['<A-A>'] = '@function.inner',
-                        },
-                    },
-                }
-            }
+            vim.api.nvim_create_autocmd('FileType', {
+                pattern = { "python", "rust", "java", "scala", "yaml", "markdown", "terraform", "c" },
+                callback = function()
+                    -- syntax highlighting, provided by Neovim
+                    vim.treesitter.start()
+                    -- folds, provided by Neovim
+                    vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+                    vim.wo.foldmethod = 'expr'
+                    -- indentation, provided by nvim-treesitter
+                    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                end,
+            })
         end
     },
 }
