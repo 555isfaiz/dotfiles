@@ -10,6 +10,16 @@ return {
     'MunifTanjim/nui.nvim',
     'projekt0n/github-nvim-theme',
     {
+        "Aejkatappaja/sora",
+        lazy = false,
+        priority = 1000,
+        opts = {},
+        config = function(_, opts)
+            require("sora").setup(opts)
+            vim.cmd("colorscheme sora")
+        end,
+    },
+    {
         "kndndrj/nvim-dbee",
         dependencies = {
             "MunifTanjim/nui.nvim",

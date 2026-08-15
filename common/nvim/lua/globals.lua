@@ -19,5 +19,6 @@ vim.o.spelllang="en_us"
 vim.o.signcolumn = 'yes:3'
 
 vim.g.mapleader = " "
+vim.opt.foldlevelstart = 99
 
-vim.cmd("colorscheme nordic")
+vim.cmd("colorscheme sora")
