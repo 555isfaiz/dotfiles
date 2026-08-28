@@ -15,6 +15,7 @@ return {
     },
     {
         'ggandor/leap.nvim',
+        url = 'https://codeberg.org/andyg/leap.nvim',
         config = function()
             vim.api.nvim_create_autocmd('ColorScheme', {
                 callback = function()
