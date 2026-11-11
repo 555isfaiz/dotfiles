@@ -54,7 +54,7 @@ return {
         build = ':TSUpdate',
         config = function()
             vim.api.nvim_create_autocmd('FileType', {
-                pattern = { "python", "rust", "java", "scala", "yaml", "markdown", "terraform", "c" },
+                pattern = { "python", "rust", "java", "scala", "yaml", "markdown", "terraform", "terraform-vars", "hcl", "c" },
                 callback = function()
                     -- syntax highlighting, provided by Neovim
                     vim.treesitter.start()
@@ -65,6 +65,7 @@ return {
                     vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
                 end,
             })
+            vim.treesitter.language.register('terraform', 'terraform-vars')
         end
     },
 }

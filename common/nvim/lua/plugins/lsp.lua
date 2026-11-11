@@ -308,6 +308,15 @@ return {
 
             vim.lsp.enable('pyright')
             vim.lsp.enable('terraformls')
+            vim.lsp.config('terragrunt_ls', {
+                cmd = { 'terragrunt-ls' },
+                filetypes = { 'hcl' },
+                root_dir = function(bufnr, on_dir)
+                    local root = vim.fs.root(bufnr, 'root.hcl') or vim.fs.root(bufnr, 'terragrunt.hcl')
+                    if root then on_dir(root) end -- no Terragrunt marker, no attach
+                end,
+            })
+            vim.lsp.enable('terragrunt_ls')
         end
     },
 }
