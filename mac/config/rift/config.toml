@@ -1,0 +1,93 @@
+[keys]
+"Command + Shift + Z" = "toggle_space_activated"
+"Ctrl + Command + H" = { move_focus = "left" }
+"Ctrl + Command + J" = { move_focus = "down" }
+"Ctrl + Command + K" = { move_focus = "up" }
+"Ctrl + Command + L" = { move_focus = "right" }
+"Alt + Command + H" = { move_node = "left" }
+"Alt + Command + J" = { move_node = "down" }
+"Alt + Command + K" = { move_node = "up" }
+"Alt + Command + L" = { move_node = "right" }
+"Command + Shift + Space" = "toggle_window_floating"
+"Command + 1" = { switch_to_workspace = 0 }
+"Command + 2" = { switch_to_workspace = 1 }
+"Command + 3" = { switch_to_workspace = 2 }
+"Command + 4" = { switch_to_workspace = 3 }
+"Command + 5" = { switch_to_workspace = 4 }
+"Command + 6" = { switch_to_workspace = 5 }
+"Command + 7" = { switch_to_workspace = 6 }
+"Command + 8" = { switch_to_workspace = 7 }
+"Command + 9" = { switch_to_workspace = 8 }
+"Alt + Command + 1" = { move_window_to_workspace = 0 }
+"Alt + Command + 2" = { move_window_to_workspace = 1 }
+"Alt + Command + 3" = { move_window_to_workspace = 2 }
+"Alt + Command + 4" = { move_window_to_workspace = 3 }
+"Alt + Command + 5" = { move_window_to_workspace = 4 }
+"Alt + Command + 6" = { move_window_to_workspace = 5 }
+"Alt + Command + 7" = { move_window_to_workspace = 6 }
+"Alt + Command + 8" = { move_window_to_workspace = 7 }
+"Alt + Command + 9" = { move_window_to_workspace = 8 }
+"Command + Shift + A" = "show_mission_control_all"
+"Command + L" = "next_workspace"
+"Command + H" = "prev_workspace"
+"Ctrl + Command + Shift + K" = { focus_display = "up" }
+"Ctrl + Command + Shift + J" = { focus_display = "down" }
+"Ctrl + Command + Shift + H" = { focus_display = "left" }
+"Ctrl + Command + Shift + L" = { focus_display = "right" }
+"Command + Shift + F" = "toggle_fullscreen_within_gaps"
+"Command + Shift + Left" = { resize_window_shrink = "horizontal" }
+"Command + Shift + Right" = { resize_window_grow = "horizontal" }
+"Command + Shift + Down" = { resize_window_shrink = "vertical" }
+"Command + Shift + Up" = { resize_window_grow = "vertical" }
+
+
+[settings.layout]
+mode = "scrolling"
+
+[settings.layout.stack]
+default_orientation = "perpendicular"
+
+[settings.layout.gaps.outer]
+top = 12.0
+left = 12.0
+bottom = 12.0
+right = 12.0
+
+[settings.layout.gaps.inner]
+horizontal = 12.0
+vertical = 12.0
+
+[settings]
+animate = true
+default_disable = false
+
+[settings.drag_drop]
+enabled = true
+modifier = "command"
+action1 = "move"
+action2 = "none"
+drop_action = "swap"
+preview = true
+
+[settings.gestures]
+enabled = true
+
+[settings.ui.mission_control]
+enabled = true
+fade_enabled = true
+
+[settings.ui.menu_bar]
+enabled = true
+display_style = "label"
+active_label = "index"
+
+[settings.ui.stack_line]
+hover = "click"
+thickness = 32.0
+spacing = 20.0
+vert_placement = "left"
+horiz_placement = "top"
+
+[virtual_workspaces]
+enabled = true
+default_workspace_count = 9
